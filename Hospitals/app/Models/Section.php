@@ -14,6 +14,13 @@ class Section extends Model
     public $translatedAttributes = ['name'];
 
     // الحقول التي يمكن تعبئتها بشكل مباشر
+
     protected $fillable = ['name'];
-    
+
+
+    public function Doctors()
+    {
+        return $this->hasMany(Doctor::class,'section_id');
+    }
+
 }

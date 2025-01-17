@@ -12,4 +12,10 @@ class DoctorTranslation extends Model
     protected $fillable = ['name','appointments'];
     public $timestamps = false;
 
+
+    protected $casts = [
+        'appointments' => 'array',
+        'name' => 'string'
+    ];
+
 }

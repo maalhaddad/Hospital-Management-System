@@ -9,10 +9,11 @@ class SectionRepository implements SectionRepositoryInterface
 {
     public function index()
     {
-            return view('Dashboard.sections.index' , ['sections' => Section::all()]);
+
+      return view('Dashboard.sections.index' , ['sections' => Section::all()]);
     }
 
-    public function create($attributes)
+    public function store($attributes)
     {
         try {
 

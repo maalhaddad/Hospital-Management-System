@@ -30,7 +30,7 @@ class SectionController extends Controller
 
     public function store(Request $request)
     {
-         return $this->SectionRepository->create($request);
+         return $this->SectionRepository->store($request);
     }
 
 
