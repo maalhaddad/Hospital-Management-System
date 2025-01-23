@@ -40,11 +40,12 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table text-md-nowrap" id="example2">
+                                        <table style="width: 100%" class="table text-md-nowrap" id="example2">
                                             <thead>
                                             <tr>
                                                 <th class="wd-10p border-bottom-0">#</th>
                                                 <th class="wd-15p border-bottom-0">{{__('Dashboard/section_trans.name_sections')}}</th>
+                                                <th class="wd-15p border-bottom-0">{{__('sections_trans.description')}}</th>
                                                 <th class="wd-20p border-bottom-0">{{__('sections_trans.created_at')}}</th>
                                                 <th class="wd-20p border-bottom-0">{{__('sections_trans.Processes')}}</th>
                                             </tr>
@@ -54,11 +55,13 @@
                                                <tr>
                                                    <td>{{$loop->iteration}}</td>
                                                    <td>{{$section->name}}</td>
+                                                   <td>{{$section->description}}</td>
                                                    <td>{{ $section->created_at->diffForHumans() }}</td>
                                                    <td>
                                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"  data-toggle="modal" href="#edit"
                                                         data-section_id="{{$section->id}}"
                                                        data-section_name="{{$section->name}}"
+                                                       data-section_description="{{$section->description}}"
                                                        ><i class="las la-pen"></i></a>
                                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"
                                                         data-section_id="{{$section->id}}"
@@ -145,9 +148,11 @@ $('#delete').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var section_id = button.data('section_id')
             var section_name = button.data('section_name')
+            var description = button.data('section_description');
             var modal = $(this)
             modal.find('.modal-body #section_id').val(section_id);
             modal.find('.modal-body #name').val(section_name);
+            modal.find('.modal-body #description').val(description);
 
         });
     </script>

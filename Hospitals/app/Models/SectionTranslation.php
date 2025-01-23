@@ -12,5 +12,5 @@ class SectionTranslation extends Model
     public $timestamps = false;
 
     // الحقول القابلة للتعبئة
-    protected $fillable = ['name'];
+    protected $fillable = ['name','description'];
 }

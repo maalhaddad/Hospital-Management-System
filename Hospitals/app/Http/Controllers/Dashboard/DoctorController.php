@@ -18,6 +18,8 @@ class DoctorController extends Controller
 
         $this->DoctorRepository = $DoctorRepository;
     }
+
+
     public function index()
     {
         return $this->DoctorRepository->index();
@@ -55,8 +57,29 @@ class DoctorController extends Controller
     }
 
 
-    public function destroy(string $id)
+    public function destroy(Request $request,string $id)
     {
-        //
+        if($request->delete_type)
+        {
+            return $this->DoctorRepository->DeleteSelectDoctors($request);
+        }
+        return $this->DoctorRepository->destroy($request);
+    }
+
+    public function updateStatus (Request $request)
+    {
+        $this->validate($request, [
+            'status' => 'required|in:0,1',
+        ]);
+        return $this->DoctorRepository->updateStatus($request);
+    }
+
+    public function updatePassword (Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6'
+        ]);
+        return $this->DoctorRepository->updatePassword($request);
     }
 }

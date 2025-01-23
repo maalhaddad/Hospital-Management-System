@@ -20,6 +20,7 @@ class SectionRepository implements SectionRepositoryInterface
             Section::create(
                 [
                     'name' => $attributes->name,
+                    'description' => $attributes->description,
                 ]
                 );
 
@@ -41,6 +42,8 @@ class SectionRepository implements SectionRepositoryInterface
             $section->update(
                 [
                     'name' => $attributes->name,
+                    'description' => $attributes->description,
+
                 ]
                 );
 

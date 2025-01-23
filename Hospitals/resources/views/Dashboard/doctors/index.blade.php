@@ -1,6 +1,6 @@
 @extends('Dashboard.layouts.master')
 @section('title')
-    {{trans('Dashboard/main-sidebar_trans.doctors')}}
+    {{__('Dashboard/main-sidebar_trans.doctors')}}
 @stop
 @section('css')
     <!-- Internal Data table css -->
@@ -19,7 +19,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">{{__('Dashboard/main-sidebar_trans.doctors')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{trans('Dashboard/main-sidebar_trans.view_all')}}</span>
+							<h4 class="content-title mb-0 my-auto">{{__('Dashboard/main-sidebar_trans.doctors')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{__('Dashboard/main-sidebar_trans.view_all')}}</span>
 						</div>
 					</div>
 				</div>
@@ -37,6 +37,9 @@
                                         <a  class="btn btn-primary" href="{{ route('doctors.create') }}" >
                                             {{__('doctors_trans.add_doctor')}}
                                         </a>
+
+                                        <button type="button" class="btn btn-danger"
+                                        id="btn_delete_all" data-target="#delete_select" >{{__('doctors_trans.delete_select')}}</button>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -44,7 +47,12 @@
                                         <table style="width: 100%" class="table key-buttons text-md-wrap" id="example2">
                                             <thead>
                                             <tr>
+
                                                 <th class="border-bottom-0">#</th>
+                                                <th>
+                                                    <input type="checkbox" id="select_all_ids" name="delete_select" id="flexCheckChecked">
+                                                </th>
+                                                <th class="border-bottom-0">{{__('doctors_trans.img')}}</th>
                                                 <th class="border-bottom-0">{{__('doctors_trans.name')}}</th>
                                                 <th class="border-bottom-0">{{__('doctors_trans.email')}}</th>
                                                 <th class="border-bottom-0">{{__('doctors_trans.phone')}}</th>
@@ -61,7 +69,16 @@
                                                 @foreach ($doctors as  $doctor )
 
                                                 <tr>
+
                                                     <td>{{ $loop->iteration }}</td>
+                                                    <td>
+                                                        <input class="form-check-input checkbox-ids" type="checkbox" name="select_ids" value="{{ $doctor->id }}">
+                                                    </td>
+                                                       <td>
+                                                       <?php $pathImg = (isset($doctor->image->filename)) ? $doctor->image->filename : 'default.png' ?>
+                                                       <img src="{{Url::asset('Dashboard/img/doctors/'.$pathImg)}}"
+                                                        height="50px" width="50px" alt="{{ $pathImg }}">
+                                                       </td>
                                                        <td>{{ $doctor->name }}</td>
                                                        <td>{{ $doctor->email }}</td>
                                                        <td>{{ $doctor->phone }}</td>
@@ -82,14 +99,27 @@
                                                     class="dot-label bg-{{$className}} ml-1"></div>
                                                     <span class="text-{{ $className }}">{{ $status }}</span>
                                                        </td>
-                                                       <td>{{ $doctor->appointments[0] }}</td>
+                                                       <td>
+                                                     @foreach ($doctor->Appointments as $appointment )
+
+                                                           {{ $appointment->name }},
+
+                                                        @endforeach
+                                                       </td>
                                                        <td>{{ $doctor->created_at->diffForHumans() }}</td>
                                                        <td>
-                                                           <a class="modal-effect btn btn-sm btn-info" href="{{ route('doctors.edit',$doctor) }}"
-                                                           ><i class="las la-pen"></i></a>
-                                                           <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"
-                                                            data-section_id=""
-                                                           ><i class="las la-trash"></i></a>
+                                                      <div class="dropdown">
+                                                            <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary btn-sm" data-toggle="dropdown" type="button">{{__('doctors_trans.Processes')}}<i class="fas fa-caret-down mr-1"></i></button>
+                                                            <div class="dropdown-menu tx-13">
+                                                                <a class="dropdown-item" href="{{route('doctors.edit',$doctor)}}"><i style="color: #0ba360" class="text-success ti-user"></i>&nbsp;&nbsp;تعديل البيانات</a>
+                                                                <a class="dropdown-item" href="#update_password" data-doctor_id="{{ $doctor->id }}" data-doctor_name="{{ $doctor->name }}"  data-toggle="modal" ><i   class="text-primary ti-key"></i>&nbsp;&nbsp;تغير كلمة المرور</a>
+                                                                <a class="dropdown-item" href="#update_status" data-toggle="modal" data-doctor_id="{{ $doctor->id }}"><i   class="text-warning ti-back-right"></i>&nbsp;&nbsp;تغير الحالة</a>
+                                                               <a class="dropdown-item" data-effect="effect-scale"  data-toggle="modal" href="#delete_doctor" data-doctor_id="{{ $doctor->id }}">
+                                                                 <i class="text-danger  ti-trash"></i>&nbsp;&nbsp;حذف البيانات</a>
+                                                            </div>
+                                                        </div>
+
+
                                                        </td>
                                                    </tr>
                                                 @endforeach
@@ -106,7 +136,17 @@
                         </div>
                         <!--/div-->
 
-                    
+                         {{-- Update Password --}}
+                         @include('Dashboard.doctors.update_password')
+                         {{-- Update Status --}}
+                         @include('Dashboard.doctors.update_status')
+
+
+                                  {{-- Delete Doctor --}}
+                                    @include('Dashboard.doctors.delete')
+                               {{-- Delete Select --}}
+                               @include('Dashboard.doctors.delete_select')
+
 
 
                     <!-- /row -->
@@ -145,5 +185,60 @@
 
 
     </script>
+
+
+    <script>
+        $('#delete_doctor').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var doctor_id = button.data('doctor_id')
+            var modal = $(this)
+            modal.find('.modal-body #doctor_id').val(doctor_id);
+
+        });
+
+        $('#update_status').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var doctor_id = button.data('doctor_id')
+            var modal = $(this)
+            modal.find('.modal-body #doctor_id').val(doctor_id);
+
+        });
+
+        $('#update_password').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var doctor_id = button.data('doctor_id')
+            var doctor_name = button.data('doctor_name')
+            console.log(doctor_name)
+            var modal = $(this)
+            modal.find('.modal-body #doctor_id').val(doctor_id);
+            $('#doctor-name').text(doctor_name);
+
+        });
+    </script>
+
+<script>
+    $(function(e) {
+       $("#select_all_ids").click(function() {
+        var check = $(this).prop('checked');
+        $(".checkbox-ids").prop('checked',check);
+        });
+    })
+</script>
+
+<script>
+    $(function () {
+            $("#btn_delete_all").click(function () {
+                var selected = [];
+                $("input[name=select_ids]:checked").each(function () {
+                    selected.push(this.value);
+                });
+
+                if (selected.length > 0) {
+                    $('#delete_select').modal('show')
+                    $('input[name="delete_select_ids"]').val(selected);
+                }
+            });
+        });
+</script>
 
 @endsection

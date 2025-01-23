@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete();
             $table->string('password');
             $table->string('phone');
-            $table->decimal('price',8,2);
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

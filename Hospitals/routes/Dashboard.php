@@ -31,17 +31,17 @@ Route::group(
             return view('Dashboard.User.dashboard');
         })->middleware(['auth', 'verified'])->name('dashboard.user');
 
-         //============================== End Dasboard User =================================
+         //============================== End Dashboard User =================================
 
          //============================== Dasboard Admin =================================
         Route::get('/dashboard/admin', function () {
             return view('Dashboard.Admin.dashboard');
         })->middleware(['auth:admin', 'verified'])->name('dashboard.admin');
 
-         //============================== End Dasboard Admin =================================
+         //============================== End Dashboard Admin =================================
         require __DIR__.'/auth.php';
 
-         //============================== Dasboard User =================================
+         //============================== Dashboard User =================================
 
          Route::group(
             [
@@ -55,7 +55,20 @@ Route::group(
 
                  // =========== Doctor ===========
 
-                 Route::resource('/doctors' , DoctorController::class);
+                 Route::controller(DoctorController::class)->group(function () {
+
+                   Route::resource('/doctors' , DoctorController::class);
+
+
+                   Route::prefix('doctors')->name('doctors.')->group(function () {
+
+                    Route::post('update-status', 'updateStatus')->name('update-status');
+                    Route::post('update-password', 'updatePassword')->name('update-password');
+                });
+
+                });
+                // =========== End Doctor ===========
+
             });
 
 

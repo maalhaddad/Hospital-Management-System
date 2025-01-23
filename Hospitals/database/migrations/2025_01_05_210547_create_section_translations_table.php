@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete(); // المفتاح الخارجي
             $table->string('locale')->index(); // اللغة (مثل en أو ar)
             $table->string('name'); // الاسم المترجم
+            $table->text('description');
             $table->unique(['section_id', 'locale']);
             $table->timestamps();
         });

@@ -11,11 +11,11 @@ class Section extends Model
     use HasFactory;
     use Translatable;
 
-    public $translatedAttributes = ['name'];
+    public $translatedAttributes = ['name','description'];
 
     // الحقول التي يمكن تعبئتها بشكل مباشر
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','description'];
 
 
     public function Doctors()

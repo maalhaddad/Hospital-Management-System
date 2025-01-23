@@ -24,7 +24,7 @@ class DoctorUpdateRequest extends FormRequest
         return [
             'email' => 'required|email|max:255',
             'password'  => 'required|string|min:8',
-            'phone' => 'required|numeric',
+            'phone' => 'required',
             'price' => 'required|numeric|min:0',
             'name' => 'required|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',

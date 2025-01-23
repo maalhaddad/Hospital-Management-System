@@ -130,7 +130,7 @@
 
                             <div class="col-md-11 mg-t-5 mg-md-t-0">
                                 <select name="section_id" class="form-control SlectBox @error('section_id') is-invalid @enderror "">
-                                    <option value="" selected disabled>------</option>
+                                    <option value=""  selected disabled>---حدد القسم---</option>
                                     @foreach ($sections as $section)
                                         <option {{ (isset($Doctor)&& $Doctor->Section->id == $section->id)? 'selected':'' }} value="{{ $section->id }}">{{ $section->name }}</option>
                                     @endforeach
@@ -140,6 +140,7 @@
 
                         </div>
 
+
                         <div class="row row-xs align-items-center mg-b-20">
                             <div class="col-md-1">
                                 <label for="exampleInputEmail1">
@@ -148,39 +149,24 @@
 
                             <div class="col-md-11 mg-t-5 mg-md-t-0">
                                 <select multiple="multiple" class="testselect2 @error('appointments') is-invalid @enderror " name="appointments[]">
-                                    <option selected value="" selected disabled>-- حدد المواعيد --</option>
-                                    <option selected value="السبت">السبت</option>
-                                    <option  selected value="الأحد">الأحد</option>
-                                    <option value="الأثنين">الأثنين</option>
-                                    <option value="الثلاثاء">الثلاثاء</option>
-                                    <option value="الأربعاء">الأربعاء</option>
-                                    <option value="الخميس">الخميس</option>
-                                    <option value="الجمعة">الجمعة</option>
+                                    <option  value="" selected disabled>-- حدد المواعيد --</option>
+                                    @foreach ($appointments as $appointment )
+                                    <option
+                                    @if(isset($Doctor))
+                                    {{ (in_array($appointment->id, $appointmentsId)) ? 'selected' : '' }}
+                                    @endif
+                                     value="{{ $appointment->id }}">{{ $appointment->name }}</option>
+                                    @endforeach
+
+
                                 </select>
                                  <x-input-error :messages="$errors->get('appointments')" class="mt-2" />
 
                             </div>
 
                         </div>
+
                         {{-- <div class="row row-xs align-items-center mg-b-20">
-                                <div class="col-md-1">
-                                    <label for="exampleInputEmail1">
-                                        {{__('doctors_trans.appointments')}}</label>
-                                </div>
-
-                                <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <select multiple="multiple" class="testselect2" name="appointments[]">
-                                        <option selected name="appointments[]" value="" selected disabled>-- حدد المواعيد --</option>
-                                        @foreach ($appointments as $appointment)
-                                            <option value="{{$appointment->id}}">{{$appointment->name}}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-
-                            </div> --}}
-
-                        <div class="row row-xs align-items-center mg-b-20">
                             <div class="col-md-1">
                                 <label for="exampleInputEmail1">
                                     {{ __('doctors_trans.price') }}</label>
@@ -191,7 +177,7 @@
                                  <x-input-error :messages="$errors->get('price')" class="mt-2" />
                             </div>
 
-                        </div>
+                        </div> --}}
 
                         <div class="row row-xs align-items-center mg-b-20">
                             <div class="col-md-1">
@@ -200,7 +186,7 @@
                             </div>
                             <div class="col-md-11 mg-t-5 mg-md-t-0">
                                 <input type="file" accept="image/*" name="photo" onchange="loadFile(event)">
-                                <img style="border-radius:50%" src="{{ isset($Doctor)? asset('Dashboard/img/doctors/'.$Doctor->Image->filename) : '' }}" width="150px" height="150px" id="output" />
+                                <img style="border-radius:50%" src="{{ (isset($Doctor) && isset($Doctor->Image->filename))? asset('Dashboard/img/doctors/'.$Doctor->Image->filename ?? '') : '' }}" width="150px" height="150px" id="output" />
                             </div>
                         </div>
 

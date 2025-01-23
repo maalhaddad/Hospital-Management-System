@@ -14,8 +14,13 @@
 
                 @if ($type == 'insert')
                 <div class="modal-body">
-                    <label for="exampleInputPassword1">{{__('Dashboard/section_trans.name_sections')}}</label>
-                    <input type="text" name="name" class="form-control" required >
+                    <label for="name">{{__('Dashboard/section_trans.name_sections')}}</label>
+                    <input id="name" type="text" name="name" class="form-control" required >
+
+                    <div class="col-lg">
+                        <label for="description">{{__('sections_trans.description')}}</label>
+                        <textarea id="description" name="description" class="form-control"  rows="3"></textarea>
+                    </div>
                 </div>
 
                 @elseif($type == 'edit')
@@ -25,6 +30,11 @@
                     <label for="exampleInputPassword1">{{__('Dashboard/section_trans.name_sections')}}</label>
                     <input type="text" name="name" id="name" class="form-control" required >
                     <input type="hidden" name="section_id" id="section_id" class="form-control" required >
+
+                    <div class="col-lg">
+                        <label for="description">{{__('sections_trans.description')}}</label>
+                        <textarea id="description" name="description" class="form-control"  rows="3"></textarea>
+                    </div>
                 </div>
 
                 @else

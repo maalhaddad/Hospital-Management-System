@@ -10,8 +10,8 @@ class Doctor extends Model
 {
     use Translatable;
     use HasFactory;
-    public $translatedAttributes = ['name','appointments'];
-    public $fillable= ['email','email_verified_at','password','phone','price','name','appointments','photo'];
+    public $translatedAttributes = ['name'];
+    public $fillable= ['email','email_verified_at','password','status','name','photo'];
 
 
     public function Image()
@@ -22,5 +22,10 @@ class Doctor extends Model
     public function Section()
     {
        return $this->belongsTo(Section::class);
+    }
+
+    public function Appointments()  {
+
+        return $this->belongsToMany(Appointment::class, 'appointment_doctor');
     }
 }

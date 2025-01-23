@@ -11,9 +11,15 @@
             <form action="{{ route('sections.store') }}" method="post" autocomplete="off">
                 @csrf
                 <div class="modal-body">
-                    <label for="exampleInputPassword1">{{__('Dashboard/section_trans.name_sections')}}</label>
-                    <input type="text" name="name" class="form-control" required >
+                    <label for="setion_name">{{__('Dashboard/section_trans.name_sections')}}</label>
+                    <input id="section_name" type="text" name="name" class="form-control" required >
+
+                    <div class="col-lg">
+                        <label for="description">{{__('Dashboard/section_trans.description')}}</label>
+                        <textarea id="description" class="form-control" placeholder="Textarea" rows="3"></textarea>
+                    </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Dashboard/section_trans.Close')}}</button>
                     <button type="submit" class="btn btn-primary">{{__('Dashboard/section_trans.submit')}}</button>

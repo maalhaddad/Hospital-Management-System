@@ -48,3 +48,15 @@
 
 </script>
 @endif
+
+@if (session()->has('update-status'))
+<script>
+    window.onload = function() {
+        notif({
+            msg: "{{ trans('Dashboard/messages.update_status') }}",
+            type: "success"
+        });
+    }
+
+</script>
+@endif

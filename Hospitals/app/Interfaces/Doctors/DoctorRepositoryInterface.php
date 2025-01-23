@@ -13,4 +13,6 @@ interface DoctorRepositoryInterface {
     Public function edit(Model $Doctor);
     public function update($attributes , $id);
     public function destroy($attributes);
+    public function DeleteSelectDoctors($attributes);
+    public function updateStatus($attributes);
 }
