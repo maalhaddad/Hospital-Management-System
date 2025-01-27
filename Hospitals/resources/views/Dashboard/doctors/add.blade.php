@@ -95,6 +95,8 @@
                             </div>
                         </div>
 
+                        @if(!isset($Doctor))
+
                         <div class="row row-xs align-items-center mg-b-20">
                             <div class="col-md-1">
                                 <label for="exampleInputEmail1">
@@ -107,6 +109,19 @@
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>
                         </div>
+                        @endif
+                        {{-- <div class="row row-xs align-items-center mg-b-20">
+                            <div class="col-md-1">
+                                <label for="exampleInputEmail1">
+                                    {{ __('doctors_trans.password') }}</label>
+                            </div>
+                            <div class="col-md-11 mg-t-5 mg-md-t-0">
+                                <input class="form-control @error('password') is-invalid @enderror " name="password"
+                                value="{{ old('password') }}"
+                                type="password">
+                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                            </div>
+                        </div> --}}
 
                         <div class="row row-xs align-items-center mg-b-20">
                             <div class="col-md-1">

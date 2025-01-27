@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Dashboard\SingleServiceController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -68,6 +69,15 @@ Route::group(
 
                 });
                 // =========== End Doctor ===========
+
+                 // ===========  Service ===========
+
+                 Route::controller(SingleServiceController::class)->group(function(){
+
+                    Route::resource('services',SingleServiceController::class);
+                 });
+
+                  // =========== End Service ===========
 
             });
 

@@ -23,9 +23,8 @@ class DoctorUpdateRequest extends FormRequest
     {
         return [
             'email' => 'required|email|max:255',
-            'password'  => 'required|string|min:8',
             'phone' => 'required',
-            'price' => 'required|numeric|min:0',
+
             'name' => 'required|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'section_id' => 'required|exists:sections,id', //
@@ -37,9 +36,7 @@ class DoctorUpdateRequest extends FormRequest
     {
         return [
             'email' => 'البريد الإلكتروني',
-            'password' => 'كلمة المرور',
             'phone' => ' الهاتف',
-            'price' => 'السعر',
             'name' => 'الاسم',
             'section_id' => 'القسم',
             'photo' => 'الصورة',

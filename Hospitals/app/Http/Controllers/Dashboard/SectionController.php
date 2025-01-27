@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\sections\SectionRepositoryInterface;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -19,6 +20,11 @@ class SectionController extends Controller
     public function index()
     {
         return  $this->SectionRepository->index();
+    }
+
+    public function show(Section $section)
+    {
+        return $this->SectionRepository->show($section);
     }
 
 

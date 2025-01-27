@@ -9,7 +9,7 @@
                 @method('delete')
                 @csrf
                 <div class="modal-body">
-                    <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                    <p>{{ __('sections_trans.Warning') }}</p><br>
                     <input type="hidden" name="doctor_id" id="doctor_id" value="">
                 </div>
                 <div class="modal-footer">

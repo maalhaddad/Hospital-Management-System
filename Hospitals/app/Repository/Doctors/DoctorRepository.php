@@ -20,6 +20,7 @@ class DoctorRepository implements DoctorRepositoryInterface
         return view('Dashboard.doctors.index', ['doctors' => Doctor::all()]);
     }
 
+
     public function create()
     {
 
@@ -65,8 +66,6 @@ class DoctorRepository implements DoctorRepositoryInterface
     Public function edit($Doctor)
     {
 
-        // $appointments = Appointment::all();
-        // $appointmentsId = $Doctor->Appointments->pluck('id')->toArray();
         return view('Dashboard.doctors.add',
         [
             'Doctor'         => $Doctor,
@@ -86,7 +85,6 @@ class DoctorRepository implements DoctorRepositoryInterface
             $Doctor = Doctor::find($id);
             $Doctor->name = $request->name;
             $Doctor->email = $request->email;
-            $Doctor->password = Hash::make($request->password);
             $Doctor->phone = $request->phone;
             $Doctor->section_id = $request->section_id;
             $Doctor->save();
@@ -104,11 +102,11 @@ class DoctorRepository implements DoctorRepositoryInterface
 
             DB::commit();
             session()->flash('edit');
-            return redirect()->route('doctors.index');
+            return redirect()->back();
         } catch (\Exception $ex) {
 
             DB::rollBack();
-            return redirect()->route('doctors.index')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 
@@ -123,10 +121,10 @@ class DoctorRepository implements DoctorRepositoryInterface
             }
             $doctor->delete();
             session()->flash('delete');
-            return redirect()->route('doctors.index');
+            return redirect()->back();
         } catch (\Exception $ex) {
 
-            return redirect()->route('doctors.index')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 
@@ -163,9 +161,9 @@ class DoctorRepository implements DoctorRepositoryInterface
                 'status' => $request->status,
             ]);
             session()->flash('update-status');
-            return redirect()->route('doctors.index');
+            return redirect()->back();
         } catch (\Exception $ex) {
-            return redirect()->route('doctors.index')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 

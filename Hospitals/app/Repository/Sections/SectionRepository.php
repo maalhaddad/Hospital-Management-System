@@ -13,6 +13,13 @@ class SectionRepository implements SectionRepositoryInterface
       return view('Dashboard.sections.index' , ['sections' => Section::all()]);
     }
 
+    public function show(Section $section)
+    {
+        $doctors = $section->Doctors;
+
+        return view('Dashboard.sections.show_doctors',compact('doctors','section'));
+    }
+
     public function store($attributes)
     {
         try {
