@@ -55,7 +55,7 @@
                                                <tr>
                                                    <td>{{$loop->iteration}}</td>
                                                    <td><a href="{{ route('sections.show',$section) }}">{{$section->name}}</a></td>
-                                                   <td>{{$section->description}}</td>
+                                                   <td>{{\Str::limit($section->description, 50)}}</td>
                                                    <td>{{ $section->created_at->diffForHumans() }}</td>
                                                    <td>
                                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"  data-toggle="modal" href="#edit"

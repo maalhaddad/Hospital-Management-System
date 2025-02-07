@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\sections;
+namespace App\Interfaces\Sections;
 use App\Models\Section;
 
 interface SectionRepositoryInterface {

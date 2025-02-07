@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DoctorController;
+use App\Http\Controllers\Dashboard\InsuranceController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\SingleServiceController;
@@ -46,7 +47,7 @@ Route::group(
 
          Route::group(
             [
-                'prefix' => '/admin',
+                'prefix' => 'admin',
                 'middleware' => [ 'auth:admin' ]
             ],function(){
 
@@ -78,6 +79,22 @@ Route::group(
                  });
 
                   // =========== End Service ===========
+
+                //========  GroupServices route =========
+
+             Route::view('Add-GroupServices','livewire.GroupServices.include_create')->name('Add_GroupServices');
+
+              //=========== end GroupServices route =========
+
+               // ===========  Insurance ===========
+
+               Route::controller(InsuranceController::class)->group(function(){
+
+                Route::resource('insurances',InsuranceController::class);
+             });
+
+              // =========== End Insurance ===========
+
 
             });
 

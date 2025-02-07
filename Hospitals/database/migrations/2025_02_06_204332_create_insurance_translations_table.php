@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('group_translations', function (Blueprint $table) {
+        Schema::create('insurance_translations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('insurance_id')->constrained('insurances')->cascadeOnDelete();
             $table->string('locale')->index();
             $table->string('name');
-            $table->string('notes')->nullable();
-            $table->foreignId('group_id')->constrained('groups')->cascadeOnDelete();
-            $table->unique(['Group_id','locale','name']);
-            $table->timestamps();
+            $table->string('notes');
+            $table->unique(['insurance_id','locale']);
+
+
+
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('group_translations');
+        Schema::dropIfExists('insurance_translations');
     }
 };

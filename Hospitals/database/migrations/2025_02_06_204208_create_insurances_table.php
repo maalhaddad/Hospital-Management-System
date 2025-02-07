@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('insurances', function (Blueprint $table) {
             $table->id();
-            $table->decimal('Total_before_discount',8,2);
-            $table->decimal('discount_value',8,2);
-            $table->decimal('Total_after_discount',8,2);
-            $table->string('tax_rate');
-            $table->decimal('Total_with_tax',8,2);
+            $table->string('insurance_code')->unique();
+            $table->string('discount_percentage')->nullable();
+            $table->string('company_rate');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('insurances');
     }
 };

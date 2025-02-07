@@ -37,7 +37,6 @@
                                         <a  class="btn btn-primary" href="{{ route('doctors.create') }}" >
                                             {{__('doctors_trans.add_doctor')}}
                                         </a>
-
                                         <button type="button" class="btn btn-danger"
                                         id="btn_delete_all" data-target="#delete_select" >{{__('doctors_trans.delete_select')}}</button>
                                     </div>

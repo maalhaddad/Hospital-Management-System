@@ -1,6 +1,8 @@
 <!-- Title -->
 <title> @yield('title') </title>
 @yield('css')
+@livewireStyles
+
 
 @if (App::getlocale() == 'ar')
 
@@ -44,4 +46,6 @@
 <!---Skinmodes css-->
 <link href="{{URL::asset('Dashboard/css/skin-modes.css')}}" rel="stylesheet" />
 @endif
+
+
 
