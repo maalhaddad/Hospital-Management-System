@@ -11,7 +11,7 @@ class GroupServices extends Component
 {
     public $GroupsItems = [];
     public $allServices;
-    public $discount_value ;
+    public $discount_value=0 ;
     public $taxes = 17;
     public $name_group;
     public $notes;

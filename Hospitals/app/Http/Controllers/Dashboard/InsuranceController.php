@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InsuranceRequest;
 use App\Interfaces\Insurances\InsuranceRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Insurance;
@@ -30,7 +31,7 @@ class InsuranceController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(InsuranceRequest $request)
     {
 
         return $this->InsuranceRepository->store($request);
@@ -49,7 +50,7 @@ class InsuranceController extends Controller
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(InsuranceRequest $request, string $id)
     {
         return $this->InsuranceRepository->update($request, $id);
     }
@@ -57,10 +58,7 @@ class InsuranceController extends Controller
 
     public function destroy(Request $request,string $id)
     {
-        if($request->delete_type)
-        {
-            return $this->InsuranceRepository->DeleteSelectInsurances($request);
-        }
+        
         return $this->InsuranceRepository->destroy($request);
     }
 

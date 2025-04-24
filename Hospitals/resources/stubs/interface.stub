@@ -1,0 +1,22 @@
+<?php
+
+namespace {{namespace}};
+
+use App\Models\{{model}};
+
+interface {{interfaceName}}
+{
+    public function index();
+
+    public function create();
+
+    public function show({{model}} ${{model}});
+
+    public function store(array $attributes);
+
+    public function edit({{model}} ${{model}});
+
+    public function update(array $attributes, $id);
+
+    public function destroy($id);
+}

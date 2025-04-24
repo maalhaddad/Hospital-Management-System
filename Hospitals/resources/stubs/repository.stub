@@ -1,0 +1,73 @@
+<?php
+
+namespace {{namespace}};
+
+use {{interfaceNs}};
+use App\Models\{{model}};
+
+class {{repositoryName}} implements {{interfaceName}}
+{
+    public function index()
+    {
+        return view('Dashboard.view.index', ['{{model}}s' => {{model}}::all()]);
+    }
+
+    public function create()
+    {
+        //
+    }
+
+    public function show({{model}} ${{model}})
+    {
+        //
+    }
+
+    public function store(array $attributes)
+    {
+         try {
+
+
+
+            session()->flash('add');
+            return redirect()->back();
+        }
+
+        catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function edit({{model}} ${{model}})
+    {
+
+    }
+
+    public function update(array $attributes, $id)
+    {
+        try {
+
+            ${{model}} = {{model}}::findOrFail($id);
+
+
+            session()->flash('edit');
+            return redirect()->route('view.index');
+        } catch (\Exception $ex) {
+
+            return redirect()->route('view.index')->withErrors($ex->getMessage());
+        }
+    }
+
+    public function destroy($request)
+    {
+         try {
+
+            ${{model}} = {{model}}::find($request->${{model}}_id);
+            ${{model}}->delete();
+            session()->flash('delete');
+            return redirect()->route('view.index');
+        } catch (\Exception $ex) {
+
+            return redirect()->route('view.index')->withErrors($ex->getMessage());
+        }
+    }
+}

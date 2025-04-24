@@ -55,7 +55,7 @@
                     <div class="row">
                         <div class="col">
                             <label>{{__('insurance.discount_percentage')}} %</label>
-                            <input type="number" name="discount_percentage" value="{{ $insurance->discount_percentage ?? ' '}}" class="form-control @error ('discount_percentage') is-invalid @enderror">
+                            <input type="number" name="discount_percentage" value="{{ $insurance->discount_percentage ??  old('discount_percentage')}}" class="form-control @error ('discount_percentage') is-invalid @enderror">
                             @error('discount_percentage')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -63,7 +63,7 @@
 
                         <div class="col">
                             <label>{{__('insurance.Insurance_bearing_percentage')}} %</label>
-                            <input type="number" name="Company_rate" value="{{ $insurance->company_rate ?? ' '}}" class="form-control @error ('Company_rate') is-invalid @enderror">
+                            <input type="number" name="Company_rate" value="{{ $insurance->company_rate ??  old('Company_rate')}}" class="form-control @error ('Company_rate') is-invalid @enderror">
                             @error('Company_rate')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col">
                             <label>{{__('insurance.notes')}}</label>
-                            <textarea rows="5" cols="10" class="form-control" name="notes">{{ $insurance->notes ?? ' ' }}</textarea>
+                            <textarea rows="5" cols="10" class="form-control" name="notes">{{ $insurance->notes ??  old('notes') }}</textarea>
                         </div>
                     </div>
 
