@@ -13,4 +13,10 @@ class Patient extends Model
 
     public $translatedAttributes = ['name','Address'];
     public $fillable= ['name','Address','email','Password','Date_Birth','Phone','Gender','Blood_Group'];
+
+
+    public function Invoices()
+    {
+        return $this->hasMany(SingleInvoices::class);
+    }
 }

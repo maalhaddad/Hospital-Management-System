@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\PatientController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\SingleServiceController;
+use App\Livewire\CreateInvoice;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -117,6 +118,20 @@ Route::group(
                 });
 
                 // =========== End Patient ===========
+
+
+                //############################# single_invoices route ##########################################
+
+                    Route::view('single_invoices','livewire.singleInvoices.index')->name('single_invoices');
+                    Route::view('create-invoice','livewire.singleInvoices.index')->name('create-invoice');
+                    Route::get('update-invoice/{invoice_id}',function($invoice_id){
+
+                        return view('livewire.singleInvoices.index');
+                    }
+                    )->name('update-invoice');
+
+               //############################# end single_invoices route ######################################
+
 
             }
         );

@@ -28,4 +28,9 @@ class Doctor extends Model
 
         return $this->belongsToMany(Appointment::class, 'appointment_doctor');
     }
+
+    public function Invoices()
+    {
+        return $this->hasMany(SingleInvoices::class);
+    }
 }

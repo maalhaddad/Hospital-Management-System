@@ -22,4 +22,8 @@ class Service extends Model
         return $this->belongsToMany(Group::class, 'service_group')->withPivot('quantity');
     }
 
+    public function Invoices()
+    {
+        return $this->hasMany(SingleInvoices::class);
+    }
 }
