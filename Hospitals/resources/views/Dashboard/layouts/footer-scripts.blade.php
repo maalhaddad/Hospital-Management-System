@@ -25,6 +25,8 @@
 <script src="{{URL::asset('Dashboard/plugins/sidebar/sidebar-custom.js')}}"></script>
 <!-- Eva-icons js -->
 <script src="{{URL::asset('Dashboard/js/eva-icons.min.js')}}"></script>
+
+
 @yield('js')
 <!-- Sticky js -->
 <script src="{{URL::asset('Dashboard/js/sticky.js')}}"></script>

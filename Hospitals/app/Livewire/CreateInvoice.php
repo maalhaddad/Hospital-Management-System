@@ -23,6 +23,7 @@ class CreateInvoice extends Component
     public $InvoiceSaved;
     public $invoice_id = 0;
     public $functionName = 'store';
+    public $selectType = '';
     public function __construct()
     {
         if(Route::currentRouteName() == 'update-invoice')
@@ -30,6 +31,7 @@ class CreateInvoice extends Component
             $this->invoice_id = Route::current()->parameter('invoice_id');
             $this->ShowInvoiceEdit($this->invoice_id);
             $this->functionName = 'Update';
+            $this->selectType = 'disabled';
         }
 
 
@@ -145,11 +147,11 @@ class CreateInvoice extends Component
             if($type== 1)
             {
                 $fundAccounts = FundAccount::where('single_invoice_id',$this->invoice_id)->first();
-                $fundAccount->date = date('Y-m-d');
-                $fundAccount->single_invoice_id = $invoice->id;
-                $fundAccount->Debit = $invoice->total_with_tax;
-                $fundAccount->credit = 0.00;
-                $fundAccount->save();
+                $fundAccounts->date = date('Y-m-d');
+                $fundAccounts->single_invoice_id = $invoice->id;
+                $fundAccounts->Debit = $invoice->total_with_tax;
+                $fundAccounts->credit = 0.00;
+                $fundAccounts->save();
                
             }
             else

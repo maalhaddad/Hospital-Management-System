@@ -36,7 +36,7 @@
 
                      <div class="col">
                          <label>نوع الفاتورة</label>
-                         <select wire:model="invoice.type" class="form-control">
+                         <select {{ $selectType }} wire:model="invoice.type" class="form-control">
                              <option value="" >-- اختار من القائمة --</option>
                              <option value="1">نقدي</option>
                              <option value="2">اجل</option>
