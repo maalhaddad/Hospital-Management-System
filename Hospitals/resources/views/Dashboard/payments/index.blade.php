@@ -1,6 +1,6 @@
 @extends('Dashboard.layouts.master')
 @section('title')
-    سندات القبض
+    سندات الصرف
 @stop
 @section('css')
     <!-- Internal Data table css -->
@@ -30,7 +30,7 @@
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">الحسابات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ سندات
-                    القبض</span>
+                    الصرف</span>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <a href="{{ route('Receipts.create') }}" class="btn btn-primary" role="button"
+                        <a href="{{ route('Payment.create') }}" class="btn btn-primary" role="button"
                             aria-pressed="true">اضافة سند جديد</a>
                     </div>
                 </div>
@@ -63,23 +63,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($receipts as $receipt)
+                                @foreach ($Payments as $Payment)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $receipt->patients->name }}</td>
-                                        <td>{{ number_format($receipt->amount, 2) }}</td>
-                                        <td>{{ \Str::limit($receipt->description, 50) }}</td>
-                                        <td>{{ $receipt->created_at->diffForHumans() }}</td>
+                                        <td>{{ $Payment->patients->name }}</td>
+                                        <td>{{ number_format($Payment->amount, 2) }}</td>
+                                        <td>{{ \Str::limit($Payment->description, 50) }}</td>
+                                        <td>{{ $Payment->created_at->diffForHumans() }}</td>
                                         <td>
-                                            <a href="{{ route('Receipts.edit', $receipt) }}"
+
+                                            <a href="{{ route('Payment.edit', $Payment,$Payment->id) }}"
                                                 class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                                                <button class="btn btn-sm btn-danger" data-receipt_id="{{ $receipt->id }}" data-receipt_name="{{ $receipt->patients->name }}" data-toggle="modal" data-target="#delete_Receipts"><i class="fas fa-trash"></i></button>
-                                                <a href="{{route('Receipts.show',$receipt)}}" class="btn btn-success btn-sm" target="_blank" title="طباعه سند قبض">
+                                                <button class="btn btn-sm btn-danger"
+                                                 data-payment_id="{{ $Payment->id }}"
+                                                 data-payment_name="{{ $Payment->patients->name }}"
+                                                  data-toggle="modal" data-target="#delete_Payments"><i class="fas fa-trash"></i></button>
+
+                                                  <a href="{{route('Payment.show',$Payment->id)}}" class="btn btn-success btn-sm" target="_blank" title="طباعه سند قبض">
                                                     <i class="fas fa-print"></i>
                                                 </a>
                                         </td>
                                     </tr>
-                                    {{-- @include('Dashboard.Receipt.delete') --}}
+                                    {{-- @include('Dashboard.Payment.delete') --}}
                                 @endforeach
                             </tbody>
                         </table>
@@ -90,20 +95,20 @@
         <!--/div-->
 
         <!-- /row -->
-        <div class="modal" id="delete_Receipts">
+        <div class="modal" id="delete_Payments">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modal-content-demo">
                     <div class="modal-header">
                         <h6 class="modal-title">حذف سند</h6><button aria-label="Close" class="close"
                             data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                     </div>
-                    <form action="{{ route('Receipts.destroy','test') }}" method="post">
+                    <form action="{{ route('Payment.destroy','test') }}" method="post">
                         @method('delete')
                         @csrf
                         <div class="modal-body">
                             <p>{{ __('sections_trans.Warning') }}</p><br>
-                            <input type="hidden" name="Receipt_id" id="Receipt_id" value="">
-                            <input type="text" name="Receipt_name" id="Receipt_name" class="form-control" readonly>
+                            <input type="hidden" name="Payment_id" id="Payment_id" value="">
+                            <input type="text" name="Payment_name" id="Payment_name" class="form-control" readonly>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Dashboard/section_trans.Close')}}</button>
@@ -165,15 +170,15 @@
 
 
     <script>
-        $('#delete_Receipts').on('show.bs.modal', function(event) {
+        $('#delete_Payments').on('show.bs.modal', function(event) {
            var button = $(event.relatedTarget)
-           var Receipt_id = button.data('receipt_id')
-           var Receipt_name = button.data('receipt_name')
+           var Payment_id = button.data('payment_id')
+           var Payment_name = button.data('payment_name')
            var modal = $(this)
-           console.log(Receipt_id);
-           console.log(Receipt_name);
-           modal.find('.modal-body #Receipt_id').val(Receipt_id);
-           modal.find('.modal-body #Receipt_name').val(Receipt_name);
+           console.log(Payment_id);
+           console.log(Payment_name);
+           modal.find('.modal-body #Payment_id').val(Payment_id);
+           modal.find('.modal-body #Payment_name').val(Payment_name);
 
        });
    </script>

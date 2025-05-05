@@ -21,7 +21,7 @@ class ReceiptRequest extends FormRequest
     {
         return [
             'patient_id' => 'required|exists:patients,id',
-            'Debit' => 'required|numeric|min:0',
+            'amount' => 'required|numeric|min:0',
             'description' => 'required|string|max:500',
         ];
     }
@@ -34,9 +34,9 @@ class ReceiptRequest extends FormRequest
         return [
             'patient_id.required' => 'يرجى اختيار المريض',
             'patient_id.exists' => 'المريض المحدد غير موجود',
-            'Debit.required' => 'يرجى إدخال المبلغ',
-            'Debit.numeric' => 'المبلغ يجب أن يكون رقماً',
-            'Debit.min' => 'المبلغ يجب أن يكون أكبر من أو يساوي صفر',
+            'amount.required' => 'يرجى إدخال المبلغ',
+            'amount.numeric' => 'المبلغ يجب أن يكون رقماً',
+            'amount.min' => 'المبلغ يجب أن يكون أكبر من أو يساوي صفر',
             'description.required' => 'يرجى إدخال البيان',
             'description.string' => 'البيان يجب أن يكون نصاً',
             'description.max' => 'البيان يجب ألا يتجاوز 500 حرف',

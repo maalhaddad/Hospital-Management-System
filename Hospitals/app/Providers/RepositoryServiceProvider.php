@@ -16,6 +16,8 @@ use App\Repository\Patients\PatientRepository;
 use App\Repository\Services\SingleServiceRepository;
 use App\Repository\ReceiptAccounts\ReceiptAccountRepository;
 use App\Interfaces\ReceiptAccounts\ReceiptAccountRepositoryInterface;
+use App\Interfaces\PaymentAccounts\PaymentAccountRepositoryInterface;
+use App\Repository\PaymentAccounts\PaymentAccountRepository;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -33,6 +35,7 @@ class RepositoryServiceProvider extends ServiceProvider
        $this->app->bind(AmbulanceRepositoryInterface::class , AmbulanceRepository::class);
        $this->app->bind(PatientRepositoryInterface::class , PatientRepository::class);
        $this->app->bind(ReceiptAccountRepositoryInterface::class , ReceiptAccountRepository::class);
+       $this->app->bind(PaymentAccountRepositoryInterface::class , PaymentAccountRepository::class);
     }
 
     /**

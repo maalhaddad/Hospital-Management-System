@@ -24,12 +24,13 @@ class ReceiptAccountRepository implements ReceiptAccountRepositoryInterface
     public function create()
     {
         return view('Dashboard.receipts.add', ['Patients' => Patient::all()]);
-        
+
     }
 
     public function show(ReceiptAccount $ReceiptAccount)
     {
-        
+
+        return view('Dashboard.receipts.print',['receipt' => $ReceiptAccount]);
     }
 
     public function store( $attributes)
@@ -41,14 +42,14 @@ class ReceiptAccountRepository implements ReceiptAccountRepositoryInterface
             $ReceiptAccount = new ReceiptAccount();
             $ReceiptAccount->date = date('Y-m-d');
             $ReceiptAccount->patient_id = $attributes->patient_id;
-            $ReceiptAccount->Debit = $attributes->Debit;
+            $ReceiptAccount->amount = $attributes->amount;
             $ReceiptAccount->description = $attributes->description;
             $ReceiptAccount->save();
             // store fund_accounts
             $fund_accounts = new FundAccount();
             $fund_accounts->date =date('y-m-d');
             $fund_accounts->receipt_id = $ReceiptAccount->id;
-            $fund_accounts->Debit = $attributes->Debit;
+            $fund_accounts->Debit = $attributes->amount;
             $fund_accounts->credit = 0.00;
             $fund_accounts->save();
             // store patient_accounts
@@ -57,7 +58,7 @@ class ReceiptAccountRepository implements ReceiptAccountRepositoryInterface
             $patient_accounts->patient_id = $attributes->patient_id;
             $patient_accounts->receipt_id = $ReceiptAccount->id;
             $patient_accounts->Debit = 0.00;
-            $patient_accounts->credit =$attributes->Debit;
+            $patient_accounts->credit =$attributes->amount;
             $patient_accounts->save();
             DB::commit();
             session()->flash('add');
@@ -76,7 +77,7 @@ class ReceiptAccountRepository implements ReceiptAccountRepositoryInterface
             'Patients' => Patient::all(),
             'Receipt'  => $Receipt,
         ]);
-      
+
     }
 
     public function update( $attributes, $id)
@@ -86,7 +87,7 @@ class ReceiptAccountRepository implements ReceiptAccountRepositoryInterface
             $ReceiptAccount = ReceiptAccount::findOrFail($id);
             $ReceiptAccount->date = date('Y-m-d');
             $ReceiptAccount->patient_id = $attributes->patient_id;
-            $ReceiptAccount->Debit = $attributes->Debit;
+            $ReceiptAccount->amount = $attributes->amount;
             $ReceiptAccount->description = $attributes->description;
             $ReceiptAccount->save();
 
@@ -94,7 +95,7 @@ class ReceiptAccountRepository implements ReceiptAccountRepositoryInterface
              $fund_accounts = FundAccount::where('receipt_id',$ReceiptAccount->id)->first();
              $fund_accounts->date =date('y-m-d');
              $fund_accounts->receipt_id = $ReceiptAccount->id;
-             $fund_accounts->Debit = $attributes->Debit;
+             $fund_accounts->Debit = $attributes->amount;
              $fund_accounts->credit = 0.00;
              $fund_accounts->save();
              // store patient_accounts
@@ -103,7 +104,7 @@ class ReceiptAccountRepository implements ReceiptAccountRepositoryInterface
              $patient_accounts->patient_id = $attributes->patient_id;
              $patient_accounts->receipt_id = $ReceiptAccount->id;
              $patient_accounts->Debit = 0.00;
-             $patient_accounts->credit =$attributes->Debit;
+             $patient_accounts->credit =$attributes->amount;
              $patient_accounts->save();
 
              DB::commit();
@@ -117,7 +118,7 @@ class ReceiptAccountRepository implements ReceiptAccountRepositoryInterface
 
     public function destroy($request)
     {
-        
+
          try {
 
             $ReceiptAccount = ReceiptAccount::find($request->Receipt_id);

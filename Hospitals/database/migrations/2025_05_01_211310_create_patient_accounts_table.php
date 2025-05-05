@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('single_invoice_id')->nullable()->constrained('single_invoices')->cascadeOnDelete();
             $table->foreignId('patient_id')->nullable()->constrained('patients')->cascadeOnDelete();
             $table->foreignId('receipt_id')->nullable()->constrained('receipt_accounts')->cascadeOnDelete();
+            $table->foreignId('payment_id')->nullable()->constrained('payment_accounts')->cascadeOnDelete();
             $table->decimal('Debit',8,2)->nullable();
             $table->decimal('credit',8,2)->nullable();
             $table->timestamps();

@@ -51,7 +51,7 @@
                                 {{-- <button wire:click="editInvoice" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button> --}}
                                 {{-- <button type="button" wire:click="delete({{ $single_invoice->id }})" class="btn btn-danger btn-sm" data-toggle="modal"  data-target="#delete_invoice"><i class="fa fa-trash"></i></button> --}}
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_invoice" wire:click="delete({{ $single_invoice->id }})" ><i class="fa fa-trash"></i></button>
-
+                                <a href="{{ route('print-single-invoice' ,$single_invoice->id) }}" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-print"></i></a>
                             </td>
                         </tr>
                     @endforeach

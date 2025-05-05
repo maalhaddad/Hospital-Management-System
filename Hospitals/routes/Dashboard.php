@@ -9,7 +9,9 @@ use App\Http\Controllers\Dashboard\ReceiptAccountController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\SingleServiceController;
+use App\Http\Controllers\Dashboard\PaymentAccountController;
 use App\Livewire\CreateInvoice;
+use App\Models\SingleInvoices;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -125,6 +127,12 @@ Route::group(
 
                     Route::view('single_invoices','livewire.singleInvoices.index')->name('single_invoices');
                     Route::view('create-invoice','livewire.singleInvoices.index')->name('create-invoice');
+                    Route::get('print-single-invoice/{id}',function($id){
+
+                        $singleInvoice = SingleInvoices::find($id);
+                        return view('livewire.singleInvoices.print',compact('singleInvoice'));
+
+                    })->name('print-single-invoice');
                     Route::get('update-invoice/{invoice_id}',function($invoice_id){
 
                         return view('livewire.singleInvoices.index');
@@ -135,9 +143,19 @@ Route::group(
 
                // ===========  ReceiptAccount ===========
 
-               Route::controller(AmbulanceController::class)->group(function () {
+               Route::controller(ReceiptAccountController::class)->group(function () {
 
                 Route::resource('Receipts', ReceiptAccountController::class);
+            });
+
+            // =========== End ReceiptAccount ===========
+
+             // ===========  ReceiptAccount ===========
+
+               Route::controller(PaymentAccountController::class)->group(function () {
+
+                Route::resource('Payment', PaymentAccountController::class);
+                Route::get('credit-balance/{patient_id}','gitCredit');
             });
 
             // =========== End ReceiptAccount ===========

@@ -10,7 +10,7 @@ use App\http\Requests\ReceiptRequest;
 
 class ReceiptAccountController extends Controller
 {
-    private $receiptAccounts;   
+    private $receiptAccounts;
     public function __construct(ReceiptAccountRepositoryInterface $receiptAccounts)
     {
         $this->receiptAccounts= $receiptAccounts;
@@ -20,13 +20,13 @@ class ReceiptAccountController extends Controller
         return $this->receiptAccounts->index();
     }
 
-   
+
     public function create()
     {
         return $this->receiptAccounts->create();
     }
 
-   
+
     public function store(ReceiptRequest $request)
     {
        return $this->receiptAccounts->store($request);
@@ -35,9 +35,9 @@ class ReceiptAccountController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ReceiptAccount $Receipt)
     {
-        //
+        return $this->receiptAccounts->show($Receipt);
     }
 
     /**
@@ -54,7 +54,7 @@ class ReceiptAccountController extends Controller
     public function update(Request $request, string $id)
     {
         return $this->receiptAccounts->update($request, $id);
-        
+
     }
 
     /**

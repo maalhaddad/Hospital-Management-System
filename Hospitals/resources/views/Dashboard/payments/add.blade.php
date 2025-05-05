@@ -6,14 +6,14 @@
 @endsection
 
 @section('title')
-{{ isset($Receipt) ? 'تعديل سند قبض' : 'إضافة سند قبض جديد'; }}
+{{ isset($Payment) ? 'تعديل سند صرف' : 'إضافة سند صرف جديد'; }}
 @stop
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الحسابات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ isset($Receipt) ? 'تعديل سند قبض' : 'إضافة سند قبض جديد'; }}</span>
+                <h4 class="content-title mb-0 my-auto">الحسابات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ isset($Payment) ? 'تعديل سند صرف' : 'إضافة سند صرف جديد'; }}</span>
             </div>
         </div>
     </div>
@@ -27,11 +27,11 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @if (isset($Receipt))
-                    <form action="{{ route('Receipts.update',$Receipt->id) }}" method="post" autocomplete="off" enctype="multipart/form-data">
+                    @if (isset($Payment))
+                    <form action="{{ route('Payment.update',$Payment->id) }}" method="post" autocomplete="off" enctype="multipart/form-data">
                         @method('PUT')
                     @else
-                    <form action="{{ route('Receipts.store') }}" method="post" autocomplete="off" enctype="multipart/form-data">
+                    <form action="{{ route('Payment.store') }}" method="post" autocomplete="off" enctype="multipart/form-data">
                     @endif
                         @csrf
                         <div class="pd-30 pd-sm-40 bg-gray-200">
@@ -48,8 +48,8 @@
                                       @foreach($Patients as $Patient)
                                            <option value=""></option>
                                            <option
-                                            @if (isset($Receipt))
-                                                {{ ($Receipt->patients->id == $Patient->id)? 'selected' : '' }}
+                                            @if (isset($Payment))
+                                                {{ ($Payment->patients->id == $Patient->id)? 'selected' : '' }}
                                             @endif
                                             value="{{$Patient->id}}">{{$Patient->name}}</option>
                                       @endforeach
@@ -62,7 +62,7 @@
                                     <label>المبلغ</label>
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <input class="form-control" name="amount" value="{{ isset($Receipt)? $Receipt->amount : '' }}" type="number">
+                                    <input class="form-control" name="amount" value="{{ isset($Payment)? $Payment->amount : '' }}" type="number">
                                 </div>
                             </div>
 
@@ -71,7 +71,7 @@
                                     <label>البيان</label>
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <textarea class="form-control" name="description" rows="3">{{ isset($Receipt)? $Receipt->description : '' }}</textarea>
+                                    <textarea class="form-control" name="description" rows="3">{{ isset($Payment)? $Payment->description : '' }}</textarea>
                                 </div>
                             </div>
 
@@ -110,4 +110,36 @@
     <script src="{{URL::asset('Dashboard/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
     <!-- Internal form-elements js -->
     <script src="{{URL::asset('Dashboard/js/form-elements.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('select[name="patient_id"]').on('change', function() {
+                var patient_id = $(this).val();
+
+                if (patient_id) {
+
+                    $.ajax({
+                        url: "http://127.0.0.1:8000/ar/admin/credit-balance",
+                        type: "GET",
+                        dataType: "json",
+                        data: {
+                            id: patient_id
+                        },
+                        success: function(data) {
+                            console.log(data);
+
+                        },
+
+                        error: function(xhr, status, error) {
+                            console.log('حدث خطأ أثناء استرداد البيانات: ' + error);
+                        }
+                    });
+
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+
+        });
+    </script>
 @endsection
