@@ -4,6 +4,7 @@ namespace App\Repository\Patients;
 
 use App\Interfaces\Patients\PatientRepositoryInterface;
 use App\Models\Patient;
+use App\Models\SingleInvoices;
 use Illuminate\Support\Facades\Hash;
 
 class PatientRepository implements PatientRepositoryInterface
@@ -17,6 +18,15 @@ class PatientRepository implements PatientRepositoryInterface
     public function create()
     {
         return view('Dashboard.patients.add');
+    }
+
+
+    public function show(Patient $Patient)
+    {
+        // $invoices = SingleInvoices::where('patient_id',$Patient->id)->get();
+        // $receipt_accounts = R
+
+        return view('Dashboard.patients.show',compact('Patient'));
     }
 
 

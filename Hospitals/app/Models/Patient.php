@@ -19,4 +19,14 @@ class Patient extends Model
     {
         return $this->hasMany(SingleInvoices::class);
     }
+
+    public function Receipt_accounts()
+    {
+        return $this->hasMany(ReceiptAccount::class);
+    }
+
+    public function Patient_accounts()
+    {
+        return $this->hasMany(PatientAccount::class);
+    }
 }
