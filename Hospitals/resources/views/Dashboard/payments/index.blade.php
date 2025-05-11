@@ -79,7 +79,7 @@
                                                  data-payment_name="{{ $Payment->patients->name }}"
                                                   data-toggle="modal" data-target="#delete_Payments"><i class="fas fa-trash"></i></button>
 
-                                                  <a href="{{route('Payment.show',$Payment->id)}}" class="btn btn-success btn-sm" target="_blank" title="طباعه سند قبض">
+                                                <a href="{{route('Payment.show',$Payment->id)}}" class="btn btn-success btn-sm" target="_blank" title="طباعه سند قبض">
                                                     <i class="fas fa-print"></i>
                                                 </a>
                                         </td>

@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\SingleServiceController;
 use App\Http\Controllers\Dashboard\PaymentAccountController;
 use App\Livewire\CreateInvoice;
+use App\Models\GroupInvoice;
 use App\Models\SingleInvoices;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -159,6 +160,26 @@ Route::group(
             });
 
             // =========== End ReceiptAccount ===========
+
+
+             //############################# single_invoices route ##########################################
+
+                    Route::view('group_invoices','livewire.groupInvoices.index')->name('group_invoices');
+                    Route::view('create-group-invoice','livewire.groupInvoices.index')->name('create-group-invoice');
+                    Route::get('print-group-invoice/{id}',function($id){
+
+                        $groupInvoice = GroupInvoice::find($id);
+                        return view('livewire.groupInvoices.print',compact('groupInvoice'));
+
+                    })->name('print-group-invoice');
+
+                    Route::get('update-group-invoice/{invoice_id}',function($invoice_id){
+
+                        return view('livewire.groupInvoices.index');
+                    }
+                    )->name('update-group-invoice');
+
+               //############################# end single_invoices route ######################################
 
             }
         );

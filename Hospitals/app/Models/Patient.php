@@ -15,7 +15,7 @@ class Patient extends Model
     public $fillable= ['name','Address','email','Password','Date_Birth','Phone','Gender','Blood_Group'];
 
 
-    public function Invoices()
+    public function SingleInvoices()
     {
         return $this->hasMany(SingleInvoices::class);
     }
@@ -28,5 +28,33 @@ class Patient extends Model
     public function Patient_accounts()
     {
         return $this->hasMany(PatientAccount::class);
+    }
+
+    public function GroupInvoices()
+    {
+        return $this->hasMany(GroupInvoice::class);
+    }
+
+    public function totalSingleInvoicesAmount()
+    {
+       return $this->SingleInvoices->sum('total_with_tax');
+    }
+
+     public function totalGroupInvoicesAmount()
+    {
+       return $this->GroupInvoices->sum('total_with_tax');
+    }
+
+
+    public function AllInvoices()
+    {
+        $invoices = $this->SingleInvoices->merge($this->GroupInvoices);
+        $invoices = $invoices->sortBy('created_at');
+        return $invoices;
+    }
+
+    public function getTotalInvoicesAmount()
+    {
+        return (float)$this->totalSingleInvoicesAmount() +(float)$this->totalGroupInvoicesAmount();
     }
 }

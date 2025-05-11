@@ -25,4 +25,9 @@ class PatientAccount extends Model
     {
          return $this->belongsTo(SingleInvoices::class,'single_invoice_id');
     }
+
+    public function group_invoice()
+    {
+         return $this->belongsTo(GroupInvoice::class,'group_invoice_id');
+    }
 }

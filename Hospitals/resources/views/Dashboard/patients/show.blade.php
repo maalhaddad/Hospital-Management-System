@@ -101,10 +101,12 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($Patient->Invoices as $invoice)
+                                                    @foreach($Patient->AllInvoices() as $invoice)
                                                         <tr>
                                                             <td>{{$loop->iteration}}</td>
-                                                            <td>{{$invoice->Service->name}}</td>
+                                                            <td>
+                                                                {{ ($invoice instanceof \App\Models\SingleInvoices) ? $invoice->Service->name :  $invoice->Group->name }}
+                                                            </td>
                                                             <td>{{$invoice->invoice_date}}</td>
                                                             <td>{{$invoice->total_with_tax}}</td>
                                                             <td>{{$invoice->type == 1 ? 'نقدي' : 'اجل'}}</td>
@@ -115,7 +117,7 @@
                                                         <th colspan="4" scope="row" class="alert alert-success">
                                                             الاجمالي
                                                         </th>
-                                                        <td class="alert alert-primary">{{ number_format( $Patient->Invoices->sum('total_with_tax') , 2)}}</td>
+                                                        <td class="alert alert-primary">{{ number_format( $Patient->totalSingleInvoicesAmount()+ $Patient->totalGroupInvoicesAmount(),2) }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -193,7 +195,11 @@
 
                                                                 @elseif($Patient_account->PaymentAccount == true)
                                                                     {{$Patient_account->PaymentAccount->description}}
+
+                                                                 @elseif($Patient_account->group_invoice == true)
+                                                                    {{$Patient_account->group_invoice->Group->name}}
                                                                 @endif
+
 
                                                             </td>
                                                             <td>{{ $Patient_account->Debit}}</td>

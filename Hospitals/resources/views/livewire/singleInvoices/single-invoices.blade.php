@@ -62,8 +62,8 @@
         </table>
     </div>
 
-     <div class="modal" id="delete_invoice">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal" id="delete_invoice">
+         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
                     <h6 class="modal-title">{{ __('doctors_trans.delete_doctor') }}</h6><button aria-label="Close"

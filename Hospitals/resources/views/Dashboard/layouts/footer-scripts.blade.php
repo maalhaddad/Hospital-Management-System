@@ -1,3 +1,4 @@
+{{-- @livewireScripts --}}
 <!-- Back-to-top -->
 <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
 <!-- JQuery min js -->
@@ -33,4 +34,5 @@
 <!-- custom js -->
 <script src="{{URL::asset('Dashboard/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('Dashboard/plugins/side-menu/sidemenu.js')}}"></script>
-@livewireScripts
+{{-- <script src="{{URL::asset('Dashboard/js/table-data.js')}}"></script> --}}
+
