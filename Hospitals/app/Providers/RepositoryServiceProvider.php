@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Interfaces\Ambulances\AmbulanceRepositoryInterface;
+use App\Interfaces\DoctorDashboard\Invoices\InvoiceRepositoryInterface;
 use App\Interfaces\sections\SectionRepositoryInterface;
 use App\Repository\Sections\SectionRepository;
 use App\Interfaces\Doctors\DoctorRepositoryInterface;
@@ -19,6 +20,7 @@ use App\Interfaces\ReceiptAccounts\ReceiptAccountRepositoryInterface;
 use App\Interfaces\PaymentAccounts\PaymentAccountRepositoryInterface;
 use App\Repository\PaymentAccounts\PaymentAccountRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Repository\DoctorDashboard\Invoices\InvoiceRepository;
 
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -28,6 +30,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        //========================== Admin ========================
        $this->app->bind(SectionRepositoryInterface::class , SectionRepository::class);
        $this->app->bind(DoctorRepositoryInterface::class , DoctorRepository::class);
        $this->app->bind(SingleServiceRepositoryInterface::class , SingleServiceRepository::class);
@@ -36,6 +39,10 @@ class RepositoryServiceProvider extends ServiceProvider
        $this->app->bind(PatientRepositoryInterface::class , PatientRepository::class);
        $this->app->bind(ReceiptAccountRepositoryInterface::class , ReceiptAccountRepository::class);
        $this->app->bind(PaymentAccountRepositoryInterface::class , PaymentAccountRepository::class);
+
+
+       //========================== Doctor ===========================
+         $this->app->bind( InvoiceRepositoryInterface::class ,InvoiceRepository::class);
     }
 
     /**

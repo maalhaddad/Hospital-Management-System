@@ -49,6 +49,7 @@
                                                         <option selected disabled >{{ __('Dashboard/login_trans.Choose_list') }}</option>
                                                         <option value="admin">{{ __('Dashboard/login_trans.admin') }}</option>
                                                         <option value="user">{{ __('Dashboard/login_trans.user') }}</option>
+                                                        <option value="doctor">{{ __('Dashboard/login_trans.doctor') }}</option>
                                                         {{-- <option value="3">Three</option> --}}
                                                       </select>
                                                 </div>
@@ -59,16 +60,22 @@
                                                  :route="route('login.user')"
                                                   :title="__('Dashboard/login_trans.user')" >
                                                 </x-login-form>
-                                               
+
 
 
                                                   {{-- login-form admin --}}
                                                   <x-login-form id="login-form-admin"
-                                                   :route="route('login.admin')" 
+                                                   :route="route('login.admin')"
                                                    :title="__('Dashboard/login_trans.admin')" >
                                                 </x-login-form>
 
-                                                 
+                                                 {{-- login-form doctor --}}
+                                                  <x-login-form id="login-form-doctor"
+                                                   :route="route('login.doctor')"
+                                                   :title="__('Dashboard/login_trans.doctor')" >
+                                                </x-login-form>
+
+
 											</div>
 										</div>
 									</div>
@@ -87,13 +94,22 @@
             $('#Access-Control').change(function() {
                 if ($(this).val() === 'admin') {
 
+                    $('#login-form-doctor').hide();
                     $('#login-form-user').hide();
                     $('#login-form-admin').show();
 
-                } else if($(this).val() === 'user')
+                }
+                else if($(this).val() === 'user')
                 {
                     $('#login-form-admin').hide();
+                    $('#login-form-doctor').hide();
                     $('#login-form-user').show();
+                }
+                 else if($(this).val() === 'doctor')
+                {
+                    $('#login-form-admin').hide();
+                    $('#login-form-user').hide();
+                    $('#login-form-doctor').show();
                 }
 
 

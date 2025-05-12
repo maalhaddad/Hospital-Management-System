@@ -31,6 +31,7 @@ class DoctorRepository implements DoctorRepositoryInterface
         ]);
     }
 
+
     public function store($request)
     {
         try {

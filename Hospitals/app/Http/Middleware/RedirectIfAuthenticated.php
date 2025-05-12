@@ -23,11 +23,16 @@ class RedirectIfAuthenticated
             return redirect(RouteServiceProvider::ADMIN);
         }
 
-        if(auth('web')->check())
+        if(auth('doctor')->check())
+        {
+            return redirect(RouteServiceProvider::DOCTOR);
+        }
+
+         if(auth('web')->check())
         {
             return redirect(RouteServiceProvider::HOME);
         }
-       
+
 
         return $next($request);
     }

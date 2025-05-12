@@ -303,8 +303,11 @@
                         @if (auth('web')->check())
                             <form action="{{ route('logout.user') }}" id="logout-form" method="post"
                                 style="display: none">
-                            @else
+                        @elseif (auth('admin')->check())
                                 <form action="{{ route('logout.admin') }}" id="logout-form" method="post"
+                                    style="display: none">
+                        @elseif (auth('doctor')->check())
+                                    <form action="{{ route('logout.doctor') }}" id="logout-form" method="post"
                                     style="display: none">
                         @endif
 
