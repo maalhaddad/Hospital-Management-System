@@ -6,7 +6,7 @@ use App\Livewire\Forms\InvoiceForm;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Service;
-use App\Models\SingleInvoices;
+use App\Models\Invoice;
 use App\Models\FundAccount;
 use App\Models\PatientAccount;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +39,7 @@ class CreateInvoice extends Component
 
     public function ShowInvoiceEdit($invoice_id)
     {
-        $invoiceEdit = SingleInvoices::find($invoice_id);
+        $invoiceEdit = Invoice::find($invoice_id);
 
          $this->invoice= new InvoiceForm ;
          $this->invoice->section_id = $invoiceEdit->Section->id;
@@ -56,7 +56,7 @@ class CreateInvoice extends Component
          $this->invoice->invoice_date = $invoiceEdit->invoice_date;
     }
 
-    public $count = 1;
+    // public $count = 1;
     public function render()
     {
         return view('livewire.singleInvoices.create-invoice',
@@ -80,6 +80,7 @@ class CreateInvoice extends Component
 
         $data = [
             'invoice_date' =>date('Y-m-d'),
+            'invoice_type' => 1,
             'section_id' => $this->invoice->section_id,
             'doctor_id' => $this->invoice->doctor_id,
             'service_id' => $this->invoice->service_id,
@@ -96,12 +97,12 @@ class CreateInvoice extends Component
         try {
 
             DB::beginTransaction();
-            $invoice = SingleInvoices::create($data);
+            $invoice = Invoice::create($data);
             if($invoice->type == 1)
             {
                 $fundAccount = new FundAccount();
                 $fundAccount->date = date('Y-m-d');
-                $fundAccount->single_invoice_id = $invoice->id;
+                $fundAccount->invoice_id = $invoice->id;
                 $fundAccount->Debit = $invoice->total_with_tax;
                 $fundAccount->credit = 0.00;
                 $fundAccount->save();
@@ -111,7 +112,7 @@ class CreateInvoice extends Component
 
                 $patient_accounts = new PatientAccount();
                 $patient_accounts->date = date('Y-m-d');
-                $patient_accounts->single_invoice_id = $invoice->id;
+                $patient_accounts->invoice_id = $invoice->id;
                 $patient_accounts->patient_id = $invoice->patient_id;
                 $patient_accounts->Debit = $invoice->total_with_tax;
                 $patient_accounts->credit = 0.00;
@@ -140,15 +141,15 @@ class CreateInvoice extends Component
 
         try {
             DB::beginTransaction();
-            $invoice = SingleInvoices::find($this->invoice_id);
+            $invoice = Invoice::find($this->invoice_id);
             $type = $invoice->type;
             $invoice->update($data);
 
             if($type== 1)
             {
-                $fundAccounts = FundAccount::where('single_invoice_id',$this->invoice_id)->first();
+                $fundAccounts = FundAccount::where('invoice_id',$this->invoice_id)->first();
                 $fundAccounts->date = date('Y-m-d');
-                $fundAccounts->single_invoice_id = $invoice->id;
+                $fundAccounts->invoice_id = $invoice->id;
                 $fundAccounts->Debit = $invoice->total_with_tax;
                 $fundAccounts->credit = 0.00;
                 $fundAccounts->save();
@@ -156,9 +157,9 @@ class CreateInvoice extends Component
             }
             else
             {
-                $patient_accounts = PatientAccount::where('single_invoice_id',$this->invoice_id)->first();
+                $patient_accounts = PatientAccount::where('invoice_id',$this->invoice_id)->first();
                 $patient_accounts->date = date('Y-m-d');
-                $patient_accounts->single_invoice_id = $invoice->id;
+                $patient_accounts->invoice_id = $invoice->id;
                 $patient_accounts->patient_id = $invoice->patient_id;
                 $patient_accounts->Debit = $invoice->total_with_tax;
                 $patient_accounts->credit = 0.00;
@@ -167,7 +168,7 @@ class CreateInvoice extends Component
 
             DB::commit();
             session()->flash('edit');
-            return redirect()->to('/single_invoices');
+            return redirect()->route('single_invoices');
         } catch (\Exception $ex) {
             DB::rollback();
             throw $ex;

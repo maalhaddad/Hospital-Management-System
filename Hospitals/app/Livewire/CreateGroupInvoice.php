@@ -8,7 +8,7 @@ use App\Models\Patient;
 use Livewire\Component;
 use App\Livewire\Forms\GroupInvoicesForm;
 use App\Models\FundAccount;
-use App\Models\GroupInvoice;
+use App\Models\Invoice;
 use App\Models\PatientAccount;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -86,7 +86,7 @@ class CreateGroupInvoice extends Component
 
      public function ShowInvoiceEdit($invoice_id)
     {
-        $invoiceEdit = GroupInvoice::find($invoice_id);
+        $invoiceEdit = Invoice::find($invoice_id);
 
          $this->invoice= new GroupInvoicesForm ;
          $this->invoice->group_id = $invoiceEdit->Group->id;
@@ -109,12 +109,12 @@ class CreateGroupInvoice extends Component
         try {
 
             DB::beginTransaction();
-            $invoice = GroupInvoice::create($this->invoice->Data());
+            $invoice = Invoice::create($this->invoice->Data());
             if($invoice->type == 1)
             {
                 $fundAccount = new FundAccount();
                 $fundAccount->date = date('Y-m-d');
-                $fundAccount->group_invoice_id = $invoice->id;
+                $fundAccount->invoice_id = $invoice->id;
                 $fundAccount->Debit = $invoice->total_with_tax;
                 $fundAccount->credit = 0.00;
                 $fundAccount->save();
@@ -124,7 +124,7 @@ class CreateGroupInvoice extends Component
 
                 $patient_accounts = new PatientAccount();
                 $patient_accounts->date = date('Y-m-d');
-                $patient_accounts->group_invoice_id = $invoice->id;
+                $patient_accounts->invoice_id = $invoice->id;
                 $patient_accounts->patient_id = $invoice->patient_id;
                 $patient_accounts->Debit = $invoice->total_with_tax;
                 $patient_accounts->credit = 0.00;
@@ -152,15 +152,15 @@ class CreateGroupInvoice extends Component
 
         try {
             DB::beginTransaction();
-            $invoice = GroupInvoice::find($this->invoice_id);
+            $invoice = Invoice::find($this->invoice_id);
             $type = $invoice->type;
             $invoice->update($data);
 
             if($type== 1)
             {
-                $fundAccounts = FundAccount::where('group_invoice_id',$this->invoice_id)->first();
+                $fundAccounts = FundAccount::where('invoice_id',$this->invoice_id)->first();
                 $fundAccounts->date = date('Y-m-d');
-                $fundAccounts->group_invoice_id = $invoice->id;
+                $fundAccounts->invoice_id = $invoice->id;
                 $fundAccounts->Debit = $invoice->total_with_tax;
                 $fundAccounts->credit = 0.00;
                 $fundAccounts->save();
@@ -168,9 +168,9 @@ class CreateGroupInvoice extends Component
             }
             else
             {
-                $patient_accounts = PatientAccount::where('group_invoice_id',$this->invoice_id)->first();
+                $patient_accounts = PatientAccount::where('invoice_id',$this->invoice_id)->first();
                 $patient_accounts->date = date('Y-m-d');
-                $patient_accounts->group_invoice_id = $invoice->id;
+                $patient_accounts->invoice_id = $invoice->id;
                 $patient_accounts->patient_id = $invoice->patient_id;
                 $patient_accounts->Debit = $invoice->total_with_tax;
                 $patient_accounts->credit = 0.00;

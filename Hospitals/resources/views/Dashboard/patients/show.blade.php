@@ -101,11 +101,11 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($Patient->AllInvoices() as $invoice)
+                                                    @foreach($Patient->Invoices as $invoice)
                                                         <tr>
                                                             <td>{{$loop->iteration}}</td>
                                                             <td>
-                                                                {{ ($invoice instanceof \App\Models\SingleInvoices) ? $invoice->Service->name :  $invoice->Group->name }}
+                                                                {{ ($invoice->invoice_type == 1) ? $invoice->Service->name :  $invoice->Group->name }}
                                                             </td>
                                                             <td>{{$invoice->invoice_date}}</td>
                                                             <td>{{$invoice->total_with_tax}}</td>
@@ -117,7 +117,7 @@
                                                         <th colspan="4" scope="row" class="alert alert-success">
                                                             الاجمالي
                                                         </th>
-                                                        <td class="alert alert-primary">{{ number_format( $Patient->totalSingleInvoicesAmount()+ $Patient->totalGroupInvoicesAmount(),2) }}</td>
+                                                        <td class="alert alert-primary">{{ number_format( $Patient->totalInvoicesAmount(),2) }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -187,8 +187,8 @@
                                                             <td>{{$loop->iteration}}</td>
                                                             <td>{{$Patient_account->date}}</td>
                                                             <td>
-                                                                @if($Patient_account->single_invoice == true)
-                                                                    {{$Patient_account->single_invoice->Service->name}}
+                                                                @if(isset($Patient_account->Invoice->Service))
+                                                                    {{$Patient_account->Invoice->Service->name}}
 
                                                                 @elseif($Patient_account->receipt_id == true)
                                                                     {{$Patient_account->ReceiptAccount->description}}
@@ -196,8 +196,8 @@
                                                                 @elseif($Patient_account->PaymentAccount == true)
                                                                     {{$Patient_account->PaymentAccount->description}}
 
-                                                                 @elseif($Patient_account->group_invoice == true)
-                                                                    {{$Patient_account->group_invoice->Group->name}}
+                                                                 @elseif($Patient_account->Invoice->Group == true)
+                                                                    {{$Patient_account->Invoice->Group->name}}
                                                                 @endif
 
 

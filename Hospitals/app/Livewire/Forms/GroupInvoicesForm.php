@@ -24,6 +24,7 @@ class GroupInvoicesForm extends InvoiceForm
       unset($this->data['service_id']);
       $this->data['group_id'] = $this->group_id;
       $this->data['invoice_date'] = date('Y-m-d');
+      $this->data['invoice_type'] = 2;
       return $this->data;
     }
 

@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\SingleInvoices as Invoice;
+use App\Models\Invoice;
 use Illuminate\Support\Facades\Redirect;
 
 class SingleInvoices extends Component
@@ -13,7 +13,7 @@ class SingleInvoices extends Component
 
     public function render()
     {
-        $this->single_invoices = Invoice::all();
+        $this->single_invoices = Invoice::where('invoice_type', 1)->get();
         return view('livewire.singleInvoices.single-invoices');
     }
 

@@ -21,13 +21,13 @@ class PatientAccount extends Model
         return $this->belongsTo(PaymentAccount::class,'payment_id');
     }
 
-    public function single_invoice()
-    {
-         return $this->belongsTo(SingleInvoices::class,'single_invoice_id');
-    }
+    // public function single_invoice()
+    // {
+    //      return $this->belongsTo(SingleInvoices::class,'single_invoice_id');
+    // }
 
-    public function group_invoice()
+    public function Invoice()
     {
-         return $this->belongsTo(GroupInvoice::class,'group_invoice_id');
+         return $this->belongsTo(Invoice::class,'invoice_id');
     }
 }

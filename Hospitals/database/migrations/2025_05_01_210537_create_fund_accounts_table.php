@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('fund_accounts', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->foreignId('single_invoice_id')->nullable()->constrained('single_invoices')->cascadeOnDelete();
-            $table->foreignId('group_invoice_id')->nullable()->constrained('group_invoices')->cascadeOnDelete();
+            $table->foreignId('invoice_id')->nullable()->constrained('invoices')->cascadeOnDelete();
             $table->foreignId('receipt_id')->nullable()->constrained('receipt_accounts')->cascadeOnDelete();
             $table->foreignId('payment_id')->nullable()->constrained('payment_accounts')->cascadeOnDelete();
             $table->decimal('Debit',8,2)->nullable();

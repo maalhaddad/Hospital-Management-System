@@ -15,10 +15,10 @@ class Patient extends Model
     public $fillable= ['name','Address','email','Password','Date_Birth','Phone','Gender','Blood_Group'];
 
 
-    public function SingleInvoices()
-    {
-        return $this->hasMany(SingleInvoices::class);
-    }
+    // public function SingleInvoices()
+    // {
+    //     return $this->hasMany(SingleInvoices::class);
+    // }
 
     public function Receipt_accounts()
     {
@@ -30,31 +30,31 @@ class Patient extends Model
         return $this->hasMany(PatientAccount::class);
     }
 
-    public function GroupInvoices()
+    public function Invoices()
     {
-        return $this->hasMany(GroupInvoice::class);
+        return $this->hasMany(Invoice::class);
     }
 
-    public function totalSingleInvoicesAmount()
+    public function totalInvoicesAmount()
     {
-       return $this->SingleInvoices->sum('total_with_tax');
+       return $this->Invoices->sum('total_with_tax');
     }
 
-     public function totalGroupInvoicesAmount()
-    {
-       return $this->GroupInvoices->sum('total_with_tax');
-    }
+    //  public function totalGroupInvoicesAmount()
+    // {
+    //    return $this->GroupInvoices->sum('total_with_tax');
+    // }
 
 
-    public function AllInvoices()
-    {
-        $invoices = $this->SingleInvoices->merge($this->GroupInvoices);
-        $invoices = $invoices->sortBy('created_at');
-        return $invoices;
-    }
+    // public function AllInvoices()
+    // {
+    //     $invoices = $this->SingleInvoices->merge($this->GroupInvoices);
+    //     $invoices = $invoices->sortBy('created_at');
+    //     return $invoices;
+    // }
 
-    public function getTotalInvoicesAmount()
-    {
-        return (float)$this->totalSingleInvoicesAmount() +(float)$this->totalGroupInvoicesAmount();
-    }
+    // public function getTotalInvoicesAmount()
+    // {
+    //     return (float)$this->totalSingleInvoicesAmount() +(float)$this->totalGroupInvoicesAmount();
+    // }
 }
