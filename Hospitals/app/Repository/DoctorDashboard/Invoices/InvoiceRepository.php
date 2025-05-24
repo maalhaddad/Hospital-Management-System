@@ -11,8 +11,24 @@ class InvoiceRepository implements InvoiceRepositoryInterface
 {
     public function index()
     {
-        $Invoice = Doctor::find(auth()->user()->id)->Invoices();
+          $Invoice = Doctor::find(auth()->user()->id)->Invoices()->where('invoice_status', 1 )->get();
         return view('Dashboard.doctor-dashboard.invoices.index', ['invoices' => $Invoice]);
+
+    }
+
+    public function reviewInvoices()
+    {
+         $Invoice = Doctor::find(auth()->user()->id)->reviewInvoices;
+         return view('Dashboard.doctor-dashboard.invoices.review_invoices', ['invoices' => $Invoice]);
+
+    }
+
+    // Get completedInvoices Doctor
+    public function completedInvoices()
+    {
+        $Invoice = Doctor::find(auth()->user()->id)->completedInvoices;
+        return view('Dashboard.doctor-dashboard.invoices.completed_invoices', ['invoices' => $Invoice]);
+
 
     }
 

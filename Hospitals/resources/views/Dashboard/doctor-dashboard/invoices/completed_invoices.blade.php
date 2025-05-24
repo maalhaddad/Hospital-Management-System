@@ -1,6 +1,6 @@
 @extends('Dashboard.layouts.master-doctor')
 @section('title')
-   الكشوفات
+   الكشوفات المكتملة
 @stop
 @section('css')
     <!-- Internal Data table css -->
@@ -26,7 +26,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">الكشوفات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الفواتير</span>
+							<h4 class="content-title mb-0 my-auto">المكتملة</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الفواتير</span>
 						</div>
 					</div>
 				</div>
@@ -41,7 +41,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table style="width: 100%" class="table key-buttons text-md-wrap text-center" id="example1">
+                                        <table style="width: 100%;" class="table key-buttons text-md-wrap text-center" id="example1">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
@@ -54,7 +54,7 @@
                                                 <th>قيمة الضريبة</th>
                                                 <th>الاجمالي مع الضريبة</th>
                                                 <th>حالة الفاتورة</th>
-                                                <th>العمليات</th>
+                                                {{-- <th>العمليات</th> --}}
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -79,28 +79,7 @@
                                                        @endif
                                                    </td>
 
-                                                   <td>
-                                                     <div class="dropdown">
-                                                           <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-outline-primary btn-sm" data-toggle="dropdown" type="button">العمليات<i class="fas fa-caret-down mr-1"></i></button>
-                                                           <div class="dropdown-menu tx-13">
-                                                               <a class="dropdown-item" href="#"
-                                                               data-patient_id ="{{ $invoice->patient_id }}"
-                                                               data-invoice_id="{{ $invoice->id }}"
-                                                               data-doctor_id="{{auth()->user()->id}}"
-                                                                data-toggle="modal" data-target="#add_diagnosis"><i class="text-primary fa fa-stethoscope"></i>&nbsp;&nbsp;اضافة تشخيص </a>
 
-                                                                <a class="dropdown-item" href="#"
-                                                                data-patient_id ="{{ $invoice->patient_id }}"
-                                                               data-invoice_id="{{ $invoice->id }}"
-                                                               data-doctor_id="{{auth()->user()->id}}"
-                                                                data-toggle="modal" data-target="#add_review"
-                                                               ><i  class="text-warning far fa-file-alt"></i>&nbsp;&nbsp; اضافة مراجعة </a>
-                                                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#update_password"><i class="text-primary fas fa-x-ray"></i>&nbsp;&nbsp;تحويل الي الاشعة</a>
-                                                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#update_status"><i class="text-warning fas fa-syringe"></i>&nbsp;&nbsp;تحويل الي المختبر</a>
-                                                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete"><i class="text-danger  ti-trash"></i>&nbsp;&nbsp;حذف البيانات</a>
-                                                           </div>
-                                                       </div>
-                                                   </td>
                                                </tr>
                                            @endforeach
                                             </tbody>
@@ -110,8 +89,6 @@
                             </div><!-- bd -->
                         </div>
                         <!--/div-->
-                        @include('Dashboard.doctor-dashboard.invoices.add_diagnostics')
-                        @include('Dashboard.doctor-dashboard.invoices.add_review')
                     <!-- /row -->
 
 				</div>
@@ -170,35 +147,5 @@
 
 
 
-<script>
-
-      const ShowModal = (modalId) =>{
-
-    $('#'+modalId).on('shown.bs.modal', function (event) {
-    let button = $(event.relatedTarget);
-    let patientId = button.data('patient_id');
-    let invoiceId = button.data('invoice_id');
-    let doctorId = button.data('doctor_id');
-
-    let modal = $(this);
-    modal.find('input[name="patient_id"]').val(patientId);
-    modal.find('input[name="invoice_id"]').val(invoiceId);
-    modal.find('input[name="doctor_id"]').val(doctorId);
-});
-      }
-
-
-      ShowModal('add_review');
-      ShowModal('add_diagnosis');
-
-
-
-   </script>
-
-<script>
-        $('#review_date').datetimepicker({
-
-        })
-    </script>
 
 @endsection

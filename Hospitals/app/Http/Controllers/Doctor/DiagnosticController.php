@@ -3,31 +3,24 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\DoctorDashboard\Invoices\InvoiceRepositoryInterface;
+use App\Http\Requests\StoreDiagnosisRequest;
+use App\Interfaces\DoctorDashboard\Diagnostics\DiagnosticRepositoryInterface;
+use App\Models\Diagnostic;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
-class InvoiceController extends Controller
+class DiagnosticController extends Controller
 {
 
-    protected $Invoices;
+    protected $Diagnostic;
 
-    public function __construct(InvoiceRepositoryInterface $invoice)
+    public function __construct(DiagnosticRepositoryInterface $Diagnostic)
     {
-        $this->Invoices = $invoice;
+        $this->Diagnostic = $Diagnostic;
     }
     public function index()
     {
-        return $this->Invoices->index();
-    }
-
-    public function completedInvoices()
-    {
-        return $this->Invoices->completedInvoices();
-    }
-
-    public function reviewInvoices()
-    {
-        return $this->Invoices->reviewInvoices();
+        //
     }
 
     /**
@@ -41,17 +34,18 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDiagnosisRequest $request)
     {
-        //
+        return $this->Diagnostic->store($request);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function addReview(StoreDiagnosisRequest $request)
     {
-        //
+       return $this->Diagnostic->addReview($request);
+    }
+    public function show($id)
+    {
+        return $this->Diagnostic->show($id);
     }
 
     /**

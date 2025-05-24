@@ -36,4 +36,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(Group::class,'Group_id');
     }
+
+     public function Diagnostic()
+    {
+        return $this->hasOne(Diagnostic::class, 'invoice_id');
+    }
 }

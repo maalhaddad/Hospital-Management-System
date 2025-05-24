@@ -30,19 +30,19 @@ class Doctor extends Authenticatable
         return $this->belongsToMany(Appointment::class, 'appointment_doctor');
     }
 
-    public function SingleInvoices()
+    public function reviewInvoices()
     {
-        return $this->hasMany(SingleInvoices::class);
+        return $this->hasMany(Invoice::class)->where('invoice_status',2);
     }
 
-    public  function GroupInvoices()
+    public  function completedInvoices()
     {
-        return $this->hasMany(GroupInvoice::class);
+        return $this->hasMany(Invoice::class)->where('invoice_status',3);
     }
 
     public function Invoices()
     {
-        return $this->SingleInvoices->merge($this->GroupInvoices);
+        return $this->hasMany(Invoice::class);
     }
 
 }

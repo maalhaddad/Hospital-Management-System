@@ -35,6 +35,13 @@ class Patient extends Model
         return $this->hasMany(Invoice::class);
     }
 
+     public function Records()
+    {
+        return $this->hasMany(Diagnostic::class);
+    }
+
+
+
     public function totalInvoicesAmount()
     {
        return $this->Invoices->sum('total_with_tax');

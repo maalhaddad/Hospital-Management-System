@@ -20,4 +20,8 @@ interface InvoiceRepositoryInterface
     public function update(array $attributes, $id);
 
     public function destroy($id);
+
+    public function reviewInvoices();
+
+    public function completedInvoices();
 }

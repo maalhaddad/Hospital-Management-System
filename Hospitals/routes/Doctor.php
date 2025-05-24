@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Doctor\DiagnosticController;
 use App\Http\Controllers\Doctor\InvoiceController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -43,8 +44,29 @@ Route::group(
 
                     Route::resource('/invoices', InvoiceController::class);
 
+
+            Route::get('completed_invoices', 'completedInvoices')->name('completedInvoices');
+            Route::get('review_invoices', 'reviewInvoices')->name('reviewInvoices');
+
                 });
                 // =========== End Invoices ===========
+
+
+                 // =========== Diagnostics ===========
+                Route::controller(DiagnosticController::class)->group(function () {
+
+
+                    Route::resource('/Diagnostics', DiagnosticController::class);
+
+                     Route::prefix('Diagnostics')->name('Diagnostics.')->group(function () {
+
+                        Route::post('add_review','addReview')->name('add_review');
+                    });
+
+
+                });
+                // Route::post('add-review',[DiagnosticController::class,'addReview'])->name('add_review');
+                // =========== End Diagnostics ===========
 
 
             }
