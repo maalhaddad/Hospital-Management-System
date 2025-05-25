@@ -63,7 +63,7 @@
                                                    <td>{{ $loop->iteration}}</td>
                                                    <td>{{ $invoice->invoice_date }}</td>
                                                    <td>{{ $invoice->Service->name ?? $invoice->Group->name }}</td>
-                                                   <td><a href="{{ route('Diagnostics.show',$invoice->Patient->id) }}">{{ $invoice->Patient->name }}</a></td>
+                                                   <td><a href="{{ route('patientDetails',$invoice->Patient->id) }}">{{ $invoice->Patient->name }}</a></td>
                                                    <td>{{ number_format($invoice->price, 2) }}</td>
                                                    <td>{{ number_format($invoice->discount_value, 2) }}</td>
                                                    <td>{{ $invoice->tax_rate }}%</td>
@@ -95,7 +95,12 @@
                                                                data-doctor_id="{{auth()->user()->id}}"
                                                                 data-toggle="modal" data-target="#add_review"
                                                                ><i  class="text-warning far fa-file-alt"></i>&nbsp;&nbsp; اضافة مراجعة </a>
-                                                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#update_password"><i class="text-primary fas fa-x-ray"></i>&nbsp;&nbsp;تحويل الي الاشعة</a>
+                                                               <a class="dropdown-item" href="#"
+                                                                data-patient_id ="{{ $invoice->patient_id }}"
+                                                                data-invoice_id="{{ $invoice->id }}"
+                                                                data-doctor_id="{{auth()->user()->id}}"
+                                                                data-toggle="modal" data-target="#xray_conversion">
+                                                                <i class="text-primary fas fa-x-ray"></i>&nbsp;&nbsp;تحويل الي الاشعة</a>
                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#update_status"><i class="text-warning fas fa-syringe"></i>&nbsp;&nbsp;تحويل الي المختبر</a>
                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete"><i class="text-danger  ti-trash"></i>&nbsp;&nbsp;حذف البيانات</a>
                                                            </div>
@@ -112,6 +117,7 @@
                         <!--/div-->
                         @include('Dashboard.doctor-dashboard.invoices.add_diagnostics')
                         @include('Dashboard.doctor-dashboard.invoices.add_review')
+                        @include('Dashboard.doctor-dashboard.invoices.xray_conversion')
                     <!-- /row -->
 
 				</div>
@@ -190,6 +196,7 @@
 
       ShowModal('add_review');
       ShowModal('add_diagnosis');
+      ShowModal('xray_conversion');
 
 
 

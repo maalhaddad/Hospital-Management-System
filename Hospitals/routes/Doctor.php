@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Doctor\DiagnosticController;
 use App\Http\Controllers\Doctor\InvoiceController;
+use App\Http\Controllers\Doctor\PatientDetailsController;
+use App\Http\Controllers\Doctor\RayController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -24,7 +26,7 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-         //============================== Dasboard Doctor =================================
+        //============================== Dasboard Doctor =================================
         Route::get('/dashboard/doctor', function () {
             return view('Dashboard.doctor-dashboard.dashboard');
         })->middleware(['auth:doctor', 'verified'])->name('dashboard.doctor');
@@ -45,28 +47,39 @@ Route::group(
                     Route::resource('/invoices', InvoiceController::class);
 
 
-            Route::get('completed_invoices', 'completedInvoices')->name('completedInvoices');
-            Route::get('review_invoices', 'reviewInvoices')->name('reviewInvoices');
-
+                    Route::get('completed_invoices', 'completedInvoices')->name('completedInvoices');
+                    Route::get('review_invoices', 'reviewInvoices')->name('reviewInvoices');
                 });
                 // =========== End Invoices ===========
 
 
-                 // =========== Diagnostics ===========
+                // =========== Diagnostics ===========
                 Route::controller(DiagnosticController::class)->group(function () {
 
 
                     Route::resource('/Diagnostics', DiagnosticController::class);
 
-                     Route::prefix('Diagnostics')->name('Diagnostics.')->group(function () {
+                    Route::prefix('Diagnostics')->name('Diagnostics.')->group(function () {
 
-                        Route::post('add_review','addReview')->name('add_review');
+                        Route::post('add_review', 'addReview')->name('add_review');
                     });
-
-
                 });
-                // Route::post('add-review',[DiagnosticController::class,'addReview'])->name('add_review');
                 // =========== End Diagnostics ===========
+
+                // =========== Rays ===========
+                Route::controller(RayController::class)->group(function () {
+
+                    Route::resource('/Rays', RayController::class);
+                });
+                // =========== End Rays ===========
+
+                // =========== PatientDetails ===========
+                Route::controller(PatientDetailsController::class)->group(function () {
+
+                    Route::get('/patient-details/{id}', 'showDetails')->name('patientDetails');
+                });
+                // =========== End PatientDetails ===========
+
 
 
             }
