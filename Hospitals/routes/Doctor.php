@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Doctor\DiagnosticController;
 use App\Http\Controllers\Doctor\InvoiceController;
+use App\Http\Controllers\Doctor\LaboratorieController;
 use App\Http\Controllers\Doctor\PatientDetailsController;
 use App\Http\Controllers\Doctor\RayController;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +78,13 @@ Route::group(
                 Route::controller(PatientDetailsController::class)->group(function () {
 
                     Route::get('/patient-details/{id}', 'showDetails')->name('patientDetails');
+                });
+                // =========== End PatientDetails ===========
+
+                // =========== PatientDetails ===========
+                Route::controller(LaboratorieController::class)->group(function () {
+
+                    Route::resource('/Laboratorie', LaboratorieController::class);
                 });
                 // =========== End PatientDetails ===========
 

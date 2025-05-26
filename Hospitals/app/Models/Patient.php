@@ -58,6 +58,11 @@ class Patient extends Model
         return $this->hasMany(Diagnostic::class);
     }
 
+     public function Laboratories()
+    {
+        return $this->hasMany(Laboratorie::class);
+    }
+
     //  public function totalGroupInvoicesAmount()
     // {
     //    return $this->GroupInvoices->sum('total_with_tax');

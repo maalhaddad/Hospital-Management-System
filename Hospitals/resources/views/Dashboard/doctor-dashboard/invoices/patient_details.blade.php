@@ -45,26 +45,27 @@
                                         {{-- Strat Show Information Patient --}}
 
                                         <div class="tab-pane active" id="tab1">
-                                            <br>
-                                            @foreach($patient->Diagnostics as $patient_record)
-                                                <div
-                                                    class="timeline-wrapper {{ $loop->first ? '' : 'timeline-inverted' }} timeline-wrapper-primary">
-                                                    <div class="timeline-badge"><i class="las la-check-circle"></i></div>
-                                                    <div class="timeline-panel">
-                                                        <div class="timeline-heading">
-                                                            <h6 class="timeline-title">Art Ramadani posted a status update</h6>
-                                                        </div>
-                                                        <div class="timeline-body">
-                                                            <p>{{$patient_record->diagnosis}}</p>
-                                                        </div>
-                                                        <div class="timeline-footer d-flex align-items-center flex-wrap">
-                                                            <i class="fas fa-user-md"></i>&nbsp;
-                                                            <span>{{$patient_record->Doctor->name}}</span>
-                                                            <span class="mr-auto"><i class="fe fe-calendar text-muted mr-1"></i>{{$patient_record->date}}</span>
+                                             <br>
+                                            <div class="vtimeline">
+                                                @foreach($patient->diagnostics as $patient_record)
+                                                    <div class="timeline-wrapper {{ $loop->iteration % 2 == 0 ? 'timeline-inverted' : '' }} timeline-wrapper-primary">
+                                                        <div class="timeline-badge"><i class="las la-check-circle"></i></div>
+                                                        <div class="timeline-panel">
+                                                            <div class="timeline-heading">
+                                                                <h6 class="timeline-title">Art Ramadani posted a status update</h6>
+                                                            </div>
+                                                            <div class="timeline-body">
+                                                                <p>{{$patient_record->diagnosis}}</p>
+                                                            </div>
+                                                            <div class="timeline-footer d-flex align-items-center flex-wrap">
+                                                                <i class="fas fa-user-md"></i>&nbsp;
+                                                                <span>{{$patient_record->Doctor->name}}</span>
+                                                                <span class="mr-auto"><i class="fe fe-calendar text-muted mr-1"></i>{{$patient_record->date}}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+                                            </div>
                                         </div>
 
                                         {{-- End Show Information Patient --}}
@@ -124,114 +125,50 @@
 
                                         <div class="tab-pane" id="tab3">
                                             <div class="table-responsive">
-{{--                                                <table class="table table-hover text-md-nowrap text-center">--}}
-{{--                                                    <thead>--}}
-{{--                                                    <tr>--}}
-{{--                                                        <th>#</th>--}}
-{{--                                                        <th>تاريخ الاضافه</th>--}}
-{{--                                                        <th>المبلغ</th>--}}
-{{--                                                        <th>البيان</th>--}}
-{{--                                                    </tr>--}}
-{{--                                                    </thead>--}}
-{{--                                                    <tbody>--}}
-{{--                                                    @foreach($receipt_accounts as $receipt_account)--}}
-{{--                                                        <tr>--}}
-{{--                                                            <td>{{$loop->iteration}}</td>--}}
-{{--                                                            <td>{{$receipt_account->date}}</td>--}}
-{{--                                                            <td>{{$receipt_account->Debit}}</td>--}}
-{{--                                                            <td>{{$receipt_account->description}}</td>--}}
-{{--                                                        </tr>--}}
-{{--                                                        <br>--}}
-{{--                                                    @endforeach--}}
-{{--                                                    <tr>--}}
-{{--                                                        <th scope="row" class="alert alert-success">الاجمالي--}}
-{{--                                                        </th>--}}
-{{--                                                        <td colspan="4"--}}
-{{--                                                            class="alert alert-primary">{{ number_format( $receipt_accounts->sum('Debit') , 2)}}</td>--}}
-{{--                                                    </tr>--}}
-{{--                                                    </tbody>--}}
-{{--                                                </table>--}}
+                                                <table class="table table-hover text-md-nowrap text-center">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>اسم الخدمه</th>
+                                                        <th>اسم الدكتور</th>
+                                                        <th>العمليات</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($patient->Laboratories as $patient_Laboratorie)
+                                                        <tr>
+                                                            <td>{{$loop->iteration}}</td>
+                                                            <td>{{$patient_Laboratorie->description}}</td>
+                                                            <td>{{$patient_Laboratorie->doctor->name}}</td>
+                                                            @if($patient_Laboratorie->doctor_id == auth()->user()->id)
+                                                                <td>
+                                                                    <a class="modal-effect btn btn-sm btn-primary" data-effect="effect-scale"
+                                                                     data-laboratorie_id="{{ $patient_Laboratorie->id }}"
+                                                                     data-description="{{ $patient_Laboratorie->description }}"
+                                                                    data-target="#edit_laboratorie"  data-toggle="modal" href="#"><i class="fas fa-edit"></i></a>
+
+                                                                    <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                                                                     data-laboratorie_id="{{ $patient_Laboratorie->id }}"
+                                                                     data-description="{{ $patient_Laboratorie->description }}"
+                                                                    data-target="#delete_laboratorie"  data-toggle="modal" href="#"><i class="las la-trash"></i></a>
+                                                                </td>
+                                                            @endif
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
                                             </div>
+                                            @include('Dashboard.doctor-dashboard.invoices.edit_laboratorie')
+                                            @include('Dashboard.doctor-dashboard.invoices.delete_Laboratorie')
                                         </div>
 
                                         {{-- End Receipt Patient  --}}
 
 
-                                        {{-- Start payment accounts Patient --}}
-                                        <div class="tab-pane" id="tab4">
-{{--                                            <div class="table-responsive">--}}
-{{--                                                <table class="table table-hover text-md-nowrap text-center" id="example1">--}}
-{{--                                                    <thead>--}}
-{{--                                                    <tr>--}}
-{{--                                                        <th>#</th>--}}
-{{--                                                        <th>تاريخ الاضافه</th>--}}
-{{--                                                        <th>الوصف</th>--}}
-{{--                                                        <th>مدبن</th>--}}
-{{--                                                        <th>دائن</th>--}}
-{{--                                                        <th>الرصيد النهائي</th>--}}
-{{--                                                    </tr>--}}
-{{--                                                    </thead>--}}
-{{--                                                    <tbody>--}}
-{{--                                                    @foreach($Patient_accounts as $Patient_account)--}}
-{{--                                                        <tr>--}}
-{{--                                                            <td>{{$loop->iteration}}</td>--}}
-{{--                                                            <td>{{$Patient_account->date}}</td>--}}
-{{--                                                            <td>--}}
-
-{{--                                                               @if($Patient_account->invoice_id == true)--}}
-{{--                                                              {{$Patient_account->invoice->Service->name ?? $Patient_account->invoice->Group->name}}--}}
-
-{{--                                                                @elseif($Patient_account->Payment_id == true)--}}
-{{--                                                                    {{$Patient_account->PaymentAccount->description}}--}}
-{{--                                                                @endif--}}
-
-{{--                                                            </td>--}}
-{{--                                                            <td>{{ $Patient_account->Debit}}</td>--}}
-{{--                                                            <td>{{ $Patient_account->credit}}</td>--}}
-{{--                                                            <td></td>--}}
-{{--                                                        </tr>--}}
-{{--                                                        <br>--}}
-{{--                                                    @endforeach--}}
-{{--                                                    <tr>--}}
-{{--                                                        <th colspan="3" scope="row" class="alert alert-success">--}}
-{{--                                                            الاجمالي--}}
-{{--                                                        </th>--}}
-{{--                                                        <td class="alert alert-primary">{{ $Debit= $Patient_accounts->sum('Debit')}}</td>--}}
-{{--                                                        <td class="alert alert-primary">{{ $credit =$Patient_accounts->sum('credit')}}</td>--}}
-{{--                                                        <td class="alert alert-danger">--}}
-{{--                                                           <span class="text-danger"> {{$Debit-$credit}}  {{ $Debit-$credit > 0 ? 'مدين' :'دائن'}}</span>--}}
-{{--                                                        </td>--}}
-{{--                                                    </tr>--}}
-{{--                                                    </tbody>--}}
-{{--                                                </table>--}}
-
-{{--                                            </div>--}}
-
-                                            <br>
-
-                                        </div>
-
-                                        {{-- End payment accounts Patient --}}
 
 
-                                        <div class="tab-pane" id="tab5">
-                                            <p>praesentium voluptatum deleniti atque corrquas molestias excepturi sint
-                                                occaecati cupiditate non provident,</p>
-                                            <p class="mb-0">similique sunt in culpa qui officia deserunt mollitia animi,
-                                                id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
-                                                expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi
-                                                optio cumque nihil impedit quo minus id quod maxime placeat facere
-                                                possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-                                        </div>
-                                        <div class="tab-pane" id="tab6">
-                                            <p>praesentium et quas molestias excepturi sint occaecati cupiditate non
-                                                provident,</p>
-                                            <p class="mb-0">similique sunt in culpa qui officia deserunt mollitia animi,
-                                                id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
-                                                expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi
-                                                optio cumque nihil impedit quo minus id quod maxime placeat facere
-                                                possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -256,22 +193,27 @@
 
     <script>
 
-    const ShowModal = (ModalId)=>{
+    const ShowModal = (ModalId ,InputId)=>{
 
     $('#'+ModalId).on('shown.bs.modal', function (event) {
 
     let button = $(event.relatedTarget);
-    let rayId = button.data('ray_id');
+    let Input = button.data(InputId);
     let description = button.data('description');
+    console.log(Input);
+    console.log(InputId);
+    console.log(description);
 
     let modal = $(this);
-    modal.find('input[name="ray_id"]').val(rayId);
+   modal.find(`input[name="${InputId}"]`).val(Input);
     modal.find('.modal-body #description').val(description);
           });
     }
 
-    ShowModal('edit_xray_conversion');
-    ShowModal('delete_xray');
+    ShowModal('edit_xray_conversion','ray_id');
+    ShowModal('edit_laboratorie','laboratorie_id');
+    ShowModal('delete_xray','ray_id');
+    ShowModal('delete_laboratorie','laboratorie_id');
 
     </script>
 @endsection
