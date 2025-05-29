@@ -309,6 +309,9 @@
                         @elseif (auth('doctor')->check())
                                     <form action="{{ route('logout.doctor') }}" id="logout-form" method="post"
                                     style="display: none">
+                         @elseif (auth('ray_employee')->check())
+                                    <form action="{{ route('logout.RayEmployee') }}" id="logout-form" method="post"
+                                    style="display: none">
                         @endif
 
                         @csrf

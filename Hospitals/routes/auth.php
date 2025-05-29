@@ -83,4 +83,4 @@ Route::post('logout/doctor', [AdminController::class, 'destroy'])->middleware('a
 ->name('logout.doctor');
 
 Route::post('logout/Ray-Employee', [RayEmployeeController::class, 'destroy'])->middleware('auth:ray_employee')
-->name('logout.doctor');
+->name('logout.RayEmployee');
