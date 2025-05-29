@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\SingleServiceController;
 use App\Http\Controllers\Dashboard\PaymentAccountController;
+use App\Http\Controllers\Dashboard\RayEmployeeController;
 use App\Livewire\CreateInvoice;
 use App\Models\GroupInvoice;
 use App\Models\SingleInvoices;
@@ -180,6 +181,15 @@ Route::group(
                     )->name('update-group-invoice');
 
                //############################# end single_invoices route ######################################
+
+              // ===========  RayEmployees ===========
+
+               Route::controller(RayEmployeeController::class)->group(function () {
+
+                Route::resource('ray-employees', RayEmployeeController::class);
+            });
+
+            // =========== End RayEmployees ===========
 
             }
         );

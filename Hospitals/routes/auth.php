@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\RayEmployeeController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Dashboard\AdminController;
@@ -32,6 +33,10 @@ Route::middleware('guest')->group(function () {
       // ================================ Route Doctor ==================================================
 
      Route::post('login/Doctor', [DoctorController::class, 'store'])->name('login.doctor');
+
+       // ================================ Route RayEmployee ==================================================
+
+     Route::post('login/Ray-Employee', [RayEmployeeController::class, 'store'])->name('login.rayEmployee');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
@@ -75,4 +80,7 @@ Route::post('logout/admin', [AdminController::class, 'destroy'])->middleware('au
 ->name('logout.admin');
 
 Route::post('logout/doctor', [AdminController::class, 'destroy'])->middleware('auth:doctor')
+->name('logout.doctor');
+
+Route::post('logout/Ray-Employee', [RayEmployeeController::class, 'destroy'])->middleware('auth:ray_employee')
 ->name('logout.doctor');

@@ -28,6 +28,11 @@ class RedirectIfAuthenticated
             return redirect(RouteServiceProvider::DOCTOR);
         }
 
+         if(auth('ray_employee')->check())
+        {
+            return redirect(RouteServiceProvider::RAYEMPLOYEE);
+        }
+
          if(auth('web')->check())
         {
             return redirect(RouteServiceProvider::HOME);
