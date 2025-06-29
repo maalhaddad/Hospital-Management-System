@@ -1,5 +1,14 @@
 @extends('Dashboard.layouts.master')
 @section('css')
+
+ <!-- Internal Data table css -->
+    <link href="{{URL::asset('Dashboard/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{URL::asset('Dashboard/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('Dashboard/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{URL::asset('Dashboard/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('Dashboard/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('Dashboard/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+
     <link href="{{URL::asset('dashboard/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 @endsection
 @section('page-header')
@@ -7,13 +16,15 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">المرضي</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة المرضي</span>
+							<h4 class="content-title mb-0 my-auto">{{ __('patients.patients') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('patients.patient_list') }}</span>
 						</div>
 					</div>
 				</div>
 				<!-- breadcrumb -->
 @endsection
-@section('tit')
+@section('title')
+    {{ __('patients.patient_list') }}
+@endsection
 @section('content')
     @include('Dashboard.messages_alert')
 				<!-- row opened -->
@@ -23,7 +34,7 @@
 						<div class="card">
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
-                                    <a href="{{ route('patients.create') }}" class="btn btn-primary">اضافة مريض جديد</a>
+                                    <a href="{{ route('patients.create') }}" class="btn btn-primary">{{ __('patients.add_patient') }}</a>
 								</div>
 							</div>
 							<div class="card-body">
@@ -33,14 +44,14 @@
 										<thead>
 											<tr>
 												<th>#</th>
-												<th>اسم المريض</th>
-												<th >البريد الالكتروني</th>
-												<th>تاريخ الميلاد</th>
-												<th>رقم الهاتف</th>
-												<th>الجنس</th>
-                                                <th >فصلية الدم</th>
-                                                <th >العنوان</th>
-                                                <th>العمليات</th>
+												<th>{{ __('patients.name') }}</th>
+												<th>{{ __('patients.email') }}</th>
+												<th>{{ __('patients.date_of_birth') }}</th>
+												<th>{{ __('patients.phone') }}</th>
+												<th>{{ __('patients.gender') }}</th>
+                                                <th>{{ __('patients.blood_group') }}</th>
+                                                <th>{{ __('patients.address') }}</th>
+                                                <th>{{ __('patients.actions') }}</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -51,7 +62,7 @@
                                                 <td>{{$Patient->email}}</td>
                                                 <td>{{$Patient->Date_Birth}}</td>
                                                 <td>{{$Patient->Phone}}</td>
-                                                <td>{{$Patient->Gender == 1 ? 'ذكر' :'انثي'}}</td>
+                                                <td>{{$Patient->Gender == 1 ? __('patients.male') : __('patients.female')}}</td>
                                                 <td>{{$Patient->Blood_Group}}</td>
                                                 <td>{{$Patient->Address}}</td>
                                                 <td>
@@ -75,7 +86,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
-                    <h6 class="modal-title">حذف مريض</h6><button aria-label="Close" class="close"
+                    <h6 class="modal-title">{{ __('patients.delete_patient') }}</h6><button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form action="{{ route('patients.destroy','test') }}" method="post">
@@ -122,6 +133,7 @@
 <script src="{{URL::asset('Dashboard/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{URL::asset('Dashboard/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
 <!--Internal  Datatable js -->
+    <script src="{{URL::asset('Dashboard/js/table-data.js')}}"></script>
     <!--Internal  Notify js -->
     <script src="{{URL::asset('dashboard/plugins/notify/js/notifIt.js')}}"></script>
     <script src="{{URL::asset('/plugins/notify/js/notifit-custom.js')}}"></script>

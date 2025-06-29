@@ -6,7 +6,7 @@
 @endsection
 
 @section('title')
-{{ isset($Payment) ? 'تعديل سند صرف' : 'إضافة سند صرف جديد'; }}
+{{ isset($Payment) ? 'تعديل سند صرف' : 'إضافة سند صرف جديد' }}
 @stop
 @section('page-header')
     <!-- breadcrumb -->

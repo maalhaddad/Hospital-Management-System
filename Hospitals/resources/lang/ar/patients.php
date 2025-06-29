@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'add' => 'إضافة',
+    'edit' => 'تعديل',
+    'delete' => 'حذف',
+    'update-status' => 'تحديث الحالة',
+    'patient' => 'مريض',
+    'patients' => 'المرضى',
+    'name' => 'الاسم',
+    'email' => 'البريد الإلكتروني',
+    'phone' => 'رقم الهاتف',
+    'section' => 'القسم',
+    'appointments' => 'المواعيد',
+    'add_patient' => 'إضافة مريض',
+    'edit_patient' => 'تعديل مريض',
+    'delete_patient' => 'حذف مريض',
+    'patient_list' => 'قائمة المرضى',
+    'date_of_birth' => 'تاريخ الميلاد',
+    'gender' => 'الجنس',
+    'blood_group' => 'فصلية الدم',
+    'address' => 'العنوان',
+    'actions' => 'العمليات',
+    'male' => 'ذكر',
+    'female' => 'أنثى',
+];
