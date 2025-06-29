@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('rays', function (Blueprint $table) {
             $table->id();
+            $table->longText('description');
             $table->foreignId('invoice_id')->constrained('invoices')->cascadeOnDelete();
             $table->foreignId('patient_id')->constrained('patients')->cascadeOnDelete();
             $table->foreignId('doctor_id')->constrained('doctors')->cascadeOnDelete();
-            $table->longText('description');
+            $table->foreignId('employee_id')->nullable()->constrained('ray_employees')->cascadeOnDelete();
+            $table->longText('description_employee')->nullable();
+            $table->tinyInteger('case')->default(0);
             $table->timestamps();
         });
     }
