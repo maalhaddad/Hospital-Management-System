@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RayEmployee\InvoiceController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -37,7 +38,17 @@ Route::group(
             ],
             function () {
 
+            Route::controller('invoices', InvoiceController::class)->group(
+                function () {
+                    Route::name('ray_employee.')->group(
+                        function () {
 
+                        Route::resource('invoices', InvoiceController::class );
+                        }
+                    );
+
+                }
+            );
 
 
             }
