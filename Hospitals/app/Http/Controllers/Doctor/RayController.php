@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRayRequest;
 use App\Interfaces\DoctorDashboard\Rays\RayRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class RayController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(StoreRayRequest $request)
     {
          return $this->Ray->store($request);
     }

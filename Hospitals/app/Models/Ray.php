@@ -17,8 +17,22 @@ class Ray extends Model
         return $this->belongsTo(Doctor::class, 'doctor_id');
     }
 
+        public function Patient()
+    {
+        return $this->belongsTo(Patient::class, 'patient_id');
+    }
+
     public function RayEmployee()
     {
-        return $this->belongsTo(RayEm::class, 'doctor_id');
+        return $this->belongsTo(RayEmployee::class, 'employee_id')
+        ->withDefault([
+            'name' => 'لا يوجد موظف'
+        ]);
     }
+
+    public function Images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
 }

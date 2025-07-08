@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\RayEmployee\InvoiceController;
 use App\Interfaces\Ambulances\AmbulanceRepositoryInterface;
 use App\Interfaces\DoctorDashboard\Diagnostics\DiagnosticRepositoryInterface;
 use App\Interfaces\DoctorDashboard\Invoices\InvoiceRepositoryInterface;
@@ -22,6 +23,7 @@ use App\Repository\ReceiptAccounts\ReceiptAccountRepository;
 use App\Interfaces\ReceiptAccounts\ReceiptAccountRepositoryInterface;
 use App\Interfaces\PaymentAccounts\PaymentAccountRepositoryInterface;
 use App\Interfaces\RayEmployees\RayEmployeeRepositoryInterface;
+use App\Interfaces\RayEmployeesDashboard\Invoices\InvoiceRepositoryInterface as RayInvoiceRepositoryInterface;
 use App\Repository\DoctorDashboard\Diagnostics\DiagnosticRepository;
 use App\Repository\PaymentAccounts\PaymentAccountRepository;
 use Illuminate\Support\ServiceProvider;
@@ -29,7 +31,7 @@ use App\Repository\DoctorDashboard\Invoices\InvoiceRepository;
 use App\Repository\DoctorDashboard\Laboratories\LaboratorieRepository;
 use App\Repository\DoctorDashboard\Rays\RayRepository;
 use App\Repository\RayEmployees\RayEmployeeRepository;
-
+use App\Repository\RayEmployeesDashboard\Invoices\InvoiceRepository as RayInvoiceRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -55,6 +57,11 @@ class RepositoryServiceProvider extends ServiceProvider
          $this->app->bind( DiagnosticRepositoryInterface::class ,DiagnosticRepository::class);
          $this->app->bind( RayRepositoryInterface::class ,RayRepository::class);
          $this->app->bind( LaboratorieRepositoryInterface::class ,LaboratorieRepository::class);
+
+
+         //========================== Ray Employees ===========================
+         $this->app->bind( RayInvoiceRepositoryInterface::class ,RayInvoiceRepository::class);
+         
     }
 
     /**
