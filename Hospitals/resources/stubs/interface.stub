@@ -12,11 +12,11 @@ interface {{interfaceName}}
 
     public function show({{model}} ${{model}});
 
-    public function store(array $attributes);
+    public function store( $request);
 
     public function edit({{model}} ${{model}});
 
-    public function update(array $attributes, $id);
+    public function update( $request, $id);
 
     public function destroy($id);
 }

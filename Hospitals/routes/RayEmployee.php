@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RayEmployee\HomeController;
 use App\Http\Controllers\RayEmployee\InvoiceController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -23,10 +24,11 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-        //============================== Dasboard ray-employee =================================
-        Route::get('/dashboard/ray-employee', function () {
-            return view('Dashboard.rayemployee-dashboard.dashboard');
-        })->middleware(['auth:ray_employee', 'verified'])->name('dashboard.rayemployee');
+       
+
+         //============================== Dasboard ray-employee =================================
+        Route::get('/dashboard/ray-employee', [HomeController::class,'index'])
+        ->middleware(['auth:ray_employee', 'verified'])->name('dashboard.rayemployee');
 
         //============================== End Dashboard ray-employee =================================
         require __DIR__ . '/auth.php';
@@ -44,11 +46,15 @@ Route::group(
                         function () {
 
                         Route::resource('invoices', InvoiceController::class );
+                        Route::get('completed-invoices',[InvoiceController::class,'completedInvoices'])
+                        ->name('completed_invoices');
                         }
                     );
 
                 }
             );
+
+            
 
 
             }

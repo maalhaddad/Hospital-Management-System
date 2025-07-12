@@ -17,9 +17,14 @@ class RayRepository implements RayRepositoryInterface
         //
     }
 
-    public function show(Ray $Ray)
+    public function show($id)
     {
-        //
+        $ray = Ray::findOrFail($id);
+        if(  $ray->doctor_id == auth()->user()->id)
+        {
+          return view('dashboard.doctor-dashboard.invoices.view_rays',compact('ray'));        
+        }
+        return redirect()->back();
     }
 
     public function store( $attributes)

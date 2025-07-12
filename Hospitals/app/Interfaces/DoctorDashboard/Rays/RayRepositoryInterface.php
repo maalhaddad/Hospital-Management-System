@@ -10,7 +10,7 @@ interface RayRepositoryInterface
 
     public function create();
 
-    public function show(Ray $Ray);
+    public function show($id);
 
     public function store( $attributes);
 

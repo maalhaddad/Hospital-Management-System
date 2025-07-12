@@ -17,7 +17,7 @@ class Ray extends Model
         return $this->belongsTo(Doctor::class, 'doctor_id');
     }
 
-        public function Patient()
+    public function Patient()
     {
         return $this->belongsTo(Patient::class, 'patient_id');
     }
@@ -25,9 +25,9 @@ class Ray extends Model
     public function RayEmployee()
     {
         return $this->belongsTo(RayEmployee::class, 'employee_id')
-        ->withDefault([
-            'name' => 'لا يوجد موظف'
-        ]);
+            ->withDefault([
+                'name' => 'لا يوجد موظف'
+            ]);
     }
 
     public function Images()
@@ -35,4 +35,8 @@ class Ray extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
+    public function scopeLatestTen($query)
+    {
+        return $query->latest()->take(10);
+    }
 }

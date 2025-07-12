@@ -22,7 +22,7 @@ class {{repositoryName}} implements {{interfaceName}}
         //
     }
 
-    public function store(array $attributes)
+    public function store( $request)
     {
          try {
 
@@ -42,7 +42,7 @@ class {{repositoryName}} implements {{interfaceName}}
 
     }
 
-    public function update(array $attributes, $id)
+    public function update( $request, $id)
     {
         try {
 

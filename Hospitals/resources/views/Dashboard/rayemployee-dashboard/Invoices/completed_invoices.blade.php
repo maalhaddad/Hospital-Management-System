@@ -18,7 +18,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الكشوفات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الفواتير</span>
+                <h4 class="content-title mb-0 my-auto">الكشوفات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الفواتير المكتمله</span>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration}}</td>
                                     <td>{{ $invoice->created_at }}</td>
-                                   <td>{{ $invoice->Patient->name }}</td>
+                                    <td><a href="{{route('ray_employee.invoices.show',$invoice->id)}}">{{ $invoice->Patient->name }}</a></td>
                                     <td>{{ $invoice->doctor->name }}</td>
                                     <td>{{ $invoice->description }}</td>
                                     <td>

@@ -36,7 +36,7 @@ class RayController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return $this->Ray->show($id);
     }
 
     /**

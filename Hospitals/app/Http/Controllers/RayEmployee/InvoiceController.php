@@ -11,7 +11,7 @@ class InvoiceController extends Controller
 {
 
     protected $RayEmployee;
-    public function __construct( InvoiceRepositoryInterface $RayEmployee) 
+    public function __construct(InvoiceRepositoryInterface $RayEmployee)
     {
         $this->RayEmployee = $RayEmployee;
     }
@@ -21,34 +21,20 @@ class InvoiceController extends Controller
         return $this->RayEmployee->index();
     }
 
-
-    public function create()
+    public function completedInvoices()
     {
-        //
+        return $this->RayEmployee->completedInvoices();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show($id)
     {
-        //
+        return $this->RayEmployee->show($id);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        
+
         return $this->RayEmployee->edit($id);
     }
 
@@ -57,7 +43,7 @@ class InvoiceController extends Controller
      */
     public function update(StoreRayRequest $request, string $id)
     {
-        return $this->RayEmployee->update($request,$id);
+        return $this->RayEmployee->update($request, $id);
     }
 
     /**

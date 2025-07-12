@@ -287,33 +287,38 @@
                                 <div class="main-img-user"><img alt=""
                                         src="{{ URL::asset('Dashboard/img/faces/6.jpg') }}" class=""></div>
                                 <div class="mr-3 my-auto">
-                                    <h6>Petey Cruiser</h6><span>Premium Member</span>
+                                    <h6>{{ Auth::user()->name }}</h6><span>{{ Auth::user()->email }}</span>
                                 </div>
                             </div>
                         </div>
-                        <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
-                        <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
+                        <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>الملف الشخصي</a>
+                        <a class="dropdown-item" href=""><i class="bx bx-cog"></i>تعديل الملف الشخصي</a>
+                        {{-- <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
                         <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
+                        <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a> --}}
                         <a class="dropdown-item" href="#"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
-                                class="bx bx-log-out"></i> Sign Out</a>
-
+                                class="bx bx-log-out"></i>  تسجيل الخروج</a>
+                            <?php $routeName = ''; ?>
                         @if (auth('web')->check())
-                            <form action="{{ route('logout.user') }}" id="logout-form" method="post"
-                                style="display: none">
+                            {{-- <form action="{{ route('logout.user') }}" id="logout-form" method="post"
+                                style="display: none"> --}}
+                                <?php $routeName = 'logout.user'; ?>
                         @elseif (auth('admin')->check())
-                                <form action="{{ route('logout.admin') }}" id="logout-form" method="post"
-                                    style="display: none">
+                                {{-- <form action="{{ route('logout.admin') }}" id="logout-form" method="post"
+                                    style="display: none"> --}}
+                                <?php $routeName = 'logout.admin'; ?>
                         @elseif (auth('doctor')->check())
-                                    <form action="{{ route('logout.doctor') }}" id="logout-form" method="post"
-                                    style="display: none">
+                                    {{-- <form action="{{ route('logout.doctor') }}" id="logout-form" method="post"
+                                    style="display: none"> --}}
+                                    <?php $routeName = 'logout.doctor'; ?>
                          @elseif (auth('ray_employee')->check())
-                                    <form action="{{ route('logout.RayEmployee') }}" id="logout-form" method="post"
-                                    style="display: none">
+                                    {{-- <form action="{{ route('logout.RayEmployee') }}" id="logout-form" method="post"
+                                    style="display: none"> --}}
+                                    <?php $routeName = 'logout.RayEmployee'; ?>
                         @endif
-
+                        <form action="{{ route($routeName) }}" id="logout-form" method="post"
+                                style="display: none">
                         @csrf
                         </form>
                     </div>

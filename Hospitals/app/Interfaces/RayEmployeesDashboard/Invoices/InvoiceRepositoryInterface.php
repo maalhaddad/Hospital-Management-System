@@ -9,11 +9,9 @@ interface InvoiceRepositoryInterface
 {
     public function index();
 
-    public function create();
+    public function completedInvoices();
 
-    public function show(Model $Invoice);
-
-    public function store( $attributes);
+    public function show($id);
 
     public function edit($id);
 

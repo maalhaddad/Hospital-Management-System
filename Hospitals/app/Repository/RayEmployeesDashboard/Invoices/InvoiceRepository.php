@@ -14,36 +14,27 @@ class InvoiceRepository implements InvoiceRepositoryInterface
     use FileFunctionTrait;
     public function index()
     {
-        $invoices = Ray::all();
+        $invoices = Ray::where('case', 0)->get();
         return view('Dashboard.rayemployee-dashboard.invoices.index',compact('invoices'));
 
     }
 
-
-    public function create()
+    public function completedInvoices()
     {
-        //
+        $invoices = Ray::where('case', 1)->where('employee_id',auth()->user()->id)->get();
+        return view('Dashboard.rayemployee-dashboard.invoices.completed_invoices',compact('invoices'));
     }
 
-    public function show(Model $Invoice)
+     public function show($id)
     {
-        //
-    }
-
-    public function store( $attributes)
-    {
-         try {
-
-
-
-            session()->flash('add');
-            return redirect()->back();
+        $ray = Ray::findOrFail($id);
+        if(  $ray->employee_id == auth()->user()->id)
+        {
+          return view('dashboard.rayemployee-dashboard.invoices.view_rays',compact('ray'));        
         }
-
-        catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+        return redirect()->back();
     }
+
 
     public function edit( $id)
     {
