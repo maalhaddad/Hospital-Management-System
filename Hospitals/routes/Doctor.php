@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Doctor\DiagnosticController;
+use App\Http\Controllers\Doctor\HomeController;
 use App\Http\Controllers\Doctor\InvoiceController;
 use App\Http\Controllers\Doctor\LaboratorieController;
 use App\Http\Controllers\Doctor\PatientDetailsController;
@@ -28,9 +29,7 @@ Route::group(
     ],
     function () {
         //============================== Dasboard Doctor =================================
-        Route::get('/dashboard/doctor', function () {
-            return view('Dashboard.doctor-dashboard.dashboard');
-        })->middleware(['auth:doctor', 'verified'])->name('dashboard.doctor');
+        Route::get('/dashboard/doctor', [HomeController::class,'index'])->middleware(['auth:doctor', 'verified'])->name('dashboard.doctor');
 
         //============================== End Dashboard Doctor =================================
         require __DIR__ . '/auth.php';

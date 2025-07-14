@@ -6,14 +6,14 @@
 @endsection
 
 @section('title')
-{{ isset($Receipt) ? 'تعديل سند قبض' : 'إضافة سند قبض جديد'; }}
+{{ isset($Receipt) ? 'تعديل سند قبض' : 'إضافة سند قبض جديد' }}
 @stop
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الحسابات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ isset($Receipt) ? 'تعديل سند قبض' : 'إضافة سند قبض جديد'; }}</span>
+                <h4 class="content-title mb-0 my-auto">الحسابات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ isset($Receipt) ? 'تعديل سند قبض' : 'إضافة سند قبض جديد' }}</span>
             </div>
         </div>
     </div>

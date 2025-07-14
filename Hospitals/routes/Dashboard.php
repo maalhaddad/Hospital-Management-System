@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\AmbulanceController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DoctorController;
+use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\InsuranceController;
 use App\Http\Controllers\Dashboard\PatientController;
 use App\Http\Controllers\Dashboard\ReceiptAccountController;
@@ -45,9 +46,8 @@ Route::group(
         //============================== End Dashboard User =================================
 
         //============================== Dasboard Admin =================================
-        Route::get('/dashboard/admin', function () {
-            return view('Dashboard.Admin.dashboard');
-        })->middleware(['auth:admin', 'verified'])->name('dashboard.admin');
+        Route::get('/dashboard/admin', [HomeController::class,'index'])
+        ->middleware(['auth:admin', 'verified'])->name('dashboard.admin');
 
         //============================== End Dashboard Admin =================================
         require __DIR__ . '/auth.php';
