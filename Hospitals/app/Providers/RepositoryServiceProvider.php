@@ -12,6 +12,7 @@ use App\Interfaces\sections\SectionRepositoryInterface;
 use App\Repository\Sections\SectionRepository;
 use App\Interfaces\Doctors\DoctorRepositoryInterface;
 use App\Interfaces\Insurances\InsuranceRepositoryInterface;
+use App\Interfaces\LaboratorieEmployees\LaboratorieEmployeeRepositoryInterface;
 use App\Interfaces\Patients\PatientRepositoryInterface;
 use App\Interfaces\Services\SingleServiceRepositoryInterface;
 use App\Repository\Doctors\DoctorRepository;
@@ -30,6 +31,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Repository\DoctorDashboard\Invoices\InvoiceRepository;
 use App\Repository\DoctorDashboard\Laboratories\LaboratorieRepository;
 use App\Repository\DoctorDashboard\Rays\RayRepository;
+use App\Repository\LaboratorieEmployees\LaboratorieEmployeeRepository;
 use App\Repository\RayEmployees\RayEmployeeRepository;
 use App\Repository\RayEmployeesDashboard\Invoices\InvoiceRepository as RayInvoiceRepository;
 
@@ -50,6 +52,7 @@ class RepositoryServiceProvider extends ServiceProvider
        $this->app->bind(ReceiptAccountRepositoryInterface::class , ReceiptAccountRepository::class);
        $this->app->bind(PaymentAccountRepositoryInterface::class , PaymentAccountRepository::class);
        $this->app->bind(RayEmployeeRepositoryInterface::class , RayEmployeeRepository::class);
+       $this->app->bind(LaboratorieEmployeeRepositoryInterface::class ,LaboratorieEmployeeRepository::class);
 
 
        //========================== Doctor ===========================

@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\InsuranceController;
+use App\Http\Controllers\Dashboard\LaboratorieEmployeeController;
 use App\Http\Controllers\Dashboard\PatientController;
 use App\Http\Controllers\Dashboard\ReceiptAccountController;
 use App\Http\Controllers\Dashboard\SectionController;
@@ -190,6 +191,16 @@ Route::group(
             });
 
             // =========== End RayEmployees ===========
+
+
+            // ===========  LaboratorieEmployee ===========
+
+               Route::controller(LaboratorieEmployeeController::class)->group(function () {
+
+                Route::resource('laboratorie-employees', LaboratorieEmployeeController::class);
+            });
+
+            // =========== End LaboratorieEmployee ===========
 
             }
         );
