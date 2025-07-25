@@ -58,12 +58,17 @@
                                                     <option value="user">{{ __('Dashboard/login_trans.user') }}</option>
                                                     <option value="doctor">{{ __('Dashboard/login_trans.doctor') }}
                                                     </option>
-                                                    <option value="rayemployee">
+                                                    <option value="ray-employee">
                                                         {{ __('Dashboard/login_trans.ray_employee') }}</option>
+
+                                                     <option value="laboratorie-employee">
+                                                        {{ __('Dashboard/login_trans.laboratorie_employee') }}</option>
                                                     {{-- <option value="3">Three</option> --}}
                                                 </select>
                                             </div>
+                                            <?php
 
+                                            ?>
                                             {{-- login-form user --}}
 
                                             <x-login-form id="login-form-user" :route="route('login.user')" :title="__('Dashboard/login_trans.user')">
@@ -83,6 +88,9 @@
                                             <x-login-form id="login-form-ray-employee" :route="route('login.rayEmployee')" :title="__('Dashboard/login_trans.ray_employee')">
                                             </x-login-form>
 
+                                            <x-login-form id="login-form-laboratorie-employee" :route="route('login.laboratorieEmployee')" :title="__('Dashboard/login_trans.laboratorie_employee')">
+                                            </x-login-form>
+
 
                                         </div>
                                     </div>
@@ -99,32 +107,47 @@
     <script>
         $(document).ready(function() {
             $('#Access-Control').change(function() {
-                if ($(this).val() === 'admin') {
+                var loginForm = [
+                    'admin',
+                    'user',
+                    'doctor',
+                    'ray-employee',
+                    'laboratorie-employee'
+                ];
+                var kay = loginForm.indexOf($(this).val());
 
-                    $('#login-form-doctor').hide();
-                    $('#login-form-user').hide();
-                    $('#login-form-ray-employee').hide();
+                 for (let index = 0; index < loginForm.length; index++)
+                 {
+                        $('#login-form-'+loginForm[index]).hide();
 
-                    $('#login-form-admin').show();
+                 }
+                  $('#login-form-'+loginForm[kay]).show();
+                // if ($(this).val() === 'admin') {
 
-                } else if ($(this).val() === 'user') {
-                    $('#login-form-admin').hide();
-                    $('#login-form-doctor').hide();
-                    $('#login-form-ray-employee').hide();
+                //     $('#login-form-doctor').hide();
+                //     $('#login-form-user').hide();
+                //     $('#login-form-ray-employee').hide();
 
-                    $('#login-form-user').show();
-                } else if ($(this).val() === 'doctor') {
-                    $('#login-form-admin').hide();
-                    $('#login-form-user').hide();
-                    $('#login-form-ray-employee').hide();
+                //     $('#login-form-admin').show();
 
-                    $('#login-form-doctor').show();
-                } else if ($(this).val() === 'rayemployee') {
-                    $('#login-form-ray-employee').show();
-                    $('#login-form-admin').hide();
-                    $('#login-form-user').hide();
-                    $('#login-form-doctor').hide();
-                }
+                // } else if ($(this).val() === 'user') {
+                //     $('#login-form-admin').hide();
+                //     $('#login-form-doctor').hide();
+                //     $('#login-form-ray-employee').hide();
+
+                //     $('#login-form-user').show();
+                // } else if ($(this).val() === 'doctor') {
+                //     $('#login-form-admin').hide();
+                //     $('#login-form-user').hide();
+                //     $('#login-form-ray-employee').hide();
+
+                //     $('#login-form-doctor').show();
+                // } else if ($(this).val() === 'rayemployee') {
+                //     $('#login-form-ray-employee').show();
+                //     $('#login-form-admin').hide();
+                //     $('#login-form-user').hide();
+                //     $('#login-form-doctor').hide();
+                // }
 
 
             });

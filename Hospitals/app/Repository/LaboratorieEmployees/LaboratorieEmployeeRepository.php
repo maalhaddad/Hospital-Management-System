@@ -4,6 +4,7 @@ namespace App\Repository\LaboratorieEmployees;
 
 use App\Interfaces\LaboratorieEmployees\LaboratorieEmployeeRepositoryInterface;
 use App\Models\LaboratorieEmployee;
+use Illuminate\Support\Facades\Hash;
 
 class LaboratorieEmployeeRepository implements LaboratorieEmployeeRepositoryInterface
 {
@@ -26,8 +27,12 @@ class LaboratorieEmployeeRepository implements LaboratorieEmployeeRepositoryInte
     {
          try {
 
-
-
+            $data = $request->validated();
+            $LaboratorieEmployee = new LaboratorieEmployee();
+            $LaboratorieEmployee->name = $data['name'];
+            $LaboratorieEmployee->email = $data['email'];
+            $LaboratorieEmployee->password = Hash::make( $data['password']);
+            $LaboratorieEmployee->save();
             session()->flash('add');
             return redirect()->back();
         }
@@ -42,18 +47,25 @@ class LaboratorieEmployeeRepository implements LaboratorieEmployeeRepositoryInte
 
     }
 
-    public function update( $request, $id)
+    public function update( $request)
     {
         try {
-
-            $LaboratorieEmployee = LaboratorieEmployee::findOrFail($id);
+            $data = $request->validated();
+            $LaboratorieEmployee = LaboratorieEmployee::findOrFail($request->employee_id);
+            $LaboratorieEmployee->name = $data['name'];
+            $LaboratorieEmployee->email = $data['email'];
+            if ($data['password'] !== null)
+            {
+                $LaboratorieEmployee->password = Hash::make($data['password']);
+            }
+                $LaboratorieEmployee->save();
 
 
             session()->flash('edit');
-            return redirect()->route('view.index');
+            return redirect()->back();
         } catch (\Exception $ex) {
 
-            return redirect()->route('view.index')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 
@@ -61,13 +73,13 @@ class LaboratorieEmployeeRepository implements LaboratorieEmployeeRepositoryInte
     {
          try {
 
-            $LaboratorieEmployee = LaboratorieEmployee::find($request->LaboratorieEmployee_id);
+            $LaboratorieEmployee = LaboratorieEmployee::find($request->employee_id);
             $LaboratorieEmployee->delete();
             session()->flash('delete');
-            return redirect()->route('view.index');
+            return redirect()->back();
         } catch (\Exception $ex) {
 
-            return redirect()->route('view.index')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 }

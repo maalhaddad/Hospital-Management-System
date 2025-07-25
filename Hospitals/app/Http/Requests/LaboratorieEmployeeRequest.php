@@ -13,10 +13,11 @@ class LaboratorieEmployeeRequest extends FormRequest
 
     public function rules()
     {
+        $isUpdate = $this->employee_id !== null;
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:laboratorie_employees,email,' . $this->route('laboratorie_employee'),
-            'password' => 'required|string|min:6|confirmed',
+            'email' => 'required|email|unique:laboratorie_employees,email,' . $this->input('employee_id').',id',
+            'password' => $isUpdate ? 'nullable|string|min:6|confirmed': 'required|string|min:6|confirmed',
         ];
     }
 

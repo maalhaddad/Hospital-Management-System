@@ -16,7 +16,7 @@ interface LaboratorieEmployeeRepositoryInterface
 
     public function edit(LaboratorieEmployee $LaboratorieEmployee);
 
-    public function update( $request, $id);
+    public function update( $request);
 
     public function destroy($id);
 }

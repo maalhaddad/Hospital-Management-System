@@ -13,13 +13,15 @@
                @method('DELETE')
                @csrf
 
-                <input type="hidden" name="d" id="id" class="form-control" required ><br>
+
             <div class="modal-body">
-                <h5>{{trans('Dashboard/sections_trans.Warning')}} .....</h5>
+                <input type="hidden" name="employee_id" id="employee_id" class="form-control"  ><br>
+                <h5>{{__('Dashboard/section_trans.Warning')}} .....</h5>
+
             </div>
             <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Dashboard/section_trans.Close')}}</button>
-                    <button type="submit" class="btn btn-primary">{{__('Dashboard/section_trans.submit')}}</button>
+                    <button type="submit" class="btn btn-danger">{{__('Dashboard/section_trans.submit')}}</button>
             </div>
             </form>
         </div>

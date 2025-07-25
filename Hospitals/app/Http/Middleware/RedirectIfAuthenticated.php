@@ -33,6 +33,11 @@ class RedirectIfAuthenticated
             return redirect(RouteServiceProvider::RAYEMPLOYEE);
         }
 
+         if(auth('laboratorie_employee')->check())
+        {
+            return redirect(RouteServiceProvider::LABORATORIEEMPLOYEE);
+        }
+
          if(auth('web')->check())
         {
             return redirect(RouteServiceProvider::HOME);

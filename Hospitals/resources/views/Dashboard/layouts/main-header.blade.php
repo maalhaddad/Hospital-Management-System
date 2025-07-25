@@ -316,6 +316,8 @@
                                     {{-- <form action="{{ route('logout.RayEmployee') }}" id="logout-form" method="post"
                                     style="display: none"> --}}
                                     <?php $routeName = 'logout.RayEmployee'; ?>
+                         @elseif (auth('laboratorie_employee')->check())
+                                   <?php $routeName = 'logout.laboratorieEmployee'; ?>
                         @endif
                         <form action="{{ route($routeName) }}" id="logout-form" method="post"
                                 style="display: none">

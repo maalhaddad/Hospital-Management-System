@@ -50,10 +50,10 @@ class {{repositoryName}} implements {{interfaceName}}
 
 
             session()->flash('edit');
-            return redirect()->route('view.index');
+            return redirect()->back();
         } catch (\Exception $ex) {
 
-            return redirect()->route('view.index')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 
@@ -64,10 +64,10 @@ class {{repositoryName}} implements {{interfaceName}}
             ${{model}} = {{model}}::find($request->${{model}}_id);
             ${{model}}->delete();
             session()->flash('delete');
-            return redirect()->route('view.index');
+            return redirect()->back();
         } catch (\Exception $ex) {
 
-            return redirect()->route('view.index')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 }

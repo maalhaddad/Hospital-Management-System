@@ -61,12 +61,20 @@
                                                    <td>{{ $laboratorie_employee->email }}</td>
                                                    <td>{{ $laboratorie_employee->created_at->diffForHumans() }}</td>
                                                    <td>
-                                                       <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"  data-toggle="modal" href="#edit{{$laboratorie_employee->id}}"><i class="las la-pen"></i></a>
-                                                       <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$laboratorie_employee->id}}"><i class="las la-trash"></i></a>
+                                                       <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
+                                                       data-name="{{ $laboratorie_employee->name }}"
+                                                       data-email="{{ $laboratorie_employee->email }}"
+                                                       data-employee_id="{{ $laboratorie_employee->id }}"
+                                                         data-toggle="modal" href="#edit"><i class="las la-pen"></i></a>
+
+                                                       <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                                                       data-employee_id="{{$laboratorie_employee->id}}"
+
+                                                         data-toggle="modal" href="#delete"><i class="las la-trash"></i></a>
                                                    </td>
                                                </tr>
 
-                                              
+
 
                                            @endforeach
                                             </tbody>
@@ -115,4 +123,26 @@
     <script src="{{URL::asset('dashboard/plugins/notify/js/notifIt.js')}}"></script>
     <script src="{{URL::asset('/plugins/notify/js/notifit-custom.js')}}"></script>
 
+    <script>
+        $('#edit').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var employee_id = button.data('employee_id')
+            var name = button.data('name')
+            var email = button.data('email');
+            var modal = $(this)
+            modal.find('.modal-body #employee_id').val(employee_id);
+            modal.find('.modal-body #name').val(name);
+            modal.find('.modal-body #email').val(email);
+
+        });
+
+         $('#delete').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var employee_id = button.data('employee_id');
+            console.log(employee_id)
+            var modal = $(this)
+            modal.find('.modal-body #employee_id').val(employee_id);
+
+        });
+    </script>
 @endsection
