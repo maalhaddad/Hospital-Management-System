@@ -10,7 +10,7 @@ interface LaboratorieRepositoryInterface
 
     public function create();
 
-    public function show(Laboratorie $Laboratorie);
+    public function show( $id);
 
     public function store( $attributes);
 

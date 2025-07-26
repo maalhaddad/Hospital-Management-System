@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LaboratorieEmployees\HomeController;
+use App\Http\Controllers\LaboratorieEmployees\InvoiceController;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -40,7 +41,12 @@ Route::group(
             ],
             function () {
 
+                 Route::controller(InvoiceController::class)->group(function(){
 
+                    Route::resource('laboratorie-employee',InvoiceController::class);
+                    Route::get('completed-invoices',[InvoiceController::class,'completedInvoices'])
+                        ->name('laboratorie-employee.completed_invoices');
+                 });
 
 
 

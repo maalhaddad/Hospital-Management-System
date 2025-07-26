@@ -16,7 +16,10 @@ return new class extends Migration
             $table->foreignId('invoice_id')->constrained('invoices')->cascadeOnDelete();
             $table->foreignId('patient_id')->constrained('patients')->cascadeOnDelete();
             $table->foreignId('doctor_id')->constrained('doctors')->cascadeOnDelete();
+            $table->foreignId('employee_id')->nullable()->constrained('laboratorie_employees')->cascadeOnDelete();
             $table->longText('description');
+            $table->tinyInteger('case')->default(0);
+            $table->longText('description_employee')->nullable();
             $table->timestamps();
         });
     }

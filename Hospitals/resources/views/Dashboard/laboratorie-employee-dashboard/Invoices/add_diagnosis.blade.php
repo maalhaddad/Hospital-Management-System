@@ -9,8 +9,6 @@
 
     <!-- Internal Select2 css -->
     <link href="{{ URL::asset('Dashboard/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-   
-
     <!---Internal Fileupload css-->
     <link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
     <!---Internal Fancy uploader css-->
@@ -34,7 +32,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('ray_employee.invoices.update', $invoice->id)}}" method="post"
+                    <form action="{{route('laboratorie-employee.update', $invoice->id)}}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

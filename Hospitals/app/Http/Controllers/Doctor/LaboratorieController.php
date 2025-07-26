@@ -41,7 +41,7 @@ class LaboratorieController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return $this->Laboratorie->show($id);
     }
 
     /**

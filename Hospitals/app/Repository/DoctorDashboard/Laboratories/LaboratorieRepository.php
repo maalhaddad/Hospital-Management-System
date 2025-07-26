@@ -17,9 +17,10 @@ class LaboratorieRepository implements LaboratorieRepositoryInterface
         //
     }
 
-    public function show(Laboratorie $Laboratorie)
+    public function show( $id)
     {
-        //
+        $laboratorie = Laboratorie::findOrFail($id);
+        return view('Dashboard.doctor-dashboard.invoices.view_Laboratorie',compact('laboratorie'));
     }
 
     public function store($attributes)

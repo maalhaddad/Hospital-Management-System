@@ -142,7 +142,7 @@
                                                                         <a class="modal-effect btn btn-sm btn-warning"  href="{{route('Rays.show',$patient_ray->id)}}"><i class="fas fa-binoculars"></i></a>
                                                                     </td>
                                                                 @endif
-                                                                   
+
                                                                 @endif
                                                             </tr>
                                                             {{-- @include('Dashboard.doctor.invoices.edit_xray_conversion') --}}
@@ -169,6 +169,8 @@
                                                             <th>#</th>
                                                             <th>اسم الخدمه</th>
                                                             <th>اسم الدكتور</th>
+                                                            <th>اسم موظف الاشعة</th>
+                                                            <th>حالة الكشف</th>
                                                             <th>العمليات</th>
                                                         </tr>
                                                     </thead>
@@ -178,8 +180,29 @@
                                                                 <td>{{$loop->iteration}}</td>
                                                                 <td>{{$patient_Laboratorie->description}}</td>
                                                                 <td>{{$patient_Laboratorie->doctor->name}}</td>
+                                                                 <td>
+                                                                    {{$patient_Laboratorie->LaboratorieEmployee->name}}
+                                                                </td>
+
+                                                                @php
+                                                                    if ($patient_Laboratorie->case == 1) {
+                                                                        $className = 'success';
+                                                                        $status = 'مكتملة';
+
+                                                                    } else {
+                                                                        $className = 'danger';
+                                                                        $status = 'غير مكتملة';
+                                                                    }
+                                                                @endphp
+
+                                                                <td>
+                                                                    <span class="text-{{ $className }}">{{ $status }}</span>
+                                                                </td>
+
                                                                 @if($patient_Laboratorie->doctor_id == auth()->user()->id)
-                                                                    <td>
+                                                                 @if ($patient_Laboratorie->case == 0)
+
+                                                                  <td>
                                                                         <a class="modal-effect btn btn-sm btn-primary"
                                                                             data-effect="effect-scale"
                                                                             data-laboratorie_id="{{ $patient_Laboratorie->id }}"
@@ -194,6 +217,13 @@
                                                                             data-target="#delete_laboratorie" data-toggle="modal"
                                                                             href="#"><i class="las la-trash"></i></a>
                                                                     </td>
+
+                                                                    @else
+                                                                     <td>
+                                                                        <a class="modal-effect btn btn-sm btn-warning"  href="{{route('Laboratorie.show',$patient_Laboratorie->id)}}"><i class="fas fa-binoculars"></i></a>
+                                                                    </td>
+                                                                 @endif
+
                                                                 @endif
                                                             </tr>
                                                         @endforeach
