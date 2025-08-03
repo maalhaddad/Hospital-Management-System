@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -17,6 +18,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+                event(new TestEvent('Welcome to the Login!'));
         return view('Dashboard.User.Auth.signin');
     }
 
@@ -33,9 +35,9 @@ class AuthenticatedSessionController extends Controller
         }
 
         return redirect()->back()->withErrors(['name'=> (__('Dashboard/auth.failed'))]);
-        
 
-      
+
+
     }
 
     /**

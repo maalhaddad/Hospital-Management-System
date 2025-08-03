@@ -26,7 +26,24 @@
 <script src="{{URL::asset('Dashboard/plugins/sidebar/sidebar-custom.js')}}"></script>
 <!-- Eva-icons js -->
 <script src="{{URL::asset('Dashboard/js/eva-icons.min.js')}}"></script>
+{{-- pusher js --}}
+<script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+<script>
+                // Enable pusher logging - don't include this in production
+                Pusher.logToConsole = true;
 
+                var pusher = new Pusher('b5db412577a06d1e1447', {
+                    cluster: 'mt1'
+                });
+            </script>
+
+            <script>
+    var channel = pusher.subscribe('my-channel');
+     channel.bind('App\\Events\\TestEvent', function(data) {
+      alert(JSON.stringify(data));
+      console.log('jjjjlkjklhjk')
+    });
+            </script>
 
 @yield('js')
 <!-- Sticky js -->
@@ -34,5 +51,7 @@
 <!-- custom js -->
 <script src="{{URL::asset('Dashboard/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('Dashboard/plugins/side-menu/sidemenu.js')}}"></script>
-{{-- <script src="{{URL::asset('Dashboard/js/table-data.js')}}"></script> --}}
+
+
+
 
