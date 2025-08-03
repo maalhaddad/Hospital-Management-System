@@ -5,14 +5,15 @@ namespace App\Models;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Patient extends Model
+class Patient extends Authenticatable
 {
     use HasFactory;
     use Translatable;
 
     public $translatedAttributes = ['name','Address'];
-    public $fillable= ['name','Address','email','Password','Date_Birth','Phone','Gender','Blood_Group'];
+    public $fillable= ['name','Address','email','password','Date_Birth','Phone','Gender','Blood_Group'];
 
 
     // public function SingleInvoices()

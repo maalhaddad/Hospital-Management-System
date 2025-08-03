@@ -55,7 +55,7 @@
                                                     <option selected disabled>{{ __('Dashboard/login_trans.Choose_list') }}
                                                     </option>
                                                     <option value="admin">{{ __('Dashboard/login_trans.admin') }}</option>
-                                                    <option value="user">{{ __('Dashboard/login_trans.user') }}</option>
+                                                    <option value="patient">{{ __('Dashboard/login_trans.patient') }}</option>
                                                     <option value="doctor">{{ __('Dashboard/login_trans.doctor') }}
                                                     </option>
                                                     <option value="ray-employee">
@@ -71,8 +71,8 @@
                                             ?>
                                             {{-- login-form user --}}
 
-                                            <x-login-form id="login-form-user" :route="route('login.user')" :title="__('Dashboard/login_trans.user')">
-                                            </x-login-form>
+                                            {{-- <x-login-form id="login-form-user" :route="route('login.user')" :title="__('Dashboard/login_trans.user')">
+                                            </x-login-form> --}}
 
 
 
@@ -82,6 +82,10 @@
 
                                             {{-- login-form doctor --}}
                                             <x-login-form id="login-form-doctor" :route="route('login.doctor')" :title="__('Dashboard/login_trans.doctor')">
+                                            </x-login-form>
+
+                                            {{-- login-form patient --}}
+                                            <x-login-form id="login-form-patient" :route="route('login.patient')" :title="__('Dashboard/login_trans.patient')">
                                             </x-login-form>
 
                                             {{-- login-form doctor --}}
@@ -109,7 +113,7 @@
             $('#Access-Control').change(function() {
                 var loginForm = [
                     'admin',
-                    'user',
+                    'patient',
                     'doctor',
                     'ray-employee',
                     'laboratorie-employee'

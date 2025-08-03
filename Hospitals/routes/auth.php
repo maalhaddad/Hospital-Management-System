@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LaboratorieEmployeeController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\PatientController;
 use App\Http\Controllers\Auth\RayEmployeeController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
@@ -34,6 +35,10 @@ Route::middleware('guest')->group(function () {
       // ================================ Route Doctor ==================================================
 
      Route::post('login/Doctor', [DoctorController::class, 'store'])->name('login.doctor');
+
+     // ================================ Route Patient ==================================================
+
+     Route::post('login/Patient', [PatientController::class, 'store'])->name('login.patient');
 
        // ================================ Route RayEmployee ==================================================
 
@@ -86,6 +91,9 @@ Route::post('logout/admin', [AdminController::class, 'destroy'])->middleware('au
 
 Route::post('logout/doctor', [AdminController::class, 'destroy'])->middleware('auth:doctor')
 ->name('logout.doctor');
+
+Route::post('logout/patient', [PatientController::class, 'destroy'])->middleware('auth:patient')
+->name('logout.patient');
 
 Route::post('logout/Ray-Employee', [RayEmployeeController::class, 'destroy'])->middleware('auth:ray_employee')
 ->name('logout.RayEmployee');

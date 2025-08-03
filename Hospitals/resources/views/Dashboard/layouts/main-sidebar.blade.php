@@ -16,6 +16,8 @@
                             @include('Dashboard.layouts.main-sidebar.main-sidebar-rayemployee')
                          @elseif (auth('laboratorie_employee')->check())
                             @include('Dashboard.layouts.main-sidebar.main-sidebar-laboratorieEmployee')
+                             @elseif (auth('patient')->check())
+                            @include('Dashboard.layouts.main-sidebar.main-sidebar-patient')
                         @endif
 
 			{{-- <div class="main-sidemenu">

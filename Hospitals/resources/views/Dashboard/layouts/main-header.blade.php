@@ -301,23 +301,22 @@
                                 class="bx bx-log-out"></i>  تسجيل الخروج</a>
                             <?php $routeName = ''; ?>
                         @if (auth('web')->check())
-                            {{-- <form action="{{ route('logout.user') }}" id="logout-form" method="post"
-                                style="display: none"> --}}
+
                                 <?php $routeName = 'logout.user'; ?>
                         @elseif (auth('admin')->check())
-                                {{-- <form action="{{ route('logout.admin') }}" id="logout-form" method="post"
-                                    style="display: none"> --}}
+
                                 <?php $routeName = 'logout.admin'; ?>
                         @elseif (auth('doctor')->check())
-                                    {{-- <form action="{{ route('logout.doctor') }}" id="logout-form" method="post"
-                                    style="display: none"> --}}
+
                                     <?php $routeName = 'logout.doctor'; ?>
                          @elseif (auth('ray_employee')->check())
-                                    {{-- <form action="{{ route('logout.RayEmployee') }}" id="logout-form" method="post"
-                                    style="display: none"> --}}
+
                                     <?php $routeName = 'logout.RayEmployee'; ?>
                          @elseif (auth('laboratorie_employee')->check())
                                    <?php $routeName = 'logout.laboratorieEmployee'; ?>
+                                   
+                          @elseif (auth('patient')->check())
+                                   <?php $routeName = 'logout.patient'; ?>          
                         @endif
                         <form action="{{ route($routeName) }}" id="logout-form" method="post"
                                 style="display: none">

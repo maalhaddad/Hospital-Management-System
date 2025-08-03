@@ -38,6 +38,11 @@ class RedirectIfAuthenticated
             return redirect(RouteServiceProvider::LABORATORIEEMPLOYEE);
         }
 
+         if(auth('patient')->check())
+        {
+            return redirect(RouteServiceProvider::PATIENT);
+        }
+
          if(auth('web')->check())
         {
             return redirect(RouteServiceProvider::HOME);

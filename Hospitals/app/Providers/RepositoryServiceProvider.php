@@ -15,10 +15,12 @@ use App\Interfaces\Insurances\InsuranceRepositoryInterface;
 use App\Interfaces\LaboratorieEmployees\LaboratorieEmployeeRepositoryInterface;
 use App\Interfaces\LaboratorieEmployeesDashboard\Invoices\InvoiceRepositoryInterface as LabInvoiceRepositoryInterface;
 use App\Interfaces\Patients\PatientRepositoryInterface;
+use App\Interfaces\PatientsDashboard\PatientRepositoryInterface as PatientDashboardRepositoryInterface;
 use App\Interfaces\Services\SingleServiceRepositoryInterface;
 use App\Repository\Doctors\DoctorRepository;
 use App\Repository\Insurances\InsuranceRepository;
 use App\Repository\Ambulances\AmbulanceRepository;
+use App\Repository\PatientsDashboard\PatientRepository as PatientDashboardRepository;
 use App\Repository\Patients\PatientRepository;
 use App\Repository\Services\SingleServiceRepository;
 use App\Repository\ReceiptAccounts\ReceiptAccountRepository;
@@ -70,6 +72,10 @@ class RepositoryServiceProvider extends ServiceProvider
 
           //========================== Laboratorie Employees ===========================
             $this->app->bind( LabInvoiceRepositoryInterface::class ,LabInvoiceRepository::class);
+
+
+             //========================== Patients ===========================
+            $this->app->bind( PatientDashboardRepositoryInterface::class ,PatientDashboardRepository::class);
     }
 
     /**
