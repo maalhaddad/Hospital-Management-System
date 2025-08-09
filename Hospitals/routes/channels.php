@@ -12,7 +12,31 @@ use Illuminate\Support\Facades\Broadcast;
 | used to check if an authenticated user can listen to the channel.
 |
 */
-
+$guards = ['web','admin','patient','doctor','ray_employee','laboratorie_employee', 'api'];
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
-});
+},['guards' => $guards]);
+
+Broadcast::channel('App.Models.Doctor.{id}', function ($user, $id) {
+    return auth()->guard('doctor')->check() && auth('doctor')->id() == $id;
+},['guards' => $guards]);
+
+// Admin channel
+Broadcast::channel('App.Models.Admin.{id}', function ($user, $id) {
+    return auth('admin')->check() && auth('admin')->id() == (int) $id;
+},['guards' => $guards]);
+
+// Patient channel
+Broadcast::channel('App.Models.Patient.{id}', function ($user, $id) {
+    return auth('patient')->check() && auth('patient')->id() == (int) $id;
+},['guards' => $guards]);
+
+// Ray Employee
+Broadcast::channel('App.Models.RayEmployee.{id}', function ($user, $id) {
+    return auth('ray_employee')->check() && auth('ray_employee')->id() == (int) $id;
+},['guards' => $guards]);
+
+// Laboratorie Employee
+Broadcast::channel('App.Models.LaboratorieEmployee.{id}', function ($user, $id) {
+    return auth('laboratorie_employee')->check() && auth('laboratorie_employee')->id() == (int) $id;
+},['guards' => $guards]);

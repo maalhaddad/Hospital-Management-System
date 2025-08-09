@@ -5,12 +5,14 @@
             <div class="responsive-logo">
                 <a href="{{ url('/' . ($page = 'index')) }}"><img src="{{ URL::asset('Dashboard/img/brand/logo.png') }}"
                         class="logo-1" alt="logo"></a>
-                <a href="{{ url('/' . ($page = 'index')) }}"><img src="{{ URL::asset('Dashboard/img/brand/logo-white.png') }}"
-                        class="dark-logo-1" alt="logo"></a>
-                <a href="{{ url('/' . ($page = 'index')) }}"><img src="{{ URL::asset('Dashboard/img/brand/favicon.png') }}"
-                        class="logo-2" alt="logo"></a>
-                <a href="{{ url('/' . ($page = 'index')) }}"><img src="{{ URL::asset('Dashboard/img/brand/favicon.png') }}"
-                        class="dark-logo-2" alt="logo"></a>
+                <a href="{{ url('/' . ($page = 'index')) }}"><img
+                        src="{{ URL::asset('Dashboard/img/brand/logo-white.png') }}" class="dark-logo-1"
+                        alt="logo"></a>
+                <a href="{{ url('/' . ($page = 'index')) }}"><img
+                        src="{{ URL::asset('Dashboard/img/brand/favicon.png') }}" class="logo-2" alt="logo"></a>
+                <a href="{{ url('/' . ($page = 'index')) }}"><img
+                        src="{{ URL::asset('Dashboard/img/brand/favicon.png') }}" class="dark-logo-2"
+                        alt="logo"></a>
             </div>
             <div class="app-sidebar__toggle" data-toggle="sidebar">
                 <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
@@ -25,29 +27,28 @@
             <ul class="nav">
 
                 @php
-                $local = [
-                    'ar' => 'yemen.jpg',
-                    'en' => 'us_flag.jpg'
-        ];
-            @endphp
+                    $local = [
+                        'ar' => 'yemen.jpg',
+                        'en' => 'us_flag.jpg',
+                    ];
+                @endphp
                 <li class="">
                     <div class="dropdown  nav-itemd-none d-md-flex">
                         <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
                             aria-expanded="false">
                             <span class="avatar country-Flag mr-0 align-self-center bg-transparent"><img
-                                    src="{{ URL::asset('Dashboard/img/flags/'. $local[APP::getlocale()])}}" alt="img"></span>
+                                    src="{{ URL::asset('Dashboard/img/flags/' . $local[APP::getlocale()]) }}"
+                                    alt="img"></span>
                             <div class="my-auto">
                                 <strong class="mr-2 ml-2 my-auto">العربيه</strong>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
                             @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                <a  class="dropdown-item d-flex" rel="alternate"
-                                    hreflang="{{ $localeCode }}"
+                                <a class="dropdown-item d-flex" rel="alternate" hreflang="{{ $localeCode }}"
                                     href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                     <span class="avatar  ml-3 align-self-center bg-transparent">
-                                        <img
-                                            src="{{ URL::asset('Dashboard/img/flags/'. $local[$localeCode]) }}"
+                                        <img src="{{ URL::asset('Dashboard/img/flags/' . $local[$localeCode]) }}"
                                             alt="img"></span>
                                     <div class="d-flex">
                                         <span class="mt-2">{{ $properties['native'] }}</span>
@@ -170,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="dropdown nav-item main-header-notification">
+                <div id="dropdown-notification" class="dropdown nav-item main-header-notification">
                     <a class="new nav-link" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -186,71 +187,31 @@
                                 <span class="badge badge-pill badge-warning mr-auto my-auto float-left">Mark All
                                     Read</span>
                             </div>
-                            <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">You have 4 unread
-                                Notifications</p>
+                            <p id="notification-count"
+                                class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">
+                                {{ Auth::user()->unreadNotifications->count() }} Unread
+                            </p>
                         </div>
-                        <div class="main-notification-list Notification-scroll">
-                            <a class="d-flex p-3 border-bottom" href="#">
-                                <div class="notifyimg bg-pink">
-                                    <i class="la la-file-alt text-white"></i>
-                                </div>
-                                <div class="mr-3">
-                                    <h5 class="notification-label mb-1">New files available</h5>
-                                    <div class="notification-subtext">10 hour ago</div>
-                                </div>
-                                <div class="mr-auto">
-                                    <i class="las la-angle-left text-left text-muted"></i>
-                                </div>
-                            </a>
-                            <a class="d-flex p-3" href="#">
-                                <div class="notifyimg bg-purple">
-                                    <i class="la la-gem text-white"></i>
-                                </div>
-                                <div class="mr-3">
-                                    <h5 class="notification-label mb-1">Updates Available</h5>
-                                    <div class="notification-subtext">2 days ago</div>
-                                </div>
-                                <div class="mr-auto">
-                                    <i class="las la-angle-left text-left text-muted"></i>
-                                </div>
-                            </a>
-                            <a class="d-flex p-3 border-bottom" href="#">
-                                <div class="notifyimg bg-success">
-                                    <i class="la la-shopping-basket text-white"></i>
-                                </div>
-                                <div class="mr-3">
-                                    <h5 class="notification-label mb-1">New Order Received</h5>
-                                    <div class="notification-subtext">1 hour ago</div>
-                                </div>
-                                <div class="mr-auto">
-                                    <i class="las la-angle-left text-left text-muted"></i>
-                                </div>
-                            </a>
-                            <a class="d-flex p-3 border-bottom" href="#">
-                                <div class="notifyimg bg-warning">
-                                    <i class="la la-envelope-open text-white"></i>
-                                </div>
-                                <div class="mr-3">
-                                    <h5 class="notification-label mb-1">New review received</h5>
-                                    <div class="notification-subtext">1 day ago</div>
-                                </div>
-                                <div class="mr-auto">
-                                    <i class="las la-angle-left text-left text-muted"></i>
-                                </div>
-                            </a>
-                            <a class="d-flex p-3 border-bottom" href="#">
-                                <div class="notifyimg bg-danger">
-                                    <i class="la la-user-check text-white"></i>
-                                </div>
-                                <div class="mr-3">
-                                    <h5 class="notification-label mb-1">22 verified registrations</h5>
-                                    <div class="notification-subtext">2 hour ago</div>
-                                </div>
-                                <div class="mr-auto">
-                                    <i class="las la-angle-left text-left text-muted"></i>
-                                </div>
-                            </a>
-                            <a class="d-flex p-3 border-bottom" href="#">
+                        <div id="notification-list" class="main-notification-list Notification-scroll">
+
+                            @forelse (Auth::user()->notifications as $notification)
+                                <a class="d-flex p-3 border-bottom" href="#">
+                                    <div class="notifyimg bg-primary">
+                                        <i class="la la-check-circle text-white"></i>
+                                    </div>
+                                    <div class="mr-3">
+                                        <h5 class="notification-label mb-1">{{ $notification->data['title'] }}</h5>
+                                        <div class="notification-subtext">{{ $notification->data['body'] }}</div>
+                                    </div>
+                                    <div class="mr-auto">
+                                        <i class="las la-angle-left text-left text-muted"></i>
+                                    </div>
+                                </a>
+
+                            @empty
+                                لاتوجد اشعارات
+                            @endforelse
+                            {{-- <a class="d-flex p-3 border-bottom" href="#">
                                 <div class="notifyimg bg-primary">
                                     <i class="la la-check-circle text-white"></i>
                                 </div>
@@ -261,7 +222,9 @@
                                 <div class="mr-auto">
                                     <i class="las la-angle-left text-left text-muted"></i>
                                 </div>
-                            </a>
+                            </a> --}}
+
+
                         </div>
                         <div class="dropdown-footer">
                             <a href="">VIEW ALL</a>
@@ -298,29 +261,24 @@
                         <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a> --}}
                         <a class="dropdown-item" href="#"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
-                                class="bx bx-log-out"></i>  تسجيل الخروج</a>
-                            <?php $routeName = ''; ?>
+                                class="bx bx-log-out"></i> تسجيل الخروج</a>
+                        <?php $routeName = ''; ?>
                         @if (auth('web')->check())
-
-                                <?php $routeName = 'logout.user'; ?>
+                            <?php $routeName = 'logout.user'; ?>
                         @elseif (auth('admin')->check())
-
-                                <?php $routeName = 'logout.admin'; ?>
+                            <?php $routeName = 'logout.admin'; ?>
                         @elseif (auth('doctor')->check())
-
-                                    <?php $routeName = 'logout.doctor'; ?>
-                         @elseif (auth('ray_employee')->check())
-
-                                    <?php $routeName = 'logout.RayEmployee'; ?>
-                         @elseif (auth('laboratorie_employee')->check())
-                                   <?php $routeName = 'logout.laboratorieEmployee'; ?>
-                                   
-                          @elseif (auth('patient')->check())
-                                   <?php $routeName = 'logout.patient'; ?>          
+                            <?php $routeName = 'logout.doctor'; ?>
+                        @elseif (auth('ray_employee')->check())
+                            <?php $routeName = 'logout.RayEmployee'; ?>
+                        @elseif (auth('laboratorie_employee')->check())
+                            <?php $routeName = 'logout.laboratorieEmployee'; ?>
+                        @elseif (auth('patient')->check())
+                            <?php $routeName = 'logout.patient'; ?>
                         @endif
                         <form action="{{ route($routeName) }}" id="logout-form" method="post"
-                                style="display: none">
-                        @csrf
+                            style="display: none">
+                            @csrf
                         </form>
                     </div>
                 </div>
@@ -340,3 +298,124 @@
     </div>
 </div>
 <!-- /main-header -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+{{-- <script src="{{ asset('resources/js/app.js') }}"></script> --}}
+@vite([ 'resources/js/app.js'])
+
+<script>
+
+    Echo.private(`App.Models.Doctor.31`)
+        .listen('.new-notification', (notification) => {
+            console.log("📬 إشعار جديد:", notification);
+            alert('📢 إشعار جديد: ' + notification.title); // أو أي تصرف تريده
+        });
+// import './resources/js/app.js';
+    // Pusher.logToConsole = true;
+
+    // var pusher = new Pusher("{{ config('broadcasting.connections.pusher.key') }}", {
+    //     cluster: "{{ config('broadcasting.connections.pusher.options.cluster') }}",
+    //     encrypted: true,
+    //     authEndpoint: '/broadcasting/auth',
+    //     auth: {
+    //         headers: {
+    //             'X-CSRF-TOKEN': '{{ csrf_token() }}',
+    //             'X-Requested-With': 'XMLHttpRequest'
+    //         }
+    //     }
+    // });
+
+    //  Pusher.logToConsole = true;
+
+    // var pusher = new Pusher('b5db412577a06d1e1447', {
+    //     cluster: 'mt1'
+    //     channelAuthorization: {
+    //         endpoint: '/broadcasting/auth', // هذا هو المسار الافتراضي في Laravel
+    //         headers: {
+    //             // قم بتمرير رمز CSRF لمنع الأخطاء
+    //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    //         }
+    //     }
+    // });
+
+    // var userId = {{ auth()->user()->id ?? 0 }};
+    // var model = {{ getModelGuardName() }};
+
+    // Echo.private(`App.Models.Doctor.{{ auth()->user()->id }}`)
+    //     .notification( (notification) => {
+    //         console.log("📬 إشعار جديد:", notification);
+    //         alert('📢 إشعار جديد: ' + notification.title); // أو أي تصرف تريده
+    //     });
+
+    // Echo.private(`App.Models.${model}.${userId}`)
+    // .notification((notification) => {
+
+    //     console.log(notification.title);
+    //     alert(notification.title);
+    // });
+
+    // var channel = pusher.subscribe('private-App.Models.' + model + '.' + userId);
+    // console.log('private-App.Models.' + model + '.' + userId);
+    // var notificationCount =0;
+    // channel.bind('new-notification', function(data) {
+    //     console.log(data); // data.message
+    //     alert(JSON.stringify(data.notification));
+    //      notificationCount++;
+    //        $('#notification-count').text('You have ' + notificationCount + ' unread Notifications');
+
+
+    // });
+</script>
+
+
+{{-- <script>
+                // Enable pusher logging - don't include this in production
+                Pusher.logToConsole = true;
+
+                var pusher = new Pusher('b5db412577a06d1e1447', {
+                    cluster: 'mt1'
+                });
+            </script>
+ <script>
+    var channel = pusher.subscribe('my-channel');
+
+    var notificationCount =0;
+     channel.bind('App\\Events\\TestEvent', function(data) {
+           alert(JSON.stringify(data.doctorName));
+           notificationCount++;
+           $('#notification-count').text('You have ' + notificationCount + ' unread Notifications');
+           var $notification = $(
+    `
+    <a class="d-flex p-3 border-bottom" href="#">
+        <div class="notifyimg bg-primary">
+            <i class="la la-check-circle text-white"></i>
+        </div>
+        <div class="mr-3">
+            <h5 class="notification-label mb-1">Project has been approved</h5>
+            <div class="notification-subtext">4 hour ago</div>
+        </div>
+        <div class="mr-auto">
+            <i class="las la-angle-left text-left text-muted"></i>
+        </div>
+    </a>
+`);
+            $notification.find('.notification-label').text(data.doctorName);
+            $notification.find('.notification-subtext').text(data.patientId);
+            $('#notification-list').prepend($notification);
+            $('#dropdown-notification').show();
+            showNotification(data);
+
+
+    });
+
+    function showNotification(data)
+    {
+        window.onload = function() {
+        notif({
+            msg: "تم اضافة فاتورة للدكتور-" + data.doctorName + " للمريض-" + data.patientId,
+            type: "success"
+        });
+    }
+    }
+            </script> --}}

@@ -9,6 +9,8 @@ use App\Models\Service;
 use App\Models\Invoice;
 use App\Models\FundAccount;
 use App\Models\PatientAccount;
+use App\Events\TestEvent;
+use App\Notifications\GeneralNotification;
 use Illuminate\Support\Facades\Route;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -120,6 +122,23 @@ class CreateInvoice extends Component
             }
 
                 $this->InvoiceSaved = true;
+                // event(new TestEvent(
+                //     [
+                //       'doctorName' => $invoice->Doctor->name ,
+                //       'patientId'  => $invoice->patient_id,
+                //     ]
+                //     ));
+
+                Doctor::find($invoice->doctor_id)->notify(new GeneralNotification(
+                    [
+                        'type' => 'create_invoice',
+                        'title' => '555اضافة فاتورة جديده',
+                        'body' => ' تم اضافة فاتورة جديدة للمريض ' . $invoice->Patient->name,
+                        'invoice_id' => $invoice->id,
+                        'timestamp' => now()->toDateTimeString()
+                    ]
+                    ,'App.Models.Doctor.'.$invoice->doctor_id
+                ));
                 DB::commit();
                 session()->flash('add');
                 $this->invoice->resete();

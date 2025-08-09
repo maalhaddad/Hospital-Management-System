@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Doctor extends Authenticatable
 {
     use Translatable;
     use HasFactory;
+    use Notifiable;
     public $translatedAttributes = ['name'];
     public $fillable= ['email','email_verified_at','password','status','name','photo'];
 

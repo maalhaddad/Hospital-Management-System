@@ -47,5 +47,7 @@
 <link href="{{URL::asset('Dashboard/css/skin-modes.css')}}" rel="stylesheet" />
 @endif
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 

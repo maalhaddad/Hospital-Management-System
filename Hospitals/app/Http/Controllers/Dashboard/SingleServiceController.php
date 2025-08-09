@@ -6,6 +6,8 @@ use App\Interfaces\Services\SingleServiceRepositoryInterface;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Doctor;
+use App\Notifications\GeneralNotification;
 
 class SingleServiceController extends Controller
 {
@@ -19,6 +21,16 @@ class SingleServiceController extends Controller
     }
     public function index()
     {
+        Doctor::find(31)->notify(new GeneralNotification(
+                    [
+                        'type' => 'create_invoice',
+                        'title' => '555اضافة فاتورة جديده',
+                        'body' => ' تم اضافة فاتورة جديدة للمريض 555' ,
+                        'invoice_id' => 35,
+                        'timestamp' => now()->toDateTimeString()
+                    ]
+                    ,'App.Models.Doctor.'. 31
+                ));
         return $this->SingleServiceRepository->index();
     }
 

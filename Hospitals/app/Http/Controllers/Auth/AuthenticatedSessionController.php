@@ -18,7 +18,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-                event(new TestEvent('Welcome to the Login!'));
         return view('Dashboard.User.Auth.signin');
     }
 

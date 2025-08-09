@@ -2,7 +2,8 @@
 
 
 if (!function_exists('convertNumberToArabicWordsWithCurrency')) {
-    function convertNumberToArabicWordsWithCurrency($amount, $currency = 'ريال') {
+    function convertNumberToArabicWordsWithCurrency($amount, $currency = 'ريال')
+    {
         $formatter = new NumberFormatter("ar", NumberFormatter::SPELLOUT);
 
         $integer = floor($amount);
@@ -15,5 +16,28 @@ if (!function_exists('convertNumberToArabicWordsWithCurrency')) {
         }
 
         return $result;
+    }
+}
+
+if (!function_exists('getGuardName')) {
+    function getGuardName()
+    {
+        return
+            collect([
+        'admin',
+        'doctor',
+        'patient',
+        'ray_employee',
+        'laboratorie_employee',
+    ])->first(fn($guard) => auth($guard)->check());
+    }
+}
+
+if (!function_exists('getModelGuardName')) {
+    function getModelGuardName()
+    {
+        $text = getGuardName();
+        $text = str_replace('_',' ',$text);
+        return str_replace(' ','',ucwords($text));
     }
 }

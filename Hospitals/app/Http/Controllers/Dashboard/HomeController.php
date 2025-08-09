@@ -21,7 +21,6 @@ class HomeController extends Controller
         $data['doctorsCount'] = Doctor::count();
         $data['patientsCount'] = Patient::count();
         $data['sectionsCount'] = Section::count();
-        event(new TestEvent('Welcome to the !'));
 
         return view('Dashboard.Admin.dashboard',$data);
     }
