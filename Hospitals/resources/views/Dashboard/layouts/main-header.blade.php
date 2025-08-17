@@ -171,6 +171,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div id="dropdown-notification" class="dropdown nav-item main-header-notification">
                     <a class="new nav-link" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24"
@@ -179,30 +180,34 @@
                             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                         </svg><span class=" pulse"></span></a>
-                    <div class="dropdown-menu">
+                    <div id="dropdown-menu-notification" class="dropdown-menu">
                         <div class="menu-header-content bg-primary text-right">
                             <div class="d-flex">
-                                <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">Notifications
+                                <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">الاشعارات
                                 </h6>
-                                <span class="badge badge-pill badge-warning mr-auto my-auto float-left">Mark All
-                                    Read</span>
+                                <span class="badge badge-pill badge-warning mr-auto my-auto float-left">
+                                    قرائة الكل</span>
                             </div>
-                            <p id="notification-count"
+                            <p
                                 class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">
-                                {{ Auth::user()->unreadNotifications->count() }} Unread
+                                  لديك <span id="notification-count" >{{ Auth::user()->unreadNotifications->count() }}</span> اشعار غير مقروءه
                             </p>
                         </div>
                         <div id="notification-list" class="main-notification-list Notification-scroll">
 
                             @forelse (Auth::user()->notifications as $notification)
-                                <a class="d-flex p-3 border-bottom" href="#">
-                                    <div class="notifyimg bg-primary">
+                                <a id="route-name" class="d-flex p-3 border-bottom" href="{{ $notification->data['route_name'] }}">
+                                    {{-- <div class="notifyimg bg-primary">
                                         <i class="la la-check-circle text-white"></i>
-                                    </div>
+                                    </div> --}}
                                     <div class="mr-3">
                                         <h5 class="notification-label mb-1">{{ $notification->data['title'] }}</h5>
                                         <div class="notification-subtext">{{ $notification->data['body'] }}</div>
+                                        <div class="notification-date text-muted small">{{ $notification->created_at->diffForHumans() }}</div>
                                     </div>
+                                    {{-- <div class="mr-3">
+                                        <div class="notification-date text-muted">{{ $notification->created_at->diffForHumans() }}</div>
+                                    </div> --}}
                                     <div class="mr-auto">
                                         <i class="las la-angle-left text-left text-muted"></i>
                                     </div>
@@ -211,18 +216,6 @@
                             @empty
                                 لاتوجد اشعارات
                             @endforelse
-                            {{-- <a class="d-flex p-3 border-bottom" href="#">
-                                <div class="notifyimg bg-primary">
-                                    <i class="la la-check-circle text-white"></i>
-                                </div>
-                                <div class="mr-3">
-                                    <h5 class="notification-label mb-1">Project has been approved</h5>
-                                    <div class="notification-subtext">4 hour ago</div>
-                                </div>
-                                <div class="mr-auto">
-                                    <i class="las la-angle-left text-left text-muted"></i>
-                                </div>
-                            </a> --}}
 
 
                         </div>
@@ -297,125 +290,52 @@
         </div>
     </div>
 </div>
+
 <!-- /main-header -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
-{{-- <script src="{{ asset('resources/js/app.js') }}"></script> --}}
-@vite([ 'resources/js/app.js'])
+<script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.15.0/echo.iife.js"></script>
+<!--Internal  Notify js -->
+<script src="{{ URL::asset('dashboard/plugins/notify/js/notifIt.js') }}"></script>
+<script src="{{ URL::asset('/plugins/notify/js/notifit-custom.js') }}"></script>
+
+
 
 <script>
+const key = "{{ env('PUSHER_APP_KEY') }}";
+const cluster ="{{ env('PUSHER_APP_CLUSTER') }}";
+</script>
+<script src="{{URL::asset('Dashboard/js/echo.js')}}"></script>
+<script>
 
-    Echo.private(`App.Models.Doctor.31`)
-        .listen('.new-notification', (notification) => {
-            console.log("📬 إشعار جديد:", notification);
-            alert('📢 إشعار جديد: ' + notification.title); // أو أي تصرف تريده
-        });
-// import './resources/js/app.js';
-    // Pusher.logToConsole = true;
+let privateChannel = '';
+if( '{{ getModelGuardName() }}' == 'LaboratorieEmployee'  )
+{
+     privateChannel = `App.Models.{{ getModelGuardName() }}`;
+    console.log(privateChannel);
+    console.log(1);
+}
+else if('{{ getModelGuardName() }}' =='RayEmployee')
+{
+     privateChannel = `{{ getModelGuardName() }}`;
+    console.log(privateChannel);
+    console.log(2);
 
-    // var pusher = new Pusher("{{ config('broadcasting.connections.pusher.key') }}", {
-    //     cluster: "{{ config('broadcasting.connections.pusher.options.cluster') }}",
-    //     encrypted: true,
-    //     authEndpoint: '/broadcasting/auth',
-    //     auth: {
-    //         headers: {
-    //             'X-CSRF-TOKEN': '{{ csrf_token() }}',
-    //             'X-Requested-With': 'XMLHttpRequest'
-    //         }
-    //     }
-    // });
+}
 
-    //  Pusher.logToConsole = true;
-
-    // var pusher = new Pusher('b5db412577a06d1e1447', {
-    //     cluster: 'mt1'
-    //     channelAuthorization: {
-    //         endpoint: '/broadcasting/auth', // هذا هو المسار الافتراضي في Laravel
-    //         headers: {
-    //             // قم بتمرير رمز CSRF لمنع الأخطاء
-    //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    //         }
-    //     }
-    // });
-
-    // var userId = {{ auth()->user()->id ?? 0 }};
-    // var model = {{ getModelGuardName() }};
-
-    // Echo.private(`App.Models.Doctor.{{ auth()->user()->id }}`)
-    //     .notification( (notification) => {
-    //         console.log("📬 إشعار جديد:", notification);
-    //         alert('📢 إشعار جديد: ' + notification.title); // أو أي تصرف تريده
-    //     });
-
-    // Echo.private(`App.Models.${model}.${userId}`)
-    // .notification((notification) => {
-
-    //     console.log(notification.title);
-    //     alert(notification.title);
-    // });
-
-    // var channel = pusher.subscribe('private-App.Models.' + model + '.' + userId);
-    // console.log('private-App.Models.' + model + '.' + userId);
-    // var notificationCount =0;
-    // channel.bind('new-notification', function(data) {
-    //     console.log(data); // data.message
-    //     alert(JSON.stringify(data.notification));
-    //      notificationCount++;
-    //        $('#notification-count').text('You have ' + notificationCount + ' unread Notifications');
+else
+{
+    privateChannel = `App.Models.{{ getModelGuardName() }}.{{ auth()->user()->id }}`;
+    console.log(privateChannel);
+    console.log(3);
 
 
-    // });
+}
+
+//  console.log(privateChannel);
+receiveNotification(privateChannel);
+
 </script>
 
 
-{{-- <script>
-                // Enable pusher logging - don't include this in production
-                Pusher.logToConsole = true;
-
-                var pusher = new Pusher('b5db412577a06d1e1447', {
-                    cluster: 'mt1'
-                });
-            </script>
- <script>
-    var channel = pusher.subscribe('my-channel');
-
-    var notificationCount =0;
-     channel.bind('App\\Events\\TestEvent', function(data) {
-           alert(JSON.stringify(data.doctorName));
-           notificationCount++;
-           $('#notification-count').text('You have ' + notificationCount + ' unread Notifications');
-           var $notification = $(
-    `
-    <a class="d-flex p-3 border-bottom" href="#">
-        <div class="notifyimg bg-primary">
-            <i class="la la-check-circle text-white"></i>
-        </div>
-        <div class="mr-3">
-            <h5 class="notification-label mb-1">Project has been approved</h5>
-            <div class="notification-subtext">4 hour ago</div>
-        </div>
-        <div class="mr-auto">
-            <i class="las la-angle-left text-left text-muted"></i>
-        </div>
-    </a>
-`);
-            $notification.find('.notification-label').text(data.doctorName);
-            $notification.find('.notification-subtext').text(data.patientId);
-            $('#notification-list').prepend($notification);
-            $('#dropdown-notification').show();
-            showNotification(data);
-
-
-    });
-
-    function showNotification(data)
-    {
-        window.onload = function() {
-        notif({
-            msg: "تم اضافة فاتورة للدكتور-" + data.doctorName + " للمريض-" + data.patientId,
-            type: "success"
-        });
-    }
-    }
-            </script> --}}

@@ -4,6 +4,9 @@ namespace App\Repository\DoctorDashboard\Rays;
 
 use App\Interfaces\DoctorDashboard\Rays\RayRepositoryInterface;
 use App\Models\Ray;
+use App\Models\RayEmployee;
+use App\Notifications\GeneralNotification;
+use Illuminate\Support\Facades\Notification;
 
 class RayRepository implements RayRepositoryInterface
 {
@@ -20,46 +23,53 @@ class RayRepository implements RayRepositoryInterface
     public function show($id)
     {
         $ray = Ray::findOrFail($id);
-        if(  $ray->doctor_id == auth()->user()->id)
-        {
-          return view('dashboard.doctor-dashboard.invoices.view_rays',compact('ray'));        
+        if ($ray->doctor_id == auth()->user()->id) {
+            return view('dashboard.doctor-dashboard.invoices.view_rays', compact('ray'));
         }
         return redirect()->back();
     }
 
-    public function store( $attributes)
+    public function store($attributes)
     {
-         try {
+        try {
 
-               $Ray = new Ray();
-               $Ray->description = $attributes->description;
-               $Ray->invoice_id = $attributes->invoice_id;
-               $Ray->doctor_id = $attributes->doctor_id;
-               $Ray->patient_id = $attributes->patient_id;
-               $Ray->save();
+            $Ray = new Ray();
+            $Ray->description = $attributes->description;
+            $Ray->invoice_id = $attributes->invoice_id;
+            $Ray->doctor_id = $attributes->doctor_id;
+            $Ray->patient_id = $attributes->patient_id;
+            $Ray->save();
+
+
+            $rayEmployees = RayEmployee::all();
+            Notification::send($rayEmployees, new GeneralNotification(
+                [
+                    'type' => 'new_radiology_request',
+                    'title' => 'طلب أشعة جديد',
+                    'body' => 'تم إنشاء طلب أشعة جديد للمريض ' . $Ray->Patient->name,
+                    'route_name' => route('Laboratorie.show', $Ray->id),
+                    'timestamp' => now()->toDateTimeString()
+                ],
+                 getModelGuardName()
+            ));
 
 
             session()->flash('add');
             return redirect()->back();
-        }
-
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-    public function edit(Ray $Ray)
-    {
-
-    }
+    public function edit(Ray $Ray) {}
 
     public function update($attributes)
     {
         try {
 
-               $Ray = Ray::findOrFail($attributes->ray_id);
-               $Ray->description = $attributes->description;
-               $Ray->save();
+            $Ray = Ray::findOrFail($attributes->ray_id);
+            $Ray->description = $attributes->description;
+            $Ray->save();
 
 
 
@@ -73,7 +83,7 @@ class RayRepository implements RayRepositoryInterface
 
     public function destroy($request)
     {
-         try {
+        try {
 
             $Ray = Ray::find($request->ray_id);
             $Ray->delete();

@@ -40,3 +40,12 @@ Broadcast::channel('App.Models.RayEmployee.{id}', function ($user, $id) {
 Broadcast::channel('App.Models.LaboratorieEmployee.{id}', function ($user, $id) {
     return auth('laboratorie_employee')->check() && auth('laboratorie_employee')->id() == (int) $id;
 },['guards' => $guards]);
+
+Broadcast::channel('App.Models.LaboratorieEmployee', function ($user) {
+    return auth('laboratorie_employee')->check();
+},['guards' => $guards]);
+
+
+Broadcast::channel('RayEmployee', function ($user) {
+    return $user instanceof \App\Models\RayEmployee;
+},['guards' => $guards ]);

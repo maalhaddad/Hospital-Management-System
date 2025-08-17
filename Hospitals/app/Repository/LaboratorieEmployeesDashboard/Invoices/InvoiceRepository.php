@@ -4,6 +4,7 @@ namespace App\Repository\LaboratorieEmployeesDashboard\Invoices;
 
 use App\Interfaces\LaboratorieEmployeesDashboard\Invoices\InvoiceRepositoryInterface;
 use App\Models\Laboratorie;
+use App\Notifications\GeneralNotification;
 use App\Traits\FileFunctionTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -76,6 +77,30 @@ class InvoiceRepository implements InvoiceRepositoryInterface
                 }
 
             }
+
+            $Invoice->Doctor->notify(new GeneralNotification(
+                 [
+                        'type' => 'completed_laboratorie',
+                        'title' => 'اكتمل تجهيز التحليل',
+                        'body' => 'اكتمل تحليل المريض ' . $Invoice->Patient->name,
+                        'route_name' => route('Laboratorie.show', $Invoice->id),
+                        'timestamp' => now()->toDateTimeString()
+                    ]
+                    ,'App.Models.Doctor.'.$Invoice->doctor_id
+                 ));
+
+                 $Invoice->Patient->notify(
+                 new GeneralNotification(
+                    [
+                        'type' => 'completed_laboratorie',
+                        'title' => 'اكتمل تجهيز التحليل',
+                        'body' => 'اكتملت تجهيز التحليل الخاص بك',
+                        'route_name' => route('patient.laboratorie.view',$Invoice),
+                        'timestamp' => now()->toDateTimeString()
+                    ]
+                    ,'App.Models.Patient.'.$Invoice->patient_id
+                 )
+                );
 
             DB::commit();
             session()->flash('edit');

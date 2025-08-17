@@ -4,6 +4,9 @@ namespace App\Repository\DoctorDashboard\Laboratories;
 
 use App\Interfaces\DoctorDashboard\Laboratories\LaboratorieRepositoryInterface;
 use App\Models\Laboratorie;
+use App\Models\LaboratorieEmployee;
+use App\Notifications\GeneralNotification;
+use Illuminate\Support\Facades\Notification;
 
 class LaboratorieRepository implements LaboratorieRepositoryInterface
 {
@@ -33,7 +36,17 @@ class LaboratorieRepository implements LaboratorieRepositoryInterface
             $Laboratorie->doctor_id = $attributes->doctor_id;
             $Laboratorie->patient_id = $attributes->patient_id;
             $Laboratorie->save();
-
+            $laboratorieEmloyees = LaboratorieEmployee::all();
+            Notification::send($laboratorieEmloyees , new GeneralNotification(
+             [
+                        'type' => 'create_laboratorie',
+                        'title' => 'طلب تشخيص جديد',
+                        'body' => ' تم اضافة طلب تشخيص جديد للمريض ' . $Laboratorie->Patient->name,
+                        'route_name' => $Laboratorie->id,
+                        'timestamp' => now()->toDateTimeString()
+                    ]
+                    ,'App.Models.'.getModelGuardName()
+            ));
             session()->flash('add');
             return redirect()->back();
         } catch (\Exception $e) {
@@ -50,6 +63,8 @@ class LaboratorieRepository implements LaboratorieRepositoryInterface
             $Laboratorie = Laboratorie::findOrFail($attributes->laboratorie_id);
             $Laboratorie->description = $attributes->description;
             $Laboratorie->save();
+            return $Laboratorie->Doctor;
+            
 
             session()->flash('edit');
             return redirect()->back();

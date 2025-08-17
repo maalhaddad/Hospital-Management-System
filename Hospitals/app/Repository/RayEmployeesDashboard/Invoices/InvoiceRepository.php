@@ -4,6 +4,7 @@ namespace App\Repository\RayEmployeesDashboard\Invoices;
 
 use App\Interfaces\RayEmployeesDashboard\Invoices\InvoiceRepositoryInterface;
 use App\Models\Ray;
+use App\Notifications\GeneralNotification;
 use App\Traits\FileFunctionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
         $ray = Ray::findOrFail($id);
         if(  $ray->employee_id == auth()->user()->id)
         {
-          return view('dashboard.rayemployee-dashboard.invoices.view_rays',compact('ray'));        
+          return view('dashboard.rayemployee-dashboard.invoices.view_rays',compact('ray'));
         }
         return redirect()->back();
     }
@@ -60,8 +61,32 @@ class InvoiceRepository implements InvoiceRepositoryInterface
                     ]
                 );
                 }
-               
+
             }
+
+            $Invoice->Doctor->notify(new GeneralNotification(
+                 [
+                        'type' => 'completed_Ray',
+                        'title' => 'اكتمل تجهيز الاشعة',
+                        'body' => 'اكتملت تجهيز اشعة المريض ' . $Invoice->Patient->name,
+                        'route_name' => route('Rays.show', $Invoice->id),
+                        'timestamp' => now()->toDateTimeString()
+                    ]
+                    ,'App.Models.Doctor.'.$Invoice->doctor_id
+                 ));
+
+                 $Invoice->Patient->notify(
+                 new GeneralNotification(
+                    [
+                        'type' => 'completed_Ray',
+                        'title' => 'اكتمل تجهيز الاشعة',
+                        'body' => 'اكتملت تجهيز الاشعة الخاصه بك',
+                        'route_name' => route('patient.ray.view',$Invoice),
+                        'timestamp' => now()->toDateTimeString()
+                    ]
+                    ,'App.Models.Patient.'.$Invoice->patient_id
+                 )
+                );
 
             DB::commit();
             session()->flash('edit');

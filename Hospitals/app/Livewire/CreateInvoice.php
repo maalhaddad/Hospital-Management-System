@@ -132,13 +132,26 @@ class CreateInvoice extends Component
                 Doctor::find($invoice->doctor_id)->notify(new GeneralNotification(
                     [
                         'type' => 'create_invoice',
-                        'title' => '555اضافة فاتورة جديده',
+                        'title' => 'اضافة فاتورة جديده',
                         'body' => ' تم اضافة فاتورة جديدة للمريض ' . $invoice->Patient->name,
-                        'invoice_id' => $invoice->id,
+                        'route_name' => route('invoices.index'),
                         'timestamp' => now()->toDateTimeString()
                     ]
                     ,'App.Models.Doctor.'.$invoice->doctor_id
                 ));
+
+                $invoice->Patient->notify(
+                 new GeneralNotification(
+                    [
+                        'type' => 'create_invoice',
+                        'title' => 'اضافة فاتورة جديده',
+                        'body' => ' تم اضافة فاتورة جديدة في سجلك ',
+                        'route_name' => route('patient.invoices'),
+                        'timestamp' => now()->toDateTimeString()
+                    ]
+                    ,'App.Models.Patient.'.$invoice->patient_id
+                 )
+                );
                 DB::commit();
                 session()->flash('add');
                 $this->invoice->resete();

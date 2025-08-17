@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Doctor;
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use App\Models\Invoice;
+use App\Models\RayEmployee;
+use App\Notifications\GeneralNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
@@ -18,7 +21,6 @@ class HomeController extends Controller
         $data['reviewInvoicesCount'] = $doctor->review_invoices_count;
         $data['noInvoicesCount'] = Invoice::where('doctor_id',auth()->user()->id)->where('invoice_status',1)->count();
 
-        
         return view('Dashboard.doctor-dashboard.dashboard',$data);
     }
 }

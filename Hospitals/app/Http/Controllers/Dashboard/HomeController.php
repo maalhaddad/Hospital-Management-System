@@ -10,6 +10,7 @@ use App\Models\Patient;
 use App\Models\Section;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Notifications\GeneralNotification;
 
 class HomeController extends Controller
 {
@@ -21,7 +22,6 @@ class HomeController extends Controller
         $data['doctorsCount'] = Doctor::count();
         $data['patientsCount'] = Patient::count();
         $data['sectionsCount'] = Section::count();
-
         return view('Dashboard.Admin.dashboard',$data);
     }
 }

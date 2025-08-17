@@ -8,6 +8,7 @@ use App\Models\Laboratorie;
 use App\Models\Patient;
 use App\Models\Ray;
 use App\Models\ReceiptAccount;
+use Illuminate\Support\Facades\Route;
 
 class PatientRepository implements PatientRepositoryInterface
 {
@@ -49,6 +50,7 @@ class PatientRepository implements PatientRepositoryInterface
 
     public function raysView($rayId)
     {
+        dd(Route::current());
          $ray = Ray::find($rayId);
         if($ray->patient_id != auth()->user()->id)
         {
@@ -61,8 +63,8 @@ class PatientRepository implements PatientRepositoryInterface
     private function getData($model)
     {
         return $model::where('patient_id', auth()->user()->id)->get();
-    }   
-    
-    
+    }
+
+
 
 }
