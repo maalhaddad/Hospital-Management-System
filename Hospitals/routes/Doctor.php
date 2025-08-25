@@ -87,7 +87,11 @@ Route::group(
                 });
                 // =========== End PatientDetails ===========
 
+              Route::name('doctor.')->group(function(){
 
+                Route::get('list-patient',[HomeController::class,'patientsList'])->name('list.patient');
+                Route::get('chat-doctor',[HomeController::class,'Chats'])->name('chat');
+              });
 
             }
         );

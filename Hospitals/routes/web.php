@@ -18,6 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/{page}',function($page){
+
+//     $pathPage = 'Dashboard.'.$page;
+//     return view($pathPage);
+
+// });
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

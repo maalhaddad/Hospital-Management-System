@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Patient\HomeController;
 use App\Http\Controllers\Patient\PatientController;
+use App\Livewire\Chat\CreateChat;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -40,7 +42,6 @@ Route::group(
                 'middleware' => ['auth:patient'],
             ],
             function () {
-
                 Route::name('patient.')->group(function(){
 
                     Route::get('invoices',[PatientController::class,'invoices'])->name('invoices');
@@ -49,7 +50,9 @@ Route::group(
                     Route::get('payments',[PatientController::class,'payments'])->name('payments');
                     Route::get('laboratorie-view/{laboratorieId}',[PatientController::class,'laboratoriesView'])->name('laboratorie.view');
                     Route::get('rays-view/{rayID}',[PatientController::class,'raysView'])->name('ray.view');
-                    
+                    Route::get('list-doctors',[PatientController::class,'doctorsList'])->name('list.doctors');
+                    Route::get('chat-pateint',[PatientController::class,'Chats'])->name('chat');
+
                 });
 
 

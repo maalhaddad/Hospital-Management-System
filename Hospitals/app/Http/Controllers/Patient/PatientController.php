@@ -44,4 +44,14 @@ class PatientController extends Controller
     {
         return $this->patientRepository->raysView($raysId);
     }
+
+    public function doctorsList()
+    {
+        return $this->patientRepository->doctorsList();
+    }
+
+    public function Chats()
+    {
+        return $this->patientRepository->Chats();
+    }
 }

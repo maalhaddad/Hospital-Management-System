@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('Dashboard.layouts.master')
 @section('css')
 @endsection
 @section('page-header')
@@ -206,6 +206,7 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="col-xl-8 col-lg-7">
 						<div class="card">
 							<a class="main-header-arrow" href="" id="ChatBodyHide"><i class="icon ion-md-arrow-back"></i></a>

@@ -12,6 +12,8 @@ use App\Models\Patient;
     public function rays();
     public function laboratoriesView($laboratorieId);
     public function raysView($raysId);
+    public function doctorsList();
+    public function chats();
 
 
 

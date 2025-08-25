@@ -23,4 +23,14 @@ class HomeController extends Controller
 
         return view('Dashboard.doctor-dashboard.dashboard',$data);
     }
+
+     public function patientsList()
+    {
+       return view('Dashboard.patient-dashboard.create-chat');
+    }
+
+    public function Chats()
+    {
+      return view('Dashboard.patient-dashboard.chat');
+    }
 }

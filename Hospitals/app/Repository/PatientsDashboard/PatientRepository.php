@@ -65,6 +65,17 @@ class PatientRepository implements PatientRepositoryInterface
         return $model::where('patient_id', auth()->user()->id)->get();
     }
 
+    public function doctorsList()
+    {
+        return view('Dashboard.patient-dashboard.create-chat');
+    }
+
+    public function chats()
+    {
+        return view('Dashboard.patient-dashboard.chat');
+    }
+
+
 
 
 }

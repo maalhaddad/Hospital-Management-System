@@ -313,22 +313,18 @@ let privateChannel = '';
 if( '{{ getModelGuardName() }}' == 'LaboratorieEmployee'  )
 {
      privateChannel = `App.Models.{{ getModelGuardName() }}`;
-    console.log(privateChannel);
-    console.log(1);
 }
 else if('{{ getModelGuardName() }}' =='RayEmployee')
 {
      privateChannel = `{{ getModelGuardName() }}`;
-    console.log(privateChannel);
-    console.log(2);
+
 
 }
 
 else
 {
     privateChannel = `App.Models.{{ getModelGuardName() }}.{{ auth()->user()->id }}`;
-    console.log(privateChannel);
-    console.log(3);
+
 
 
 }
