@@ -51,15 +51,16 @@
 
             @foreach ($this->conversations as $conversation )
 
-            <div class="media new">
+            <div wire:click="chatUserSelected( {{ $conversation }} , '{{ $this->getUser($conversation , 'id') }}')" class="media new">
+            {{-- <div wire:click="sendData('madin')" class="media new"> --}}
                 <div class="main-img-user online">
                     <img src="{{ URL::asset('Dashboard/img/doctors/default.png') }}"> <span>2</span>
                 </div>
                 <div class="media-body">
                     <div class="media-contact-name">
-                        <span>{{ $this->getUsers($conversation , 'name') }}</span> <span>{{ $conversation->created_at->shortAbsoluteDiffForHumans() }}</span>
+                        <span>{{ $this->getUser($conversation , 'name') }}</span> <span>{{ $conversation->messages->last()->created_at->shortAbsoluteDiffForHumans() }}</span>
                     </div>
-                    <p>Nam quam nunc, blandit vel aecenas et ante tincid</p>
+                    <p>{{ $conversation->messages->last()->body }}</p>
                 </div>
             </div>
             @endforeach

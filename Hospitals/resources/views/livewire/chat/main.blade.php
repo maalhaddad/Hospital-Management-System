@@ -1,4 +1,4 @@
-<div class="row row-sm main-content-app mb-4">
+<div  class="row row-sm main-content-app mb-4">
     <div class="col-xl-4 col-lg-5">
 
         <livewire:chat.chat-list/>

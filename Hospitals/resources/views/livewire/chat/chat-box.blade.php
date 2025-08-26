@@ -1,10 +1,13 @@
 <div class="card">
-    <a class="main-header-arrow" href="" id="ChatBodyHide"><i class="icon ion-md-arrow-back"></i></a>
+
+    @if ($this->selectedConversation)
+
+<a class="main-header-arrow" href="" id="ChatBodyHide"><i class="icon ion-md-arrow-back"></i></a>
     <div class="main-content-body main-content-body-chat">
         <div class="main-chat-header">
-            <div class="main-img-user"><img src="{{ URL::asset('Dashboard/img/faces/9.jpg') }}"></div>
+            <div class="main-img-user"><img src="{{ URL::asset('Dashboard/img/doctors/default.png') }}"></div>
             <div class="main-chat-msg-name">
-                <h6>Reynante Labares</h6><small>Last seen: 2 minutes ago</small>
+                <h6>{{ $this->receiverUser->name }}</h6><small>Last seen: 2 minutes ago</small>
             </div>
             <nav class="nav">
                 <a class="nav-link" href=""><i class="icon ion-md-more"></i></a> <a class="nav-link"
@@ -18,23 +21,30 @@
         <div class="main-chat-body" id="ChatBody">
             <div class="content-inner">
                 <label class="main-chat-time"><span>3 days ago</span></label>
-                <div class="media flex-row-reverse">
+                @foreach ($this->messages as $message )
+
+                <div class="media {{ $message->sender_email == $this->authEmail ? 'flex-row-reverse' : '' }} ">
                     <div class="main-img-user online"><img src="{{ URL::asset('Dashboard/img/faces/9.jpg') }}"></div>
                     <div class="media-body">
                         <div class="main-msg-wrapper right">
-                            Nulla consequat massa quis enim. Donec pede justo, fringilla vel...
+                            {{ $message->body }}
                         </div>
-                        <div class="main-msg-wrapper right">
-                            rhoncus ut, imperdiet a, venenatis vitae, justo...
-                        </div>
-                        <div class="main-msg-wrapper pd-0"><img alt="" class="wd-100 ht-100"
-                                src="{{ URL::asset('assets/img/ecommerce/01.jpg') }}"></div>
+
                         <div>
-                            <span>9:48 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                            <span>{{ $message->time_formatted }}</span>
+                            @if ($message->sender_email == $this->authEmail)
+                            <a href="">
+                                <i class="fas fa-check-double" style="margin-right: 2px;" title="Read"></i>
+                            </a>
+                            @endif
+
                         </div>
                     </div>
                 </div>
-                <div class="media">
+                @endforeach
+
+
+                {{-- <div class="media">
                     <div class="main-img-user online"><img src="{{ URL::asset('Dashboard/img/faces/6.jpg') }}"></div>
                     <div class="media-body">
                         <div class="main-msg-wrapper left">
@@ -44,8 +54,8 @@
                             <span>9:32 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
                         </div>
                     </div>
-                </div>
-                <div class="media flex-row-reverse">
+                </div> --}}
+                {{-- <div class="media flex-row-reverse">
                     <div class="main-img-user online"><img src="{{ URL::asset('Dashboard/img/faces/9.jpg') }}"></div>
                     <div class="media-body">
                         <div class="main-msg-wrapper right">
@@ -112,10 +122,12 @@
                             <span>09:40 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
-    
+
                             <livewire:chat.send-message/>
+    @endif
+
 </div>

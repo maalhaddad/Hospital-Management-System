@@ -25,6 +25,11 @@ Route::get('/', function () {
 
 // });
 
+Route::get('ar/icon',function(){
+    
+    return view('Dashboard.icons');
+});
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

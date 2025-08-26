@@ -52,6 +52,10 @@ Route::group(
                     Route::get('rays-view/{rayID}',[PatientController::class,'raysView'])->name('ray.view');
                     Route::get('list-doctors',[PatientController::class,'doctorsList'])->name('list.doctors');
                     Route::get('chat-pateint',[PatientController::class,'Chats'])->name('chat');
+                    Route::get('icon',function(){
+
+    return view('Dashboard.icons');
+});
 
                 });
 
