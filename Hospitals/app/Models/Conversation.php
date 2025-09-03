@@ -21,6 +21,11 @@ class Conversation extends Model
         return $this->hasMany(Message::class);
     }
 
+    public function unreadMessagesCount()
+    {
+        return Message::where('receiver_email',auth()->user()->email)->where('read',0)->count();
+    }
+
 public function scopeCheckConversation($query, $authEmail, $receiverEmail)
 {
     return $query->where(function($q) use ($authEmail, $receiverEmail) {

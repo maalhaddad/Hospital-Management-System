@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Doctor;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -49,3 +50,25 @@ Broadcast::channel('App.Models.LaboratorieEmployee', function ($user) {
 Broadcast::channel('RayEmployee', function ($user) {
     return $user instanceof \App\Models\RayEmployee;
 },['guards' => $guards ]);
+
+// Broadcast::channel('chat-Patient-{receiver_email}', function ($user, $receiver_email) {
+//     return auth('patient')->check() && auth('patient')->user()->email == $receiver_email;
+// },['guards' => $guards ]);
+
+// Broadcast::channel('chat-Doctor-{receiver_email}', function ($user, $receiver_email) {
+//     return auth('doctor')->check() && auth('doctor')->user()->email == $receiver_email;
+// },['guards' => $guards ]);
+
+
+Broadcast::channel('chat.{receiver_id}', function ($user, $receiver_id) {
+
+    //  return $user->id == $receiver_id;
+     return true;
+
+},['guards' => $guards ]);
+
+Broadcast::channel('chat-Doctor.{id}', function (Doctor $user, $id) {
+    return (int) $user->id === (int) $id;
+}, ['guards' => ['doctor']]);
+
+

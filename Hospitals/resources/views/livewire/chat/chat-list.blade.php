@@ -1,4 +1,4 @@
-<div class="card">
+<div  class="card" >
     <div class="main-content-left main-content-left-chat">
         <nav class="nav main-nav-line main-nav-line-chat">
              <a class="nav-link active" data-toggle="tab" href="">المحادثات الاخيرة</a>
@@ -47,12 +47,37 @@
         </div>
         <!-- main-chat-active-contacts -->
 
-        <div class="main-chat-list" id="ChatList">
+        <div class="main-chat-list" id="ChatList" >
 
             @foreach ($this->conversations as $conversation )
 
-            <div wire:click="chatUserSelected( {{ $conversation }} , '{{ $this->getUser($conversation , 'id') }}')" class="media new">
-            {{-- <div wire:click="sendData('madin')" class="media new"> --}}
+            <div wire:click="chatUserSelected({{ $conversation }}, '{{ $this->getUser($conversation, 'id') }}')" class="media new">
+    <div class="main-img-user online">
+        <img src="{{ URL::asset('Dashboard/img/doctors/default.png') }}">
+        <span>{{ $conversation->unreadMessagesCount() }}</span>
+    </div>
+    <div class="media-body">
+        <div class="media-contact-name d-flex justify-content-between align-items-center">
+            <span>{{ $this->getUser($conversation, 'name') }}</span>
+            <span style="font-size: 12px; color: #888;">
+                {{ $conversation->messages->last()->created_at->shortAbsoluteDiffForHumans() }}
+            </span>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <p class="mb-0">{{ $conversation->messages->last()->body }}</p>
+
+            @if($conversation->messages->last()->sender_email == auth()->user()->email)
+                {{-- أيقونة قراءة الرسالة --}}
+                {{-- @if($conversation->messages->last()->is_read) --}}
+                    <i class="fas fa-check-double text-primary fa-sm" title="Read"></i>
+                {{-- @else
+                    <i class="fas fa-check text-muted" title="Sent"></i>
+                @endif --}}
+            @endif
+        </div>
+    </div>
+</div>
+            {{-- <div wire:click="chatUserSelected( {{ $conversation }} , '{{ $this->getUser($conversation , 'id') }}')" class="media new">
                 <div class="main-img-user online">
                     <img src="{{ URL::asset('Dashboard/img/doctors/default.png') }}"> <span>2</span>
                 </div>
@@ -62,7 +87,7 @@
                     </div>
                     <p>{{ $conversation->messages->last()->body }}</p>
                 </div>
-            </div>
+            </div> --}}
             @endforeach
 
 

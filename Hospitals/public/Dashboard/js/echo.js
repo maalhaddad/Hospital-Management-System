@@ -7,12 +7,14 @@ window.Pusher = Pusher;
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: key, // ⚠️ لا تحط المفتاح السري
+    key: key,
     cluster:cluster,
     forceTLS: true,
     enabledTransports: ['ws', 'wss'],
 });
 Pusher.logToConsole = true;
+
+console.log(window.Echo);
 
 function receiveNotification(privateChannel)
 {
@@ -53,6 +55,7 @@ function createNotification()
 `);
 }
 
+console.log('chat Yes');
 function showNotification(title) {
     $(function() {
         notif({
@@ -62,4 +65,21 @@ function showNotification(title) {
     });
 }
 
-
+function encodeEmail(email) {
+    return email.replace('@', '-').replace(/\./g, '_');
+}
+function receiveMessage(privateChannel)
+{
+    //  privateChannel = 'chat.' + encodeEmail('Madin@gmail.com');
+     console.log("Subscribe to channel:", privateChannel);
+    Echo.private(privateChannel)
+    .subscribed(() => {
+        console.log('تم الاشتراك في القناة بنجاح!');
+    })
+    .listen('New.Message', (e) => {
+        console.log('رسالة جديدة:', e.body);
+        console.log('رسالة جديدة:ههههههههههه');
+        alert('📢 رسالة جديد: ' + e.body);
+        // هنا يمكن تحديث واجهة الشات مباشرة
+    });
+}

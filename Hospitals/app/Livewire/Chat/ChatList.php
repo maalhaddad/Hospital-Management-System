@@ -6,6 +6,7 @@ use App\Models\Conversation;
 use App\Models\Doctor;
 use App\Models\Patient;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 
 class ChatList extends Component
@@ -15,6 +16,7 @@ class ChatList extends Component
     public $receiverUser;
     public $authType;
     public $selectedConversation;
+    public $chatBoxShow = false;
 
     public function __construct()
     {
@@ -49,6 +51,19 @@ class ChatList extends Component
          conversation: $this->selectedConversation,
          receiverUser: $this->receiverUser
         );
+        $this->chatBoxShow=true;
+
+        // $this->dispatch('update-message',
+        //  conversation: $this->selectedConversation,
+        //  receiverUser: $this->receiverUser
+        // );
+
+    }
+
+    #[On('update-chatlist')]
+    public function updateChatList()
+    {
+            // $this->render();
 
     }
 
