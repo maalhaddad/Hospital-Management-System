@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('FrontEnd.index');
 });
 
 // Route::get('/{page}',function($page){
@@ -26,7 +26,7 @@ Route::get('/', function () {
 // });
 
 Route::get('ar/icon',function(){
-    
+
     return view('Dashboard.icons');
 });
 
