@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\AmbulanceController;
+use App\Http\Controllers\Dashboard\AppointmentController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\HomeController;
@@ -198,6 +199,16 @@ Route::group(
                Route::controller(LaboratorieEmployeeController::class)->group(function () {
 
                 Route::resource('laboratorie-employees', LaboratorieEmployeeController::class);
+            });
+
+            // =========== End LaboratorieEmployee ===========
+
+             // ===========  LaboratorieEmployee ===========
+
+               Route::controller(AppointmentController::class)->group(function () {
+
+                Route::get('Appointments/confirmed', [AppointmentController::class,'getConfirmedAppointments'])->name('Appointments.confirmed');
+                Route::resource('Appointments', AppointmentController::class);
             });
 
             // =========== End LaboratorieEmployee ===========

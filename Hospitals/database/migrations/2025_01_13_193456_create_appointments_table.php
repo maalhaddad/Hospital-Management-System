@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete();
-            // $table->string('name');
-            // $table->string('email');
-            // $table->string('phone');
-            // $table->enum('type',['غير مؤكد','مؤكد','منتهي'])->default('غير مؤكد');
-            // $table->dateTime('appointment')->nullable();
-            // $table->text('notes')->nullable();
+            $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete();
+            $table->foreignId('doctor_id')->constrained('doctors')->cascadeOnDelete();
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->enum('type',['غير مؤكد','مؤكد','منتهي'])->default('غير مؤكد');
+            $table->dateTime('appointment')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

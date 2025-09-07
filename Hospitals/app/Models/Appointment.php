@@ -10,14 +10,18 @@ use Astrotomic\Translatable\Translatable;
 class Appointment extends Model
 {
     use HasFactory;
-    use Translatable;
+    // use Translatable;
     protected $table = 'appointments';
-    protected $fillable = ['name'];
-    public $translatedAttributes = ['name'];
+    protected $fillable = ['name','email','phone','notes','section_id','doctor_id'];
 
-    public function Doctors() {
+    public function Section()
+    {
+        return $this->belongsTo(Section::class);
+    }
 
-        return $this->belongsToMany(Doctor::class, 'appointment_doctor');
+     public function Doctor()
+    {
+        return $this->belongsTo(Doctor::class);
     }
 
 }

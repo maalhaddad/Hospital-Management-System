@@ -45,7 +45,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900|Lora:400,400i,700,700i');
 
-/* font-family: 'Cairo', sans-serif;
+/* font-family: 'Cairo', sans-serif !important;
 font-family: 'Lato', sans-serif; */
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
@@ -77,6 +77,7 @@ font-family: 'Lato', sans-serif; */
 	border:none;
 	outline:none;
 	font-size: 100%;
+    /* font-family: 'Cairo', sans-serif !important; */
 }
 
 /***
@@ -95,7 +96,7 @@ body{
 	background:#ffffff;
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 a{
@@ -118,7 +119,7 @@ h1,h2,h3,h4,h5,h6 {
 	background:none;
 	line-height:1.2em;
 	letter-spacing: -0.02em;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 textarea{
@@ -517,7 +518,7 @@ ul,li{
 	font-weight:700;
 	padding-left:32px;
 	margin-bottom: 20px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .list-style-one li .icon{
@@ -544,7 +545,7 @@ ul,li{
 	font-weight:400;
 	padding-left:32px;
 	margin-bottom: 20px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .list-style-two li:last-child{
@@ -881,7 +882,7 @@ img{
 	-ms-transition:all 300ms ease;
 	-o-transition:all 300ms ease;
 	transition:all 300ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .main-menu .navigation > li > a:before{
@@ -954,7 +955,7 @@ img{
 	-moz-transition:all 300ms ease;
 	-ms-transition:all 300ms ease;
 	transition:all 300ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .main-menu .navigation > li > ul > li > a:after{
@@ -1040,7 +1041,7 @@ img{
 	-moz-transition:all 300ms ease;
 	-ms-transition:all 300ms ease;
 	transition:all 300ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .main-menu .navigation > li > ul > li  > ul > li > a:after{
@@ -1214,7 +1215,7 @@ img{
 	color:#222222;
 	font-size:20px;
 	font-weight:700;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 
@@ -2542,7 +2543,7 @@ img{
 	padding-right:30px;
 	display:inline-block;
 	background-color:#ffffff;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	transition:all 900ms ease;
 	-moz-transition:all 900ms ease;
 	-webkit-transition:all 900ms ease;
@@ -2964,7 +2965,7 @@ img{
 	font-size:48px;
 	line-height:1em;
 	display:inline-block;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .fact-counter .column .inner .counter-title{
@@ -3217,7 +3218,7 @@ img{
 	color:#777777;
 	font-size:20px;
 	font-weight:400;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .fullwidth-section .left-column .inner-column .content h2{
@@ -3399,7 +3400,7 @@ img{
 	color:#004cda;
 	font-size:18px;
 	line-height:1.3em;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .testimonial-section .client-thumb-outer .designation{
@@ -3796,7 +3797,7 @@ img{
 	cursor:pointer;
 	font-weight:700;
 	font-size:18px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .subscribe-form .form-group input[type="submit"]:hover,
@@ -4050,7 +4051,7 @@ img{
 	color:#222222;
 	font-size:20px;
 	font-weight:700;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .main-footer .footer-bottom{
@@ -4877,7 +4878,7 @@ img{
 	font-size:16px;
 	font-weight:700;
 	background-color:#dddddd;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	transition: all 300ms ease;
 	-webkit-transition: all 300ms ease;
 	-ms-transition: all 300ms ease;
@@ -4945,7 +4946,7 @@ img{
 	font-weight:700;
 	line-height:1em;
 	margin-top:20px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .price-block .inner-box .upper-box .price sub{
@@ -4976,7 +4977,7 @@ img{
 	-ms-transition: all 300ms ease;
 	-o-transition: all 300ms ease;
 	-moz-transition: all 300ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .price-block .inner-box:hover .plan-outer .plan{
@@ -6486,7 +6487,7 @@ img{
 	letter-spacing:1px;
 	margin-top:40px;
 	text-transform:uppercase;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .video-section .content h2{
@@ -6497,7 +6498,7 @@ img{
 	letter-spacing:1px;
 	margin-top:10px;
 	font-weight:700;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 /***
@@ -6768,7 +6769,7 @@ img{
 }
 
 .doctor-block .inner-box .phone strong{
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .doctor-block .inner-box .text{
@@ -6777,7 +6778,7 @@ img{
 	font-size:16px;
 	line-height:1.8em;
 	margin-bottom:21px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .doctor-block .inner-box .detail{
@@ -6786,7 +6787,7 @@ img{
 	font-size:18px;
 	font-weight:700;
 	text-decoration:underline;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 /***
@@ -7060,7 +7061,7 @@ img{
 	text-transform:capitalize;
 	background-color:#ffffff;
 	border-radius:0px 50px 50px 50px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .department-section-three .department-tabs .tab-btns .tab-btn:before{
@@ -7120,7 +7121,7 @@ img{
 	font-weight:700;
 	line-height:1.3em;
 	margin-bottom:18px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .department-section-three .department-tabs .tabs-content .text{
@@ -7219,7 +7220,7 @@ img{
 	position:relative;
 	color:#ffffff;
 	font-size:18px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .page-title .bread-crumb{
@@ -7266,7 +7267,7 @@ img{
 	font-size: 16px;
 	line-height: 30px;
 	display: inline-block;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	-webkit-transition:all 300ms ease;
 	-moz-transition:all 300ms ease;
 	-ms-transition:all 300ms ease;
@@ -7534,7 +7535,7 @@ img{
 	-o-transition:all 300ms ease;
 	-moz-transition:all 300ms ease;
 	transition:all 300ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .styled-pagination li a i{
@@ -7979,7 +7980,7 @@ img{
 	font-size:20px;
 	line-height:1.7em;
 	font-style:italic;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .news-detail .inner-box .lower-content .text blockquote .quote-box{
@@ -8028,7 +8029,7 @@ img{
 	font-weight:700;
 	margin:0;
 	display: inline-block;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .news-detail .post-share-options .tags{
@@ -8106,7 +8107,7 @@ img{
 	font-weight:700;
 	display:block;
 	line-height:1.7em;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	-webkit-transition: all 300ms ease;
 	-moz-transition: all 300ms ease;
 	-ms-transition: all 300ms ease;
@@ -8463,7 +8464,7 @@ img{
 	display:inline-block;
 	text-transform:capitalize;
 	transition:all 500ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	border-right:1px solid #222222;
 }
 
@@ -8523,7 +8524,7 @@ img{
 	-moz-transition:all 500ms ease;
 	-webkit-transition:all 500ms ease;
 	border:1px solid #cccccc;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .accordion-box .block .acc-btn.active{
@@ -8697,7 +8698,7 @@ img{
 .faq-form button{
 	margin-top:15px;
 	padding:11px 42px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 
@@ -8786,7 +8787,7 @@ img{
 	color: #222222;
 	font-weight: 700;
 	display: block;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .doctor-detail .detail-column .info-list li p{
@@ -9052,7 +9053,7 @@ img{
 	-webkit-transition:all 500ms ease;
 	-ms-transition:all 500ms ease;
 	-o-transition:all 500ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .blog-cat li a:after{
@@ -9152,7 +9153,7 @@ img{
 	-webkit-transition:all 500ms ease;
 	-ms-transition:all 500ms ease;
 	-o-transition:all 500ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .brochure-widget .brouchers li a:hover{
@@ -9289,7 +9290,7 @@ img{
 	font-weight: 400;
 	background-color: #ffffff;
 	padding-right: 5px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .price-feature .price{
@@ -9389,7 +9390,7 @@ img{
 .contact-form button{
 	margin-top:15px;
 	padding:11px 42px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .contact-form input.error,
@@ -12095,7 +12096,7 @@ img{
 	font-weight:600;
 	font-size:14px;
 	color:#333333;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	text-transform:capitalize;
 	transition:all 500ms ease;
 	-moz-transition:all 500ms ease;
@@ -12418,7 +12419,7 @@ img{
 	letter-spacing:1px;
 	text-transform:uppercase;
 	background-color:#222222;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 /*Custom Select*/
@@ -12611,7 +12612,7 @@ img{
 	font-size:18px;
 	font-weight:700;
 	margin-bottom:20px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .about-section-two .content-column .about-list-info .list-inner:before{
@@ -12672,7 +12673,7 @@ img{
 	letter-spacing:1px;
 	padding:18px 15px 18px;
 	transition:all 500ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	text-transform:capitalize;
 }
 
@@ -12806,7 +12807,7 @@ img{
 	font-size:30px;
 	line-height:1em;
 	margin-top:20px;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .fact-counter-two .column .inner .counter-title{
@@ -12904,7 +12905,7 @@ img{
 	letter-spacing:1px;
 	padding:18px 15px 18px;
 	transition:all 500ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	text-transform:capitalize;
 	background-color:#ffffff;
 	border-right:1px solid #dddddd;
@@ -13138,7 +13139,7 @@ img{
 	font-weight:700;
 	display:inline-block;
 	background-color:#004cda;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	border-right:2px solid rgba(255,255,255,0.50);
 }
 
@@ -13160,7 +13161,7 @@ img{
 	font-weight:700;
 	display:inline-block;
 	background-color:#ffffff;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	border-right:2px solid #d7d7d7;
 	border-bottom:2px solid #d7d7d7;
 }
@@ -13220,7 +13221,7 @@ img{
 	letter-spacing:1px;
 	text-transform:uppercase;
 	background-color:#222222;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 /***
@@ -13294,7 +13295,7 @@ img{
 	letter-spacing:1px;
 	text-transform:uppercase;
 	background-color:#222222;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 }
 
 .service-block-six{
@@ -13488,7 +13489,7 @@ img{
 	letter-spacing:1px;
 	padding:35px 15px 30px;
 	transition:all 500ms ease;
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif !important;
 	text-transform:capitalize;
 	background-color:none;
 	border-top:2px solid transparent;

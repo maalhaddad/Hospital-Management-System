@@ -24,7 +24,7 @@
 
 				<!--Info-->
 				<div class="logo-outer">
-					<div class="logo"><a href="index.html"><img src="{{URL::asset('FrontEnd/images/logo-3.png')}}" alt="" title=""></a></div>
+					{{-- <div class="logo"><a href="index.html"><img src="{{URL::asset('FrontEnd/images/logo-3.png')}}" alt="" title=""></a></div> --}}
 				</div>
 
 				<!--Nav Box-->

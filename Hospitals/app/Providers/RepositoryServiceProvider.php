@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\RayEmployee\InvoiceController;
 use App\Interfaces\Ambulances\AmbulanceRepositoryInterface;
+use App\Interfaces\Appointments\AppointmentRepositoryInterface;
 use App\Interfaces\DoctorDashboard\Diagnostics\DiagnosticRepositoryInterface;
 use App\Interfaces\DoctorDashboard\Invoices\InvoiceRepositoryInterface;
 use App\Interfaces\DoctorDashboard\Laboratories\LaboratorieRepositoryInterface;
@@ -28,6 +29,7 @@ use App\Interfaces\ReceiptAccounts\ReceiptAccountRepositoryInterface;
 use App\Interfaces\PaymentAccounts\PaymentAccountRepositoryInterface;
 use App\Interfaces\RayEmployees\RayEmployeeRepositoryInterface;
 use App\Interfaces\RayEmployeesDashboard\Invoices\InvoiceRepositoryInterface as RayInvoiceRepositoryInterface;
+use App\Repository\Appointments\AppointmentRepository;
 use App\Repository\DoctorDashboard\Diagnostics\DiagnosticRepository;
 use App\Repository\PaymentAccounts\PaymentAccountRepository;
 use Illuminate\Support\ServiceProvider;
@@ -57,6 +59,7 @@ class RepositoryServiceProvider extends ServiceProvider
        $this->app->bind(PaymentAccountRepositoryInterface::class , PaymentAccountRepository::class);
        $this->app->bind(RayEmployeeRepositoryInterface::class , RayEmployeeRepository::class);
        $this->app->bind(LaboratorieEmployeeRepositoryInterface::class ,LaboratorieEmployeeRepository::class);
+       $this->app->bind(AppointmentRepositoryInterface::class , AppointmentRepository::class);
 
 
        //========================== Doctor ===========================
