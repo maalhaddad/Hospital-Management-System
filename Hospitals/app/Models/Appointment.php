@@ -14,6 +14,10 @@ class Appointment extends Model
     protected $table = 'appointments';
     protected $fillable = ['name','email','phone','notes','section_id','doctor_id'];
 
+    protected $casts = [
+    'appointment' => 'datetime',
+];
+
     public function Section()
     {
         return $this->belongsTo(Section::class);

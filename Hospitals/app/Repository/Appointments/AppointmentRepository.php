@@ -3,13 +3,15 @@
 namespace App\Repository\Appointments;
 
 use App\Interfaces\Appointments\AppointmentRepositoryInterface;
+use App\Mail\AppointmentConfirmation;
 use App\Models\Appointment;
-
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentRepository implements AppointmentRepositoryInterface
 {
     public function index()
     {
+
 
         $appointments = Appointment::where('type','غير مؤكد')->get();
         return view('Dashboard.appointments.index',compact('appointments'));
@@ -29,6 +31,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
             $appointment->type = 'مؤكد';
             $appointment->save();
             session()->flash('edit');
+            Mail::to($appointment->email)->send(new AppointmentConfirmation($appointment));
             return redirect()->back();
             }
 

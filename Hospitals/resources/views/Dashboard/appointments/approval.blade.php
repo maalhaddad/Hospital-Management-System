@@ -13,7 +13,7 @@
                 <form action="{{ route('Appointments.update','t') }}" method="post">
                     @method('PUT')
                     @csrf
-                    <input type="hidden" id="id" name="id">
+                    <input type="hidden" id="id_app" name="id">
                     <p class="mg-b-20" id="name_app" ></p>
                     <!--div-->
                     <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">

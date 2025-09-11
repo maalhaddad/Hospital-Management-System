@@ -54,7 +54,7 @@
                                     <td>{{$appointment->notes}}</td>
                                     <td>
                                         <button class="btn btn-sm btn-success" data-toggle="modal"
-                                        data-id="{{ $appointment->id }}"
+                                        data-id_app="{{ $appointment->id }}"
                                         data-name="{{ $appointment->name }}"
                                         data-target="#approval_update"><i class="fas fa-check"></i>
                                         </button>
@@ -82,7 +82,7 @@
 @endsection
 @section('js')
   <!-- Internal Data tables -->
-     <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+     {{-- <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
@@ -112,24 +112,72 @@
     <script src="{{URL::asset('Dashboard/js/table-data.js')}}"></script>
     <!--Internal  Notify js -->
     <script src="{{URL::asset('dashboard/plugins/notify/js/notifIt.js')}}"></script>
-    <script src="{{URL::asset('/plugins/notify/js/notifit-custom.js')}}"></script>
+    <script src="{{URL::asset('/plugins/notify/js/notifit-custom.js')}}"></script> --}}
+
+
+    <!-- 1️⃣ jQuery (أساسي لكل الإضافات) -->
+<script src="{{ URL::asset('dashboard/plugins/jquery/jquery.min.js') }}"></script>
+
+<!-- 2️⃣ Bootstrap JS -->
+<script src="{{ URL::asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- 2️⃣ DataTables -->
+<script src="{{ URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+
+<!-- 3️⃣ jQuery UI Datepicker -->
+<script src="{{ URL::asset('dashboard/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
+
+<!-- 4️⃣ jQuery Masked Input -->
+<script src="{{ URL::asset('dashboard/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
+
+<!-- 5️⃣ Spectrum Colorpicker -->
+<script src="{{ URL::asset('dashboard/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
+
+<!-- 6️⃣ Select2 -->
+<script src="{{ URL::asset('dashboard/plugins/select2/js/select2.min.js') }}"></script>
+
+<!-- 7️⃣ Ion RangeSlider -->
+<script src="{{ URL::asset('dashboard/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
+
+<!-- 8️⃣ AmazeUI Datetimepicker -->
+<script src="{{ URL::asset('dashboard/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js') }}"></script>
+
+<!-- 9️⃣ Simple Datetimepicker -->
+<script src="{{ URL::asset('dashboard/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js') }}"></script>
+
+<!-- 🔟 Picker.js -->
+<script src="{{ URL::asset('dashboard/plugins/pickerjs/picker.min.js') }}"></script>
+
+<!-- 11️⃣ Form Elements JS -->
+<script src="{{ URL::asset('dashboard/js/form-elements.js') }}"></script>
+
+<!-- 12️⃣ Notify JS -->
+<script src="{{ URL::asset('dashboard/plugins/notify/js/notifIt.js') }}"></script>
+<script src="{{ URL::asset('dashboard/plugins/notify/js/notifit-custom.js') }}"></script>
 
 
      <script>
          $('#approval_update').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
-            var id = button.data('id')
+            var id = button.data('id_app')
             var name = button.data('name')
             console.log(id)
             console.log(name)
 
             var modal = $(this)
 
-            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #id_app').val(id);
             modal.find('.modal-body #name_app').text(name);
             modal.show();
-            // modal.find('.modal-body #patient_name').val(patient_name);
 
         });
+
+
+        // $('#datetimepicker').datetimepicker({
+
+        // })
     </script>
 @endsection
