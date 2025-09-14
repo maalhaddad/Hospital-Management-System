@@ -16,3 +16,5 @@
 <script src="{{URL::asset('FrontEnd/js/appear.js')}}"></script>
 <script src="{{URL::asset('FrontEnd/js/script.js')}}"></script>
 <script src="{{URL::asset('FrontEnd/js/color-settings.js')}}"></script>
+
+@yield('scripts')

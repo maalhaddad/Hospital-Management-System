@@ -39,12 +39,6 @@ class DoctorController extends Controller
     }
 
 
-    public function show(string $id)
-    {
-        //
-    }
-
-
     public function edit(Doctor $Doctor)
     {
         return $this->DoctorRepository->edit($Doctor);
@@ -65,6 +59,7 @@ class DoctorController extends Controller
         }
         return $this->DoctorRepository->destroy($request);
     }
+
 
     public function updateStatus (Request $request)
     {

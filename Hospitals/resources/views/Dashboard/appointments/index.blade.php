@@ -7,6 +7,7 @@
     <link href="{{URL::asset('Dashboard/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css')}}" rel="stylesheet">
     <link href="{{URL::asset('Dashboard/plugins/pickerjs/picker.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('Dashboard/plugins/spectrum-colorpicker/spectrum.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.21/build/jquery.datetimepicker.min.css">
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -81,82 +82,50 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
-  <!-- Internal Data tables -->
-     {{-- <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('Dashboard/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('Dashboard/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{URL::asset('Dashboard/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.js')}}"></script>
-    <script src="{{URL::asset('Dashboard/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
-    <script src="{{URL::asset('Dashboard/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+  <!--Internal  Notify js -->
+    <script src="{{ URL::asset('dashboard/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('/plugins/notify/js/notifit-custom.js') }}"></script>
 
-     <!--Internal  Datepicker js -->
-    <script src="{{URL::asset('dashboard/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+
+    {{-- <!--Internal  Datepicker js -->
+    <script src="{{ URL::asset('dashboard/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
     <!--Internal  jquery.maskedinput js -->
-    <script src="{{URL::asset('dashboard/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
+    <script src="{{ URL::asset('dashboard/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
     <!--Internal  spectrum-colorpicker js -->
-    <script src="{{URL::asset('dashboard/plugins/spectrum-colorpicker/spectrum.js')}}"></script>
+    <script src="{{ URL::asset('dashboard/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
     <!-- Internal Select2.min js -->
-    <script src="{{URL::asset('dashboard/plugins/select2/js/select2.min.js')}}"></script>
+    <script src="{{ URL::asset('dashboard/plugins/select2/js/select2.min.js') }}"></script>
     <!--Internal Ion.rangeSlider.min js -->
-    <script src="{{URL::asset('dashboard/plugins/ion-rangeslider/js/ion.rangeSlider.min.js')}}"></script>
+    <script src="{{ URL::asset('dashboard/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
     <!--Internal  jquery-simple-datetimepicker js -->
-    <script src="{{URL::asset('dashboard/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
+    <script src="{{ URL::asset('dashboard/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js') }}"></script>
     <!-- Ionicons js -->
-    <script src="{{URL::asset('dashboard/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
+    <script src="{{ URL::asset('dashboard/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js') }}"></script>
     <!--Internal  pickerjs js -->
-    <script src="{{URL::asset('dashboard/plugins/pickerjs/picker.min.js')}}"></script>
+    <script src="{{ URL::asset('dashboard/plugins/pickerjs/picker.min.js') }}"></script>
     <!-- Internal form-elements js -->
-    <script src="{{URL::asset('dashboard/js/form-elements.js')}}"></script>
-    <!--Internal  Datatable js -->
-    <script src="{{URL::asset('Dashboard/js/table-data.js')}}"></script>
-    <!--Internal  Notify js -->
-    <script src="{{URL::asset('dashboard/plugins/notify/js/notifIt.js')}}"></script>
-    <script src="{{URL::asset('/plugins/notify/js/notifit-custom.js')}}"></script> --}}
+    <script src="{{ URL::asset('dashboard/js/form-elements.js') }}"></script> --}}
 
 
-    <!-- 1️⃣ jQuery (أساسي لكل الإضافات) -->
-<script src="{{ URL::asset('dashboard/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
 
-<!-- 2️⃣ Bootstrap JS -->
-<script src="{{ URL::asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-<!-- 2️⃣ DataTables -->
-<script src="{{ URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ URL::asset('Dashboard/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-
-<!-- 3️⃣ jQuery UI Datepicker -->
-<script src="{{ URL::asset('dashboard/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
-
-<!-- 4️⃣ jQuery Masked Input -->
-<script src="{{ URL::asset('dashboard/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
-
-<!-- 5️⃣ Spectrum Colorpicker -->
-<script src="{{ URL::asset('dashboard/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
-
-<!-- 6️⃣ Select2 -->
-<script src="{{ URL::asset('dashboard/plugins/select2/js/select2.min.js') }}"></script>
-
-<!-- 7️⃣ Ion RangeSlider -->
-<script src="{{ URL::asset('dashboard/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
-
-<!-- 8️⃣ AmazeUI Datetimepicker -->
-<script src="{{ URL::asset('dashboard/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js') }}"></script>
-
-<!-- 9️⃣ Simple Datetimepicker -->
-<script src="{{ URL::asset('dashboard/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js') }}"></script>
-
-<!-- 🔟 Picker.js -->
-<script src="{{ URL::asset('dashboard/plugins/pickerjs/picker.min.js') }}"></script>
-
-<!-- 11️⃣ Form Elements JS -->
-<script src="{{ URL::asset('dashboard/js/form-elements.js') }}"></script>
-
-<!-- 12️⃣ Notify JS -->
-<script src="{{ URL::asset('dashboard/plugins/notify/js/notifIt.js') }}"></script>
-<script src="{{ URL::asset('dashboard/plugins/notify/js/notifit-custom.js') }}"></script>
+    <script src="{{ URL::asset('Dashboard/js/table-data.js') }}"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.21/build/jquery.datetimepicker.full.min.js"></script> --}}
 
 
      <script>
@@ -176,8 +145,7 @@
         });
 
 
-        // $('#datetimepicker').datetimepicker({
+        $('#review_date').datetimepicker({})
 
-        // })
     </script>
 @endsection

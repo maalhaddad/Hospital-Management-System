@@ -13,5 +13,7 @@
 <link rel="shortcut icon" href="{{URL::asset('FrontEnd/images/favicon.png')}}" type="image/x-icon">
 <link rel="icon" href="{{URL::asset('FrontEnd/images/favicon.png')}}" type="image/x-icon">
 
+@yield('css')
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
 <script src="{{URL::asset('FrontEnd/js/respond.js')}}"></script>

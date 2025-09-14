@@ -1,5 +1,10 @@
 @extends('FrontEnd.layouts.master')
 @section('title','الرئيسية')
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css"/>
+
+@endsection
+
 @section('content')
     <!-- Main Slider Three -->
     <section class="main-slider-three">
@@ -930,4 +935,11 @@
         </div>
     </section>
     <!--End Clients Section-->
+@endsection
+
+
+@section('scripts')
+
+
+
 @endsection

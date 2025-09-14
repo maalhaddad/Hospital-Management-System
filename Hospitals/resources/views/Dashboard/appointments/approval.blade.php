@@ -13,7 +13,7 @@
                 <form action="{{ route('Appointments.update','t') }}" method="post">
                     @method('PUT')
                     @csrf
-                    <input type="hidden" id="id_app" name="id">
+                    <input type="text" id="id_app" name="id">
                     <p class="mg-b-20" id="name_app" ></p>
                     <!--div-->
                     <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
@@ -24,7 +24,9 @@
                                             <div class="input-group-text">
                                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                             </div>
-                                        </div><input class="form-control" name="appointment" id="datetimepicker" type="text" value="{{date('Y-m-d H:i')}}">
+                                        </div>
+                                        {{-- <input class="form-control" name="appointment" id="datetimepicker" type="text" value="{{date('Y-m-d H:i')}}"> --}}
+                                        <input type="text" class="form-control fc-datepicker" id="review_date" name="appointment" value="{{date('Y-m-d H:i')}}"  required>
                                     </div>
 
                             </div>
