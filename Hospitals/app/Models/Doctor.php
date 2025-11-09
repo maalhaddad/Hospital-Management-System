@@ -14,7 +14,7 @@ class Doctor extends Authenticatable
     use HasFactory;
     use Notifiable;
     public $translatedAttributes = ['name'];
-    public $fillable= ['email','email_verified_at','password','status','name','photo'];
+    public $fillable= ['email','email_verified_at','password','status','name','photo','phone','number_of_statements'];
 
 
     public function Image()

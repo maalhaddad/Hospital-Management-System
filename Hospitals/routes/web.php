@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontEnd\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -22,9 +23,9 @@ Route::group(
     ],
     function () {
 
-    Route::get('/', function () {
-    return view('FrontEnd.index');
-});
+//     Route::get('/', function () {
+//     return view('FrontEnd.index');
+// });
     });
 
 
@@ -37,7 +38,7 @@ Route::group(
 
 Route::get('ar/icon',function(){
 
-    return view('Dashboard.icons');
+    return view('Dashboard.profile');
 });
 
 // Route::get('/dashboard', function () {
@@ -51,3 +52,17 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
+
+    Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('dashboard');
+});
+
+    });
+

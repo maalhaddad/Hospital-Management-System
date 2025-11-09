@@ -57,7 +57,8 @@
                                         data-target="#approval_update"><i class="fas fa-check"></i>
                                         </button>
                                         <button class="btn btn-sm btn-danger" data-toggle="modal"
-                                                data-target="#Refusal{{$appointment->id}}"><i class="fas fa-remove-format"></i>
+                                        data-id="{{ $appointment->id }}"
+                                                data-target="#delete_appointment"><i class="fas fa-remove-format"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -68,6 +69,7 @@
                 </div><!-- bd -->
             </div>
             @include('Dashboard.appointments.approval')<!-- bd -->
+            @include('Dashboard.appointments.delete_Appointment')
         </div>
 
         <!--/div-->
@@ -114,18 +116,14 @@
 
 
      <script>
-         $('#approval_update').on('show.bs.modal', function(event) {
+         $('#delete_appointment').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var name = button.data('name')
             console.log(id)
-            console.log(name)
-
             var modal = $(this)
-
-            modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #name_app').text(name);
-            modal.show();
+            modal.find('.modal-body #appointment_id').val(id);
+            // modal.find('.modal-body #name_app').text(name);
+            // modal.show();
             // modal.find('.modal-body #patient_name').val(patient_name);
 
         });

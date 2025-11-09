@@ -29,4 +29,9 @@ class AppointmentController extends Controller
     {
         return $this->appointmentRepository->update($request);
     }
+
+    public function destroy(Request $request)
+    {
+        return $this->appointmentRepository->destroy($request);
+    }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete();
             $table->string('password');
             $table->string('phone');
+            $table->integer('number_of_statements');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

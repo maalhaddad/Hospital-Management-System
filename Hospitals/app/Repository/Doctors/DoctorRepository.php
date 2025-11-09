@@ -43,8 +43,9 @@ class DoctorRepository implements DoctorRepositoryInterface
             $Doctor->password = Hash::make($request->password);
             $Doctor->phone = $request->phone;
             $Doctor->section_id = $request->section_id;
+            $Doctor->number_of_statements = $request->number_of_statements;
             $Doctor->save();
-            $Doctor->Appointments()->sync($request->appointments);
+            // $Doctor->Appointments()->sync($request->appointments);
             if ($request->hasFile('photo')) {
                 $Doctor->Image()->create(
                     [
@@ -72,7 +73,7 @@ class DoctorRepository implements DoctorRepositoryInterface
             'Doctor'         => $Doctor,
             'sections'       => Section::all(),
             'appointments'   => Appointment::all(),
-            'appointmentsId' => $Doctor->Appointments->pluck('id')->toArray()
+            // 'appointmentsId' => $Doctor->Appointments->pluck('id')->toArray()
         ]
         );
     }
@@ -88,8 +89,9 @@ class DoctorRepository implements DoctorRepositoryInterface
             $Doctor->email = $request->email;
             $Doctor->phone = $request->phone;
             $Doctor->section_id = $request->section_id;
+            $Doctor->number_of_statements = $request->number_of_statements;
             $Doctor->save();
-            $Doctor->Appointments()->sync($request->appointments);
+            // $Doctor->Appointments()->sync($request->appointments);
 
                 $funcname = $Doctor->Image ? 'update' : 'create';
 
@@ -103,7 +105,7 @@ class DoctorRepository implements DoctorRepositoryInterface
 
             DB::commit();
             session()->flash('edit');
-            return redirect()->back();
+            return redirect()->route('doctors.index');
         } catch (\Exception $ex) {
 
             DB::rollBack();

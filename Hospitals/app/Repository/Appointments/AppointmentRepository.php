@@ -53,5 +53,19 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     }
 
 
+    public function destroy($request)
+    {
+        try {
+            $Patient = Appointment::find($request->appointment_id);
+            $Patient->delete();
+            session()->flash('delete');
+            return redirect()->route('Appointments.confirmed');
+        } catch (\Exception $ex) {
+
+            return redirect()->route('Appointments.confirmed')->withErrors($ex->getMessage());
+        }
+    }
+
+
 
 }

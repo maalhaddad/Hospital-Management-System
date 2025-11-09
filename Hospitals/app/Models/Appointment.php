@@ -12,7 +12,7 @@ class Appointment extends Model
     use HasFactory;
     // use Translatable;
     protected $table = 'appointments';
-    protected $fillable = ['name','email','phone','notes','section_id','doctor_id'];
+    protected $fillable = ['name','email','phone','notes','section_id','doctor_id','type','appointment','appointment_patient'];
 
     protected $casts = [
     'appointment' => 'datetime',

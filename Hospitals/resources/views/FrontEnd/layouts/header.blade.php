@@ -11,7 +11,7 @@
 						<div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
 							<ul class="navigation clearfix">
 								<li class="current dropdown"><a href="#">الرئسية</a>
-									<ul>
+									{{-- <ul>
 										<li><a href="index.html">Home page 01</a></li>
 										<li><a href="index-2.html">Home page 02</a></li>
 										<li><a href="index-3.html">Home page 03</a></li>
@@ -24,7 +24,7 @@
 												<li><a href="index-4.html">Header Style Four</a></li>
 											</ul>
 										</li>
-									</ul>
+									</ul> --}}
 								</li>
 								<li class="dropdown"><a href="#">من نحن</a>
                                         <ul>

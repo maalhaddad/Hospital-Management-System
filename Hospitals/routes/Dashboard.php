@@ -211,6 +211,10 @@ Route::group(
                 Route::resource('Appointments', AppointmentController::class);
             });
 
+            Route::get('icon',function(){
+
+    return view('Dashboard.profile');
+});
             // =========== End LaboratorieEmployee ===========
 
             }

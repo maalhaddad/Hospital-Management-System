@@ -72,6 +72,13 @@
     </div>
   @endif
 
+   @if ($message2 == true)
+
+    <div class="alert alert-danger">
+        لا توجد مواعيد لهذا اليوم برجاء اختيار يوم اخر
+    </div>
+  @endif
+
   <form method="post" wire:submit.prevent="store">
     <div class="row clearfix">
 
@@ -112,6 +119,12 @@
             <input type="tel" class="form-control" id="phone" wire:model="phone" name="phone" placeholder="رقم الهاتف" required="">
             <span class="icon fas fa-phone"></span>
         </div>
+
+        <div class="col-lg-12 col-md-6 col-sm-12 form-group">
+                <label for="exampleFormControlSelect1">تاريخ الموعد</label>
+                <input type="date" name="appointment_patient" wire:model="appointment_patient" required
+                       class="form-control">
+            </div>
 
         <div class="col-lg-12 col-md-12 col-sm-12 form-group">
             <textarea name="message" wire:model="notes" placeholder="Message"></textarea>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Group;
 use App\Models\Patient;

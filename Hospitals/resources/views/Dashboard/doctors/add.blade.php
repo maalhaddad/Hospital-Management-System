@@ -156,7 +156,7 @@
                         </div>
 
 
-                        <div class="row row-xs align-items-center mg-b-20">
+                        {{-- <div class="row row-xs align-items-center mg-b-20">
                             <div class="col-md-1">
                                 <label for="exampleInputEmail1">
                                     {{ __('doctors_trans.appointments') }}</label>
@@ -179,6 +179,20 @@
 
                             </div>
 
+                        </div>
+                         --}}
+
+                         <div class="row row-xs align-items-center mg-b-20">
+                            <div class="col-md-1">
+                                <label for="exampleInputEmail1">
+                                    {{ __('doctors_trans.appointments') }}</label>
+                            </div>
+                            <div class="col-md-11 mg-t-5 mg-md-t-0">
+                                <input class="form-control @error('number_of_statements') is-invalid @enderror "" name="number_of_statements"
+                                value=" {{$Doctor->number_of_statements ?? old('number_of_statements') }}"
+                                 type="text">
+                                <x-input-error :messages="$errors->get('number_of_statements')" class="mt-2" />
+                            </div>
                         </div>
 
                         {{-- <div class="row row-xs align-items-center mg-b-20">

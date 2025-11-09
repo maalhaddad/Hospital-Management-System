@@ -10,6 +10,7 @@ use App\Models\Invoice;
 use App\Models\FundAccount;
 use App\Models\PatientAccount;
 use App\Events\TestEvent;
+use App\Models\Appointment;
 use App\Notifications\GeneralNotification;
 use Illuminate\Support\Facades\Route;
 use Livewire\Attributes\Computed;
@@ -28,60 +29,59 @@ class CreateInvoice extends Component
     public $selectType = '';
     public function __construct()
     {
-        if(Route::currentRouteName() == 'update-invoice')
-        {
+        if (Route::currentRouteName() == 'update-invoice') {
             $this->invoice_id = Route::current()->parameter('invoice_id');
             $this->ShowInvoiceEdit($this->invoice_id);
             $this->functionName = 'Update';
             $this->selectType = 'disabled';
         }
-
-
     }
 
     public function ShowInvoiceEdit($invoice_id)
     {
         $invoiceEdit = Invoice::find($invoice_id);
 
-         $this->invoice= new InvoiceForm ;
-         $this->invoice->section_id = $invoiceEdit->Section->id;
-         $this->invoice->section = $invoiceEdit->Section->name;
-         $this->invoice->doctor_id = $invoiceEdit->Doctor->id;
-         $this->invoice->service_id = $invoiceEdit->Service->id;
-         $this->invoice->patient_id = $invoiceEdit->Patient->id;
-         $this->invoice->price = $invoiceEdit->price;
-         $this->invoice->tax_value = $invoiceEdit->tax_value;
-         $this->invoice->tax_rate = $invoiceEdit->tax_rate;
-         $this->invoice->discount_value = $invoiceEdit->discount_value;
-         $this->invoice->total_with_tax = $invoiceEdit->total_with_tax;
-         $this->invoice->type = $invoiceEdit->type;
-         $this->invoice->invoice_date = $invoiceEdit->invoice_date;
+        $this->invoice = new InvoiceForm;
+        $this->invoice->section_id = $invoiceEdit->Section->id;
+        $this->invoice->section = $invoiceEdit->Section->name;
+        $this->invoice->doctor_id = $invoiceEdit->Doctor->id;
+        $this->invoice->service_id = $invoiceEdit->Service->id;
+        $this->invoice->patient_id = $invoiceEdit->Patient->id;
+        $this->invoice->price = $invoiceEdit->price;
+        $this->invoice->tax_value = $invoiceEdit->tax_value;
+        $this->invoice->tax_rate = $invoiceEdit->tax_rate;
+        $this->invoice->discount_value = $invoiceEdit->discount_value;
+        $this->invoice->total_with_tax = $invoiceEdit->total_with_tax;
+        $this->invoice->type = $invoiceEdit->type;
+        $this->invoice->invoice_date = $invoiceEdit->invoice_date;
     }
 
     // public $count = 1;
     public function render()
     {
-        return view('livewire.singleInvoices.create-invoice',
-        [
-            'Patients' => Patient::all(),
-            'Doctors'  => Doctor::all(),
-            'Services' => Service::all(),
-        ]);
+        return view(
+            'livewire.singleInvoices.create-invoice',
+            [
+                'Patients' => Patient::all(),
+                'Doctors'  => Doctor::all(),
+                'Services' => Service::all(),
+            ]
+        );
     }
 
 
     public function get_section()
     {
         $section = Doctor::find($this->invoice->doctor_id)->Section;
-       $this->invoice->section = $section->name;
-       $this->invoice->section_id = $section->id;
-
+        $this->invoice->section = $section->name;
+        $this->invoice->section_id = $section->id;
     }
 
-    public function store() {
+    public function store()
+    {
 
         $data = [
-            'invoice_date' =>date('Y-m-d'),
+            'invoice_date' => date('Y-m-d'),
             'invoice_type' => 1,
             'section_id' => $this->invoice->section_id,
             'doctor_id' => $this->invoice->doctor_id,
@@ -100,17 +100,14 @@ class CreateInvoice extends Component
 
             DB::beginTransaction();
             $invoice = Invoice::create($data);
-            if($invoice->type == 1)
-            {
+            if ($invoice->type == 1) {
                 $fundAccount = new FundAccount();
                 $fundAccount->date = date('Y-m-d');
                 $fundAccount->invoice_id = $invoice->id;
                 $fundAccount->Debit = $invoice->total_with_tax;
                 $fundAccount->credit = 0.00;
                 $fundAccount->save();
-
-            }
-            else {
+            } else {
 
                 $patient_accounts = new PatientAccount();
                 $patient_accounts->date = date('Y-m-d');
@@ -121,53 +118,54 @@ class CreateInvoice extends Component
                 $patient_accounts->save();
             }
 
-                $this->InvoiceSaved = true;
-                // event(new TestEvent(
-                //     [
-                //       'doctorName' => $invoice->Doctor->name ,
-                //       'patientId'  => $invoice->patient_id,
-                //     ]
-                //     ));
+            $this->InvoiceSaved = true;
+            $appointmentInfo= Appointment::where([
+                'doctor_id' => $invoice->doctor_id,
+                'email'     => $invoice->Patient->email,
+                'type'      => 'مؤكد',
+            ])->first();
 
-                Doctor::find($invoice->doctor_id)->notify(new GeneralNotification(
-                    [
-                        'type' => 'create_invoice',
-                        'title' => 'اضافة فاتورة جديده',
-                        'body' => ' تم اضافة فاتورة جديدة للمريض ' . $invoice->Patient->name,
-                        'route_name' => route('invoices.index'),
-                        'timestamp' => now()->toDateTimeString()
-                    ]
-                    ,'App.Models.Doctor.'.$invoice->doctor_id
-                ));
+            if($appointmentInfo)
+            {
+                $appointmentInfo->type = 'منتهي';
+                $appointmentInfo->save();
+            }
 
-                $invoice->Patient->notify(
-                 new GeneralNotification(
+            Doctor::find($invoice->doctor_id)->notify(new GeneralNotification(
+                [
+                    'type' => 'create_invoice',
+                    'title' => 'اضافة فاتورة جديده',
+                    'body' => ' تم اضافة فاتورة جديدة للمريض ' . $invoice->Patient->name,
+                    'route_name' => route('invoices.index'),
+                    'timestamp' => now()->toDateTimeString()
+                ],
+                'App.Models.Doctor.' . $invoice->doctor_id
+            ));
+
+            $invoice->Patient->notify(
+                new GeneralNotification(
                     [
                         'type' => 'create_invoice',
                         'title' => 'اضافة فاتورة جديده',
                         'body' => ' تم اضافة فاتورة جديدة في سجلك ',
                         'route_name' => route('patient.invoices'),
                         'timestamp' => now()->toDateTimeString()
-                    ]
-                    ,'App.Models.Patient.'.$invoice->patient_id
-                 )
-                );
-                DB::commit();
-                session()->flash('add');
-                $this->invoice->resete();
-
-
+                    ],
+                    'App.Models.Patient.' . $invoice->patient_id
+                )
+            );
+            DB::commit();
+            session()->flash('add');
+            $this->invoice->resete();
         } catch (\Exception $ex) {
             DB::rollback();
             throw $ex;
         }
-
-        // dd($data);
-
     }
 
 
-    public function Update() {
+    public function Update()
+    {
 
         $data = $this->invoice->Data();
 
@@ -177,19 +175,15 @@ class CreateInvoice extends Component
             $type = $invoice->type;
             $invoice->update($data);
 
-            if($type== 1)
-            {
-                $fundAccounts = FundAccount::where('invoice_id',$this->invoice_id)->first();
+            if ($type == 1) {
+                $fundAccounts = FundAccount::where('invoice_id', $this->invoice_id)->first();
                 $fundAccounts->date = date('Y-m-d');
                 $fundAccounts->invoice_id = $invoice->id;
                 $fundAccounts->Debit = $invoice->total_with_tax;
                 $fundAccounts->credit = 0.00;
                 $fundAccounts->save();
-
-            }
-            else
-            {
-                $patient_accounts = PatientAccount::where('invoice_id',$this->invoice_id)->first();
+            } else {
+                $patient_accounts = PatientAccount::where('invoice_id', $this->invoice_id)->first();
                 $patient_accounts->date = date('Y-m-d');
                 $patient_accounts->invoice_id = $invoice->id;
                 $patient_accounts->patient_id = $invoice->patient_id;
@@ -216,13 +210,12 @@ class CreateInvoice extends Component
     {
         $this->invoice->price = Service::find($this->invoice->service_id)->price;
         $this->calculateTotal();
-
-
     }
 
-   public function Total_with_tax($value) {
+    public function Total_with_tax($value)
+    {
 
-     $this->calculateTotal();
+        $this->calculateTotal();
     }
 
 
@@ -231,11 +224,10 @@ class CreateInvoice extends Component
         $this->subTotal = $this->Is_Number($this->invoice->price) - $this->Is_Number($this->invoice->discount_value);
         $this->invoice->tax_value = ($this->subTotal * $this->invoice->tax_rate) / 100;
         $this->invoice->total_with_tax = $this->subTotal + $this->Is_Number($this->invoice->tax_value);
-
     }
 
     function Is_Number($Number)
     {
-        return is_numeric($Number) ? $Number : 0 ;
+        return is_numeric($Number) ? $Number : 0;
     }
 }

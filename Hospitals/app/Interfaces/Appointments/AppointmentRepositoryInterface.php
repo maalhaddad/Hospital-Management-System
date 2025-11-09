@@ -8,6 +8,7 @@ use App\Models\Appointment;
     public function index();
     public function update($request);
     public function getConfirmedAppointments();
+    public function destroy($request);
 
 
 

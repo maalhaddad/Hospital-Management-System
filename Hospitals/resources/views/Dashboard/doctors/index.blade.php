@@ -99,11 +99,12 @@
                                                     <span class="text-{{ $className }}">{{ $status }}</span>
                                                        </td>
                                                        <td>
-                                                     @foreach ($doctor->Appointments as $appointment )
+                                                        {{ $doctor->number_of_statements }}
+                                                     {{-- @foreach ($doctor->Appointments as $appointment )
 
                                                            {{ $appointment->name }},
 
-                                                        @endforeach
+                                                        @endforeach --}}
                                                        </td>
                                                        <td>{{ $doctor->created_at->diffForHumans() }}</td>
                                                        <td>
